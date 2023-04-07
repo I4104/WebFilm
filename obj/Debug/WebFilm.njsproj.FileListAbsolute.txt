@@ -1,3 +1,0 @@
-D:\Src_C\WebFilm\WebFilm\WebFilm\obj\Debug\WebFilm.njsproj.AssemblyReference.cache
-D:\Src_C\WebFilm\WebFilm\WebFilm\obj\Debug\WebFilm.njsproj.CoreCompileInputs.cache
-D:\Src_C\WebFilm\WebFilm\WebFilm\bin\Microsoft.NodejsTools.WebRole.dll
