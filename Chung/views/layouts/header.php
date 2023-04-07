@@ -10,15 +10,15 @@
     <meta property="og:title" content="<?php echo $settings->get(" og:title "); ?>" />
     <meta property="og:url" content="<?php echo $settings->get(" og:url "); ?>" />
     <meta property="og:site_name" content="<?php echo $settings->get(" og:site_name "); ?>" />
-    <link rel="shortcut icon" href="<?php echo $domain;?>assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-	<link href="<?php echo $domain;?>assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $domain;?>assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $domain;?>assets/plugins/custom/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $domain;?>assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $domain;?>assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $domain;?>assets/css/style.knsea.css?sea=<?php echo time() ;?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $domain;?>assets/css/style.scrollbar.css?sea=<?php echo time() ;?>" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/custom/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.knsea.css?sea=<?php echo time() ;?>" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.scrollbar.css?sea=<?php echo time() ;?>" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" rel="stylesheet" type="text/css" />
 </head>
@@ -61,12 +61,12 @@
 								</span>
                             </div>
                             <a class="me-lg-8" href="/">
-								<img alt="Logo" src="<?php echo $domain ;?>assets/media/logos/logo-light.png" class="theme-light-show h-20px h-lg-30px" />
-								<img alt="Logo" src="<?php echo $domain ;?>assets/media/logos/logo-dark.png" class="theme-dark-show h-20px h-lg-30px" />
+								<img alt="Logo" src="assets/media/logos/logo-light.png" class="theme-light-show h-20px h-lg-30px" />
+								<img alt="Logo" src="assets/media/logos/logo-dark.png" class="theme-dark-show h-20px h-lg-30px" />
 							</a>
 							<div class="d-none d-lg-block">
 							    <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-state-primary menu-title-gray-800 menu-arrow-gray-400 align-items-stretch flex-grow-1 my-5 my-lg-0 px-2 px-lg-0 fw-semibold fs-6" id="#kt_header_menu" data-kt-menu="true">
-                                <a href="<?php echo $domain ;?>" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
 										<span class="menu-title fs-5 <?php if($router == 'home') {echo 'fw-bolder active';}else{echo 'fw-normal';}?>">Đề Xuất</span>
                                     </span>
@@ -230,7 +230,7 @@
                     <div class="header-menu-container container-fluid d-flex flex-stack h-lg-75px w-100 d-none" id="kt_header_nav">
                         <div class="header-menu flex-column flex-lg-row" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
                             <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-state-primary menu-title-gray-800 menu-arrow-gray-400 align-items-stretch flex-grow-1 my-5 my-lg-0 px-2 px-lg-0 fw-semibold fs-6" id="#kt_header_menu" data-kt-menu="true">
-                                <a href="<?php echo $domain ;?>" class="menu-item <?php if($router == 'home') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="" class="menu-item <?php if($router == 'home') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
 										<span class="menu-title">Trang Chủ</span>
                                     </span>
