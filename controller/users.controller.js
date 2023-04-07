@@ -27,26 +27,35 @@ class AuthController {
 
             const existingEmail = await userModel.findOne({ where: { email } });
             if (existingEmail) {
-                return res.status(400).json({
+                return res.json({
                     error: 3,
-                    message: 'Email already in use'
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: false,
+                    message: 'Email đã được sử dụng'
                 });
             }
 
             const existingUser = await userModel.findOne({ where: { username } });
             if (existingUser) {
-                return res.status(400).json({
+                return res.json({
                     error: 2,
-                    message: 'Username already in use'
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: false,
+                    message: 'Username đã được sử dụng'
                 });
             }
 
             const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
             if (!passwordRegex.test(password)) {
-                return res.status(400).json({
+                return res.json({
                     error: 1,
-                    message: 'Password is not in the correct format'
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: false,
+                    message: 'Mật khẩu phải bao gồm chữ hoa, chữ thường và số'
                 });
             }
 
@@ -59,15 +68,20 @@ class AuthController {
                 userId: user.id,
                 login_at: Date.now()
             }
-            return res.status(200).json({
+            return res.json({
                 error: 0,
-                message: 'Register successfully'
+                type: "success", 
+                buttontext: "Ok", 
+                reload: true,
+                message: 'Đăng ký thành công'
             });
         } catch (error) {
-            return res.status(400).json({
+            return res.json({
                 error: -1,
+                type: "error", 
+                buttontext: "Ok", 
+                reload: false,
                 message: 'An error occurred during processing',
-                track: error
             });
         }
     }
@@ -78,26 +92,35 @@ class AuthController {
 
             const user = await userModel.findOne({ where: { username } });
             if (!user) {
-                return res.status(400).json({
+                return res.json({
                     error: 3,
-                    message: "Username doesn't exits!"
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: false,
+                    message: "Tài khoản không tồn tại"
                 });
             }
 
             const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
             if (!passwordRegex.test(password)) {
-                return res.status(400).json({
+                return res.json({
                     error: 1,
-                    message: 'Password is not in the correct format'
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: false,
+                    message: 'Mật khẩu không đúng định dạng'
                 });
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                return res.status(400).json({
+                return res.json({
                     error: 2,
-                    message: 'Incorrect password'
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: false,
+                    message: 'Mật khẩu không chính xác'
                 });
             }
 
@@ -105,15 +128,20 @@ class AuthController {
                 userId: user.id,
                 login_at: Date.now()
             }
-            return res.status(200).json({
+            return res.json({
                 error: 0,
-                message: 'Login successfully'
+                type: "success", 
+                buttontext: "Ok", 
+                reload: true,
+                message: 'Đăng nhập thành công'
             });
         } catch (error) {
-            return res.status(400).json({
+            return res.json({
                 error: -1,
+                type: "error", 
+                buttontext: "Ok", 
+                reload: false,
                 message: 'An error occurred during processing',
-                track: error
             });
         }
     }

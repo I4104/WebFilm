@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <title>Trang Chủ - <?php echo $settings->get("title"); ?></title>
+    <title>Trang Chủ</title>
     <meta charset="utf-8" />
-    <meta name="description" content="<?php echo $settings->get("title"); ?>" />
+    <meta name="description" content="" />
     <meta name="keywords" content="hệ thống phim, web phim, phim online, phim miễn phí, phim tốc độ cao" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:type" content="<?php echo $settings->get(" og:type "); ?>" />
-    <meta property="og:title" content="<?php echo $settings->get(" og:title "); ?>" />
-    <meta property="og:url" content="<?php echo $settings->get(" og:url "); ?>" />
-    <meta property="og:site_name" content="<?php echo $settings->get(" og:site_name "); ?>" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <meta property="og:type" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-	<link href="assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/custom/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.knsea.css?sea=<?php echo time() ;?>" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.scrollbar.css?sea=<?php echo time() ;?>" rel="stylesheet" type="text/css" />
+	<link href="/assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/custom/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.knsea.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.scrollbar.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" rel="stylesheet" type="text/css" />
 </head>
@@ -61,37 +61,37 @@
 								</span>
                             </div>
                             <a class="me-lg-8" href="/">
-								<img alt="Logo" src="assets/media/logos/logo-light.png" class="theme-light-show h-20px h-lg-30px" />
-								<img alt="Logo" src="assets/media/logos/logo-dark.png" class="theme-dark-show h-20px h-lg-30px" />
+								<img alt="Logo" src="/assets/media/logos/logo-light.png" class="theme-light-show h-20px h-lg-30px" />
+								<img alt="Logo" src="/assets/media/logos/logo-dark.png" class="theme-dark-show h-20px h-lg-30px" />
 							</a>
 							<div class="d-none d-lg-block">
 							    <div class="menu menu-rounded menu-column menu-lg-row menu-root-here-bg-desktop menu-active-bg menu-state-primary menu-title-gray-800 menu-arrow-gray-400 align-items-stretch flex-grow-1 my-5 my-lg-0 px-2 px-lg-0 fw-semibold fs-6" id="#kt_header_menu" data-kt-menu="true">
-                                <a href="" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
-                                    <span class="menu-link py-3">
-										<span class="menu-title fs-5 <?php if($router == 'home') {echo 'fw-bolder active';}else{echo 'fw-normal';}?>">Đề Xuất</span>
-                                    </span>
-                                </a>
-                                <a href="<?php echo $domain."product" ;?>" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
-                                    <span class="menu-link py-3">
-										<span class="menu-title fs-5 <?php if($router == 'product') {echo 'fw-bolder active';}else{echo 'fw-normal';}?>">Phim Bộ</span>
-                                    </span>
-                                </a>
-                                <a href="<?php echo $domain."forum" ;?>" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
-                                    <span class="menu-link py-3">
-										<span class="menu-title fs-5 <?php if($router == 'le') {echo 'fw-bolder active';}else{echo 'fw-normal';}?>">Phim Lẻ</span>
-                                    </span>
-                                </a>
-                                <a href="<?php echo $domain."forum" ;?>" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
-                                    <span class="menu-link py-3">
-										<span class="menu-title fs-5 <?php if($router == 'anime') {echo 'fw-bolder active';}else{echo 'fw-normal';}?>">Anime</span>
-                                    </span>
-                                </a>
-                                <a href="<?php echo $domain."forum" ;?>" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
-                                    <span class="menu-link py-3">
-										<span class="menu-title fs-5 <?php if($router == '3d') {echo 'fw-bolder active';}else{echo 'fw-normal';}?>">3D</span>
-                                    </span>
-                                </a>
-                            </div>
+                                    <a href="" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                        <span class="menu-link py-3">
+                                            <span class="menu-title fs-5 fw-bolder active">Đề Xuất</span>
+                                        </span>
+                                    </a>
+                                    <a href="product" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                        <span class="menu-link py-3">
+                                            <span class="menu-title fs-5 fw-normal">Phim Bộ</span>
+                                        </span>
+                                    </a>
+                                    <a href="forum" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                        <span class="menu-link py-3">
+                                            <span class="menu-title fs-5 fw-normal">Phim Lẻ</span>
+                                        </span>
+                                    </a>
+                                    <a href="forum" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                        <span class="menu-link py-3">
+                                            <span class="menu-title fs-5 fw-normal">Anime</span>
+                                        </span>
+                                    </a>
+                                    <a href="forum" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                        <span class="menu-link py-3">
+                                            <span class="menu-title fs-5 fw-normal">3D</span>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center flex-shrink-0">
@@ -120,22 +120,23 @@
                                     <div class="menu-item px-3">
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <div class="symbol symbol-50px me-5">
-                                                <img alt="Logo" src="<?php echo $ICrypt->parseToken($users["image_avatar"]); ?>" />
+                                                <img alt="Logo" src="" />
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <div class="fw-bold d-flex align-items-center fs-5"><?php echo $users["realname"]; ?>
-                                                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"><?php echo ucfirst($users["rank"]); ?></span>
+                                                <div class="fw-bold d-flex align-items-center fs-5"><%= user.username %>
+                                                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"><%= user.rank %></span>
                                                 </div>
-                                                <a href="#" class="fw-semibold text-muted text-hover-primary fs-7"><?php echo $users["email"]; ?></a>
+                                                <a href="#" class="fw-semibold text-muted text-hover-primary fs-7"><%= user.email %></a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="separator my-2"></div>
 
-                                    <!-- Check Admin -->
+                                    <% if (user.rank == "admin") { %>
                                     <div class="menu-item px-5">
                                         <a href="admin" class="menu-link px-5">Trang Quản Lý</a>
                                     </div>
+                                    <% } %>
 
                                     <div class="menu-item px-5">
                                         <a href="../../demo11/dist/apps/projects/list.html" class="menu-link px-5">
@@ -146,7 +147,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item px-5">
-                                        <a href="<?php echo $domain."upgrade-a-plan" ;?>" class="menu-link px-5">
+                                        <a href="upgrade-a-plan" class="menu-link px-5">
                                             <span class="menu-text">Nâng Cấp</span>
                                             <span class="menu-badge">
                                                     <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
@@ -154,15 +155,15 @@
                                         </a>
                                     </div>
                                     <div class="menu-item px-5 my-1">
-                                        <a href="<?php echo $domain."accounts/settings";?>" class="menu-link px-5">Cài Đặt Tài Khoản</a>
+                                        <a href="accounts/settings" class="menu-link px-5">Cài Đặt Tài Khoản</a>
                                     </div>
                                     <div class="menu-item px-5">
-                                        <a href="<?php echo $domain."logout";?>" class="menu-link px-5">Đăng Xuất</a>
+                                        <a href="users/logout" class="menu-link px-5">Đăng Xuất</a>
                                     </div>
                                 </div>
                             </div>   
                             <% } else { %>
-                            <a class="btn btn-flex btn-color-gray-700 btn-active-color-primary bg-light h-30px h-lg-40px border-0 fw-bold px-4 px-lg-6 ms-2 ms-lg-2" href="<?php echo $domain."login" ;?>">Đăng Nhập</a>
+                            <a class="btn btn-flex btn-color-gray-700 btn-active-color-primary bg-light h-30px h-lg-40px border-0 fw-bold px-4 px-lg-6 ms-2 ms-lg-2" href="login">Đăng Nhập</a>
                             <% } %>
                         </div>
                     </div>
@@ -174,7 +175,7 @@
 										<span class="menu-title">Trang Chủ</span>
                                     </span>
                                 </a>
-                                <a href="<?php echo $domain."product" ;?>" class="menu-item <?php if($router == 'product') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="product" class="menu-item <?php if($router == 'product') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
 										<span class="menu-title">Sản Phẩm</span>
                                     </span>
@@ -213,7 +214,7 @@
 										</div>
 									</div>
 								</div>
-                                <a href="<?php echo $domain."forum" ;?>" class="menu-item <?php if($router == 'forum') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="forum" class="menu-item <?php if($router == 'forum') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
 										<span class="menu-title">Diễn Đàn</span>
                                     </span>
@@ -252,12 +253,12 @@
 										</div>
 									</div>
 								</div>
-                                <a href="<?php echo $domain."night-market" ;?>" class="menu-item <?php if($router == 'night-market') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="night-market" class="menu-item <?php if($router == 'night-market') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
 										<span class="menu-title">Chợ Đêm</span>
                                     </span>
                                 </a>
-                                <a href="<?php echo $domain."news" ;?>" class="menu-item <?php if($router == 'news') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="news" class="menu-item <?php if($router == 'news') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
 										<span class="menu-title">Tin Tức</span>
                                     </span>

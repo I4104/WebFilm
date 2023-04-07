@@ -5,6 +5,7 @@ class HomeController {
 
     index(req, res) {
         const page = (req.params.page != null) ? req.params.page : 1;
+        return res.render('index');
     }
 
     view(req, res) {

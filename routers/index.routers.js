@@ -11,6 +11,6 @@ router.get('/get_list/:page', HomeController.get_list);
 router.get('/get_big_list/:from', HomeController.get_big_list);
 
 router.get('/info/:slug', HomeController.get_info);
-router.get('/', HomeController.index);
+router.get('/', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.index);
 
 module.exports = router;
