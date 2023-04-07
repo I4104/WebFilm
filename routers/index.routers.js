@@ -1,12 +1,9 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+var HomeController = require("../controller/home.controller");
+var authMiddleware = require("../middleware/authencation");
 
-/* GET home page. */
-router.get('/', function (req, res) {
-    res.render('index', {
-        title: 'Express'
-    });
-});
+router.get('/', HomeController.index);
 
 module.exports = router;
