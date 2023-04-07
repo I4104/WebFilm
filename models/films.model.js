@@ -31,27 +31,27 @@ const film = sequelize.define('films', {
         allowNull: true
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     slug: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     thumb_url: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     poster_url: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     tags: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
     },
     likes: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
     },
     year_date: {
@@ -67,7 +67,7 @@ const film = sequelize.define('films', {
         allowNull: true
     },
     m3u8: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT ,
         allowNull: true
     },
     seen: {
