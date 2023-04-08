@@ -88,19 +88,21 @@
                                 <div class="col-lg-12">
                                     <div class="fw-bolder fs-1 pt-0 pb-1">Đề xuất hot</div>
                                     <div class="row slider responsive">
+                                        <% film.forEach(function(item) { %>
                                         <div class="col-lg-1 item mb-5 p-3">
                                             <a class="position-relative rounded" href="">
                                                 <figure class="rounded">
-                                                    <img class="bgi-no-repeat bgi-center w-100" src="https://image.tmdb.org/t/p/w1280/ziEuG1essDuWuC5lpWUaw1uXY2O.jpg">
+                                                    <img class="bgi-no-repeat bgi-center w-100" src="https://default.ophimcms.com/storage/images/<%= film.slug %>/<%= film.thumb_url %>">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
                                                 <div class="movie-post-title-box">
                                                     <div class="movie-post-title">
-                                                        <h2 class="text-gray-800">Thế Giới Hoàn Mỹ</h2>
+                                                        <h2 class="text-gray-800"><%= film.title %></h2>
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
+                                        <% }); %>
                                     </div>
                                 </div>
                             </div>

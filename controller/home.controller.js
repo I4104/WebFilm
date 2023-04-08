@@ -5,7 +5,16 @@ class HomeController {
 
     index(req, res) {
         const user = res.locals.user;
-        const page = (req.params.page != null) ? req.params.page : 1;
+        try {
+            const film = filmModel.findAll({
+                order: [['year_date', 'DESC'], ['seen', 'DESC']],
+                limit: 20,
+            });
+            res.locals.film = film;
+        } catch (error) {
+            console.log(error);
+        }
+
         return res.render('index');
     }
 
@@ -74,7 +83,6 @@ class HomeController {
             year: film.year_date
         }
 
-        console.log(res.locals.info)
         return res.render('movie/player.ejs');
     }
 
