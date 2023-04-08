@@ -6,7 +6,7 @@ class HomeController {
     index(req, res) {
         const user = res.locals.user;
         try {
-            const film = filmModel.findAll({
+            const film = await filmModel.findAll({
                 order: [['year_date', 'DESC'], ['seen', 'DESC']],
                 limit: 20,
             });
