@@ -144,6 +144,36 @@ class HomeController {
         return res.render('movie/player.ejs');
     }
 
+    async category(req, res) {
+        const user = res.locals.user;
+        const category = (req.params.category != null) ? req.params.category : "";
+
+        if (category == "series") {
+            res.locals.category = "Phim Bộ";
+        }
+        if (category == "single") {
+            res.locals.category = "Phim Lẻ";
+        }
+        if (category == "anime") {
+            category = "hoathinh";
+            res.locals.category = "Hoạt Hình";
+        }
+
+        try {
+            const info_category = await filmModel.findAll({
+                where: { 
+                    type: category,
+                },
+                order: [['year_date', 'DESC'], ['id', 'DESC']],
+                limit: 24,
+            });
+            res.locals.info_category = info_category;
+        } catch (error) {
+            console.log(error);
+        }
+        return res.render("category.ejs");
+    }
+
     async iframe(req, res) {
         const slug = (req.params.slug != null) ? req.params.slug : "";
         const episode = (req.params.episode != null) ? req.params.episode : 1;
@@ -180,60 +210,10 @@ class HomeController {
     }
 
     async search(req, res) {
-        const results = await filmModel.findAll({ where: { slug: req.params.slug } });
-        try {
-            const response = await axios.get('https://ophim1.com/phim/' + req.params.slug);
-            const data = response.data;
-            if (result) {
-                var category = [];
-                await Promise.all(data.movie.category.map(async function (item) {
-                    category.push(item.name)
-                }));
-
-                var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-                var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-
-                await filmModel.update({
-                    type: data.movie.type,
-                    status: data.movie.status,
-                    description: data.movie.content,
-                    film_time: data.movie.time,
-                    episode_current: episode_current,
-                    episode_total: episode_total,
-                    m3u8: JSON.stringify(data.episodes),
-                    tags: JSON.stringify(category) 
-                }, {
-                    where: { slug: item.slug }
-                });
-
-            } else {
-                var category = [];
-
-                await Promise.all(data.movie.category.map(async function (item) {
-                    category.push(item.name)
-                }));
-
-                var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-                var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-
-                await filmModel.update({
-                    type: data.movie.type,
-                    status: data.movie.status,
-                    description: data.movie.content,
-                    film_time: data.movie.time,
-                    episode_current: episode_current,
-                    episode_total: episode_total,
-                    m3u8: JSON.stringify(data.episodes),
-                    tags: JSON.stringify(category) 
-                }, {
-                    where: { slug: item.slug }
-                });
-            }
-            return res.json(data);
-        } catch (error) {
-            console.error(error);
-        }    
-        return;
+        const user = res.locals.user;
+        const search = (req.params.search != null) ? req.params.search : "";
+        res.locals.search = search;
+        return res.render('search.ejs');
     }
 
     async get_info(req, res) {

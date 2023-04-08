@@ -293,7 +293,7 @@
     border-bottom-left-radius: 5px !important;
 }
 
-.movie-post-episode {
+.item .movie-post-episode {
     padding: 3px 6px;
     position: absolute;
     font-size: 11px;
@@ -301,9 +301,9 @@
     text-align: center;
 }
 
-.movie-post-episode {
-    left: 8px;
-    top: -213px;
+.item .movie-post-episode {
+    left: 5px;
+    top: 5px;
     background: rgb(71, 132, 19);
     color: #fff;
     padding: 3px 5px 1px;
@@ -364,6 +364,10 @@
 
 .position {
     position: absolute;
+}
+
+.w-5 {
+    width:5%!important
 }
 
 .mb--1 {

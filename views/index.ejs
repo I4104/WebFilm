@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="fw-bolder fs-1 pt-0">Thịnh hành</div>
-                                    <div class="row slider responsive">
+                                    <div class="row slider list-movie-home">
                                         <% film_hot.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
@@ -59,8 +59,8 @@
                                                     <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.thumb_url.split("/").pop() %>">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
+                                                <div class="movie-post-episode"><%= item.episode_current %></div>
                                                 <div class="movie-post-title-box">
-                                                    <div class="movie-post-episode"><%= item.episode_current %></div>
                                                     <div class="movie-post-title">
                                                         <h2 class="text-gray-800"><%= item.title %></h2>
                                                     </div>
@@ -73,7 +73,7 @@
 
                                 <div class="col-lg-12">
                                     <div class="fw-bolder fs-1 pt-0">Đề xuất cho bạn</div>
-                                    <div class="row slider responsive">
+                                    <div class="row slider list-movie-home">
                                         <% film_dexuat.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
@@ -82,8 +82,8 @@
                                                     <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.thumb_url.split("/").pop(); %>">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
+                                                <div class="movie-post-episode"><%= item.episode_current %></div>
                                                 <div class="movie-post-title-box">
-                                                    <div class="movie-post-episode"><%= item.episode_current %></div>
                                                     <div class="movie-post-title">
                                                         <h2 class="text-gray-800"><%= item.title %></h2>
                                                     </div>
