@@ -45,7 +45,7 @@
     .content-item-home {
         position: relative;
         z-index: 9;
-        margin-top: -120px;
+        margin-top: -150px;
     }
 }
 
@@ -77,8 +77,8 @@
 .slide-content {
     position: absolute;
     left: 50px;
-    bottom: 180px;
-    z-index: 1;
+    bottom: 250px;
+    z-index: 2;
     color: #fff;
 }
   

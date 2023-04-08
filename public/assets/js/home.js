@@ -5,7 +5,7 @@ var swiper = new Swiper(".banner-main", {
     effect: 'fade',
     centeredSlides: true,
     autoplay: {
-        delay: 3500,
+        delay: 7000,
         disableOnInteraction: false,
     },
     pagination: {

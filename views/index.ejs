@@ -6,7 +6,7 @@
                                 <% var episode = JSON.parse(item.m3u8); %>
                                 <div class="swiper-slide">
                                     <div class="slide-content">
-                                        <span class="fs-1 fw-bold text-success"><%= item.title %></span>
+                                        <span class="fs-xxl-1 fw-bolder text-light"><%= item.title %></span>
                                         <div class="info d-flex align-items-center text-gray-800 fs-6 my-3">
                                             <span class="vip-info"></span>
                                             <div class="broken-line"></div>
@@ -37,27 +37,26 @@
                                         </div>
                                         <a href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>" class="btn btn-icon btn-lg btn-light-danger btn-rounded me-5"><i class="fa fa-play fs-2"></i></a>
                                     </div>
-                                    <img class="bgi-no-repeat bgi-center w-100 h-200px h-sm-375px h-md-525px h-lg-800px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop(); %>">
+                                    <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-200px h-sm-375px h-md-525px h-lg-800px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop(); %>">
                                 </div>
                                 <% }); %>
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
-                            <!--<div class="swiper-pagination"></div>-->
                         </div>
                     </div>
                     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-fluid content-item-home">
                         <div class="content flex-row-fluid" id="kt_content">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="fw-bolder fs-1 pt-0 pb-1">Đề xuất hot</div>
+                                    <div class="fw-bolder fs-1 pt-0 pb-1">Thịnh hành</div>
                                     <div class="row slider responsive">
                                         <% film_hot.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
                                             <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
-                                                    <img class="bgi-no-repeat bgi-center w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop() %>">
+                                                    <img class="bgi-no-repeat bgi-center w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.thumb_url.split("/").pop() %>">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
                                                 <div class="movie-post-title-box">
@@ -79,7 +78,7 @@
                                         <div class="col-lg-1 item mb-5 p-3">
                                             <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
-                                                    <img class="bgi-no-repeat bgi-center w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop(); %>">
+                                                    <img class="bgi-no-repeat bgi-center w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.thumb_url.split("/").pop(); %>">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
                                                 <div class="movie-post-title-box">
