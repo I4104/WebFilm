@@ -5,12 +5,33 @@ class HomeController {
 
     async index(req, res) {
         const user = res.locals.user;
+
         try {
-            const film = await filmModel.findAll({
-                order: [['year_date', 'DESC'], ['seen', 'DESC']],
-                limit: 20,
+            const film_banner = await filmModel.findAll({
+                order: [['year_date', 'DESC'], ['id', 'DESC']],
+                limit: 3,
             });
-            res.locals.film = film;
+            res.locals.film_banner = film_banner;
+        } catch (error) {
+            console.log(error);
+        }
+
+        try {
+            const film_hot = await filmModel.findAll({
+                order: [['seen', 'DESC']],
+                limit: 24,
+            });
+            res.locals.film_hot = film_hot;
+        } catch (error) {
+            console.log(error);
+        }
+
+        try {
+            const film_dexuat = await filmModel.findAll({
+                order: [['year_date', 'DESC'], ['id', 'DESC']],
+                limit: 24,
+            });
+            res.locals.film_dexuat = film_dexuat;
         } catch (error) {
             console.log(error);
         }
@@ -81,6 +102,7 @@ class HomeController {
             description: film.description,
             tags: JSON.parse(film.tags),
             time: film.film_time,
+            origin_name: film.origin_name,
             episode_list: m3u8,
             year: film.year_date
         }

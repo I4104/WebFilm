@@ -67,7 +67,7 @@ const film = sequelize.define('films', {
         allowNull: true
     },
     m3u8: {
-        type: DataTypes.TEXT ,
+        type: DataTypes.TEXT('long'),
         allowNull: true
     },
     seen: {

@@ -2,15 +2,17 @@
                     <div class="toolbar" id="kt_toolbar">
                         <div class="swiper banner-main">
                             <div class="swiper-wrapper">
+                                <% film_banner.forEach(function(item) { %>
+                                <% var episode = JSON.parse(item.m3u8); %>
                                 <div class="swiper-slide">
                                     <div class="slide-content">
-                                        <span class="fs-1 fw-bold text-success">Title Here 1</span>
+                                        <span class="fs-1 fw-bold text-success"><%= item.title %></span>
                                         <div class="info d-flex align-items-center text-gray-800 fs-6 my-3">
                                             <span class="vip-info"></span>
                                             <div class="broken-line"></div>
-                                            <span>1 giờ 25 phút</span>
+                                            <span><%= item.film_time %></span>
                                             <div class="broken-line"></div>
-                                            <span>2023</span>
+                                            <span><%= item.year_date %></span>
                                             <div class="broken-line"></div>
                                             <div class="rating-label me-2 checked">
                                                 <i class="bi bi-star fs-2"></i>
@@ -29,53 +31,15 @@
                                             </div>
                                         </div>
                                         <div class="tag my-2 mb-3">
-                                            <span class="badge bg-tags fs-7 p-2">Hàn Quốc</span>
-                                            <span class="badge bg-tags fs-7 p-2">Tội Phạm</span>
-                                            <span class="badge bg-tags fs-7 p-2">Hành Động</span>
-                                            <span class="badge bg-tags fs-7 p-2">Tình Tiết</span>
-                                            <span class="badge bg-tags fs-7 p-2">Xã Hội Đen</span>
+                                            <% JSON.parse(item.tags).forEach(function(item) { %>
+                                            <span class="badge bg-tags fs-7 p-2"><%= item %></span>
+                                            <% }); %>
                                         </div>
-                                        <a href="#" class="btn btn-icon btn-lg btn-light-danger btn-rounded me-5"><i class="fa fa-play fs-2"></i></a>
+                                        <a href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>" class="btn btn-icon btn-lg btn-light-danger btn-rounded me-5"><i class="fa fa-play fs-2"></i></a>
                                     </div>
-                                    <img class="bgi-no-repeat bgi-center w-100" src="https://s199.imacdn.com/vg/2023/04/05/d30f36dae1db8df6_9694af22c814b11f_27195616806807046118684.jpg">
+                                    <img class="bgi-no-repeat bgi-center w-100 h-200px h-sm-375px h-md-525px h-lg-800px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop(); %>">
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="slide-content">
-                                        <span class="fs-1 fw-bold text-success">Title Here 2</span>
-                                        <div class="info d-flex align-items-center text-gray-800 fs-6 my-3">
-                                            <span class="vip-info"></span>
-                                            <div class="broken-line"></div>
-                                            <span>1 giờ 25 phút</span>
-                                            <div class="broken-line"></div>
-                                            <span>2023</span>
-                                            <div class="broken-line"></div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                        </div>
-                                        <div class="tag my-2 mb-3">
-                                            <span class="badge bg-tags fs-7 p-2">Hàn Quốc</span>
-                                            <span class="badge bg-tags fs-7 p-2">Tội Phạm</span>
-                                            <span class="badge bg-tags fs-7 p-2">Hành Động</span>
-                                            <span class="badge bg-tags fs-7 p-2">Tình Tiết</span>
-                                            <span class="badge bg-tags fs-7 p-2">Xã Hội Đen</span>
-                                        </div>
-                                        <a href="#" class="btn btn-icon btn-lg btn-light-danger btn-rounded me-5 "><i class="fa fa-play fs-2"></i></a>
-                                    </div>
-                                    <img class="bgi-no-repeat bgi-center w-100" src="https://s199.imacdn.com/vg/2022/12/30/dc97794921f5a86c_562089b843921847_9824816723858726118684.jpg">
-                                </div>
+                                <% }); %>
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -88,11 +52,34 @@
                                 <div class="col-lg-12">
                                     <div class="fw-bolder fs-1 pt-0 pb-1">Đề xuất hot</div>
                                     <div class="row slider responsive">
-                                        <% film.forEach(function(item) { %>
+                                        <% film_hot.forEach(function(item) { %>
+                                        <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
-                                            <a class="position-relative rounded" href="">
+                                            <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
-                                                    <img class="bgi-no-repeat bgi-center w-100" src="<%= item.thumb_url %>">
+                                                    <img class="bgi-no-repeat bgi-center w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop() %>">
+                                                </figure>
+                                                <div class="icon_overlay"></div>
+                                                <div class="movie-post-title-box">
+                                                    <div class="movie-post-title">
+                                                        <h2 class="text-gray-800"><%= item.title %></h2>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <% }); %>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="fw-bolder fs-1 pt-0 pb-1">Đề xuất cho bạn</div>
+                                    <div class="row slider responsive">
+                                        <% film_dexuat.forEach(function(item) { %>
+                                        <% var episode = JSON.parse(item.m3u8); %>
+                                        <div class="col-lg-1 item mb-5 p-3">
+                                            <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
+                                                <figure class="rounded">
+                                                    <img class="bgi-no-repeat bgi-center w-100 h-150px h-sm-175px h-md-275px h-lg-300px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop(); %>">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
                                                 <div class="movie-post-title-box">
