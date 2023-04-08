@@ -50,6 +50,17 @@
     }
 }
 
+.swiper-slide::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0%), rgb(21 21 33)); /* Điều chỉnh độ tô đen tại đây */
+    z-index: 1;
+}
+
 .menu-title.active {
     color: var(--kt-menu-title-active);
 }
