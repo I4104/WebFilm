@@ -110,7 +110,8 @@ class HomeController {
 
         var data = {
             title: film.title,
-            poster_url: "https://default.ophimcms.com/storage/images/" + slug + "/" + film.thumb_url,
+            poster_url: "https://img.ophim1.com/uploads/movies/" + film.poster_url,
+            thumb_url: "https://default.ophimcms.com/storage/images/" + slug + "/" + film.thumb_url,
             slug: slug,
             episode: episode,
             m3u8: m3u8,
