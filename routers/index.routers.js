@@ -10,6 +10,8 @@ router.get('/phim/:slug/:episode', [authMiddleware.isAuth, authMiddleware.getAut
 
 router.get("/iframe/:slug/:episode", HomeController.iframe)
 
+
+router.get('/search/:slug', HomeController.search);
 router.get('/get_info', HomeController.get_info);
 router.get('/get_list/:page', HomeController.get_list);
 router.get('/get_big_list/:from', HomeController.get_big_list);
