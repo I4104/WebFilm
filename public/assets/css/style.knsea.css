@@ -42,6 +42,11 @@
     .content {
         padding: 15px 0 15px 0;
     }
+    .content-item-home {
+        position: relative;
+        z-index: 9;
+        margin-top: -100px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -255,20 +260,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000 url('https://hhtq.vip/wp-content/themes/moviemovies/assets/images/play-icon.png') no-repeat center center;
+    background: #000 url('/assets/icons/play-icon.png') no-repeat center center;
     background-size: 30px;
     opacity: 0;
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
     -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0) scale(1.0,1.0);
-    border-bottom-right-radius: 5px !important;
-    border-bottom-left-radius: 5px !important;
+    border-radius: 5px !important;
 }
 
 .item:hover .icon_overlay,
 .slider-thumb:hover .icon_overlay {
-    opacity:.75;
+    opacity:.55;
 }
 
 .movie-post-title-box {
@@ -278,8 +282,8 @@
     margin: 0;
     width: 100%;
     height: auto;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(6, 6, 6, 0.25) 30%, rgba(0, 0, 0, 0.80) 100%);
+    bottom: -0.5px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(6, 6, 6, 0.25) 30%, rgba(0, 0, 0, 0.40) 90%);
     border-bottom-right-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
 }
