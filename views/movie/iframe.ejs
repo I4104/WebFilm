@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/assets/jwplayer/jwplayer-8.26.0.js"></script>
+    <script src="/assets/jwplayer/hls.min.js"></script>
+    <script src="/assets/jwplayer/jwplayer.hlsjs.min.js"></script>
+    <script>jwplayer.key="9p36CV6QmJmdYet7lLcp40o+0GE3J0gMCjTZwO9/mNM=";</script>
+</head>
+<body>
+    <style>
+        #player {
+            position: absolute;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .jwplayer.jw-flag-rightclick-open {
+            overflow: hidden !important;
+        }
+        .jw-title {
+            padding-top: 0px;
+        }
+        .jwplayer.jw-skin-netflix .jw-title-primary {
+            text-transform: initial;
+        }
+    </style>
+    <div id="player"></div>
+
+    <script>
+    const playerInstance = jwplayer("player").setup({
+        controls: true,
+        sharing: false,
+        playbackRateControls: true,
+        displaytitle: true,
+        displaydescription: true,
+        abouttext: "Donate Ủng Hộ",
+        aboutlink: "https://www.facebook.com/ltn.igl/",
+    
+        skin: {
+            url:"/assets/skin/netflix.css",
+            name: "netflix"
+        },
+        
+        /*logo: {
+            file: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+            link: "",
+            hide: false,
+            position: "top-right"
+        },*/
+    
+        captions: {
+            color: "#FFF",
+            fontSize: 14,
+            backgroundOpacity: 0,
+            edgeStyle: "raised"
+        },
+    
+        playlist: [
+            {
+                title: "<%= film.title %>",
+                description: "Bạn đang xem",
+                image: "<%= film.poster_url %>",
+                sources: [
+                    {
+                    file:
+                        "<%= film.m3u8 %>",
+                        label: "1080p",
+                        default: true
+                    }
+                ],
+                captions: [
+                    {
+                        file: "",
+                        label: "Việt Sub",
+                        kind: "captions",
+                        default: true
+                    }
+                ],
+            }
+        ],
+    });
+    
+    playerInstance.on("ready", function () {
+        // Move the timeslider in-line with other controls
+        const playerContainer = playerInstance.getContainer();
+        const buttonContainer = playerContainer.querySelector(".jw-button-container");
+        const spacer = buttonContainer.querySelector(".jw-spacer");
+        const timeSlider = playerContainer.querySelector(".jw-slider-time");
+        buttonContainer.replaceChild(timeSlider, spacer);
+    
+        // Detect adblock
+        playerInstance.on("adBlock", () => {
+            const modal = document.querySelector("div.modal");
+            modal.style.display = "flex";
+            
+            document
+            .getElementById("close")
+            .addEventListener("click", () => location.reload());
+        });
+    
+      // Forward 10 seconds
+        const rewindContainer = playerContainer.querySelector(
+            ".jw-display-icon-rewind"
+        );
+        const forwardContainer = rewindContainer.cloneNode(true);
+        const forwardDisplayButton = forwardContainer.querySelector(
+            ".jw-icon-rewind"
+        );
+        forwardDisplayButton.style.transform = "scaleX(-1)";
+        forwardDisplayButton.ariaLabel = "Forward 10 Seconds";
+        const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
+        nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
+    
+        // control bar icon
+        playerContainer.querySelector(".jw-display-icon-next").style.display = "none"; // hide next button
+        const rewindControlBarButton = buttonContainer.querySelector(
+            ".jw-icon-rewind"
+        );
+        const forwardControlBarButton = rewindControlBarButton.cloneNode(true);
+            forwardControlBarButton.style.transform = "scaleX(-1)";
+            forwardControlBarButton.ariaLabel = "Forward 10 Seconds";
+            rewindControlBarButton.parentNode.insertBefore(
+            forwardControlBarButton,
+            rewindControlBarButton.nextElementSibling
+        );
+    
+        // add onclick handlers
+        [forwardDisplayButton, forwardControlBarButton].forEach((button) => {
+            button.onclick = () => {
+                playerInstance.seek(playerInstance.getPosition() + 10);
+            };
+        });
+    });
+    </script>
+</body>
+</html>
