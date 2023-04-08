@@ -3,7 +3,7 @@ const axios = require('axios');
 
 class HomeController {
 
-    index(req, res) {
+    async index(req, res) {
         const user = res.locals.user;
         try {
             const film = await filmModel.findAll({
