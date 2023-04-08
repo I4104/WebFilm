@@ -30,6 +30,10 @@ const film = sequelize.define('films', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    showtimes: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: false

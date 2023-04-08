@@ -79,6 +79,7 @@ class HomeController {
 
                 var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+                var showtime = (data.movie.showtime != null) ? data.movie.showtime : "";
 
                 await filmModel.update({
                     type: data.movie.type,
@@ -87,6 +88,7 @@ class HomeController {
                     film_time: data.movie.time,
                     episode_current: episode_current,
                     episode_total: episode_total,
+                    showtime: showtime,
                     poster_url: data.movie.poster_url,
                     thumb_url: data.movie.thumb_url,
                     m3u8: JSON.stringify(data.episodes),
@@ -177,6 +179,62 @@ class HomeController {
         return res.render('movie/iframe.ejs');
     }
 
+    async search(req, res) {
+        const results = await filmModel.findAll({ where: { slug: req.params.slug } });
+        try {
+            const response = await axios.get('https://ophim1.com/phim/' + req.params.slug);
+            const data = response.data;
+            if (result) {
+                var category = [];
+                await Promise.all(data.movie.category.map(async function (item) {
+                    category.push(item.name)
+                }));
+
+                var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+
+                await filmModel.update({
+                    type: data.movie.type,
+                    status: data.movie.status,
+                    description: data.movie.content,
+                    film_time: data.movie.time,
+                    episode_current: episode_current,
+                    episode_total: episode_total,
+                    m3u8: JSON.stringify(data.episodes),
+                    tags: JSON.stringify(category) 
+                }, {
+                    where: { slug: item.slug }
+                });
+
+            } else {
+                var category = [];
+
+                await Promise.all(data.movie.category.map(async function (item) {
+                    category.push(item.name)
+                }));
+
+                var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+
+                await filmModel.update({
+                    type: data.movie.type,
+                    status: data.movie.status,
+                    description: data.movie.content,
+                    film_time: data.movie.time,
+                    episode_current: episode_current,
+                    episode_total: episode_total,
+                    m3u8: JSON.stringify(data.episodes),
+                    tags: JSON.stringify(category) 
+                }, {
+                    where: { slug: item.slug }
+                });
+            }
+            return res.json(data);
+        } catch (error) {
+            console.error(error);
+        }    
+        return;
+    }
 
     async get_info(req, res) {
         try {
