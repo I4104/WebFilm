@@ -14,7 +14,7 @@ class HomeController {
         } catch (error) {
             console.log(error);
         }
-
+        
         return res.render('index');
     }
 
