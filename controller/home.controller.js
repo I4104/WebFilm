@@ -1,5 +1,7 @@
 const filmModel = require("../models/films.model");
 const axios = require('axios');
+const moment = require('moment');
+const { Op } = require('../config');
 
 class HomeController {
 
@@ -8,6 +10,11 @@ class HomeController {
 
         try {
             const film_banner = await filmModel.findAll({
+                where: { 
+                    m3u8: {
+                        [Op.not]: "[]",
+                    }
+                },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
                 limit: 3,
             });
@@ -18,6 +25,11 @@ class HomeController {
 
         try {
             const film_hot = await filmModel.findAll({
+                where: { 
+                    m3u8: {
+                        [Op.not]: "[]",
+                    }
+                },
                 order: [['seen', 'DESC']],
                 limit: 24,
             });
@@ -28,6 +40,11 @@ class HomeController {
 
         try {
             const film_dexuat = await filmModel.findAll({
+                where: { 
+                    m3u8: {
+                        [Op.not]: "[]",
+                    }
+                },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
@@ -204,6 +221,7 @@ class HomeController {
             data.items.forEach(async (item) => {
                 const film = await filmModel.findOne({ where: { title: item.name } });
                 if (!film) {
+                    let modified = moment(item.modified.time).format('Y-MM-DD H:mm:ss');
                     await filmModel.create({
                         title: item.name,
                         origin_name: item.origin_name,
@@ -216,7 +234,7 @@ class HomeController {
                         tags: "[]",
                         likes: "[]",
                         year_date: item.year,
-                        modified: item.modified.time,
+                        modified: modified,
                         film_time: "?",
                         m3u8: "[]",
                     });
@@ -236,6 +254,7 @@ class HomeController {
                 data.items.forEach(async (item) => {
                     const film = await filmModel.findOne({ where: { title: item.name } });
                     if (!film) {
+                        let modified = moment(item.modified.time).format('Y-MM-DD H:mm:ss');
                         await filmModel.create({
                             title: item.name,
                             origin_name: item.origin_name,
@@ -248,7 +267,7 @@ class HomeController {
                             tags: "[]",
                             likes: "[]",
                             year_date: item.year,
-                            modified: item.modified.time,
+                            modified: modified,
                             film_time: "?",
                             m3u8: "[]",
                         });

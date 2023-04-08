@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Op } = require('sequelize');
 
 const sequelize = new Sequelize('admin', 'root', '', {
     host: 'localhost',
@@ -8,4 +8,4 @@ const sequelize = new Sequelize('admin', 'root', '', {
 
 const keySecret = "I4104@KnSea";
 
-module.exports = { sequelize, keySecret, DataTypes };
+module.exports = { sequelize, keySecret, DataTypes, Op };

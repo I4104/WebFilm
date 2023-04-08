@@ -1,4 +1,4 @@
-const { sequelize, keySecret, DataTypes } = require('../config');
+const { sequelize, keySecret, DataTypes, Op } = require('../config');
 
 const User = sequelize.define('users', {
     id: {
