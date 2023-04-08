@@ -11,6 +11,11 @@ class HomeController {
     view(req, res) {
         const slug = (req.params.slug != null) ? req.params.slug : 1;
         const episode = (req.params.episode != null) ? req.params.episode : 1;
+        res.locals.info = {
+            slug,
+            episode,
+        }
+        return res.render('movie/player.ejs');
     }
 
     list(req, res) {

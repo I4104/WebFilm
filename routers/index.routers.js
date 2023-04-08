@@ -4,6 +4,7 @@ var router = express.Router();
 var HomeController = require("../controller/home.controller");
 var authMiddleware = require("../middleware/authencation");
 
+// localhost:3000/1
 router.get('/:page', HomeController.index);
 router.get('/phim/:slug/:episode', HomeController.view);
 
