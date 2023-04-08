@@ -119,14 +119,6 @@
             window.location.href = "/search/" + createSlug(inputVal);
         }
     });
-    // function createSlug(str) {
-    //     str = str.replace(/^\s+|\s+$/g, ''); // Loại bỏ khoảng trắng ở đầu và cuối chuỗi
-    //     str = str.toLowerCase(); // Chuyển đổi tất cả các ký tự thành dạng thường
-    //     str = str.replace(/[^a-z0-9 -]/g, '') // Loại bỏ các ký tự đặc biệt, chỉ giữ lại ký tự a-z, số và dấu -
-    //         .replace(/\s+/g, '-') // Thay thế khoảng trắng bằng ký tự -
-    //         .replace(/-+/g, '-'); // Loại bỏ các dấu - liên tiếp
-    //     return str;
-    // }
     function createSlug(str) {
         return str.normalize('NFD')
                     .replace(/[\u0300-\u036f]/g, '')
