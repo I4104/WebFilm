@@ -14,7 +14,7 @@ class HomeController {
         } catch (error) {
             console.log(error);
         }
-        
+
         return res.render('index');
     }
 
@@ -49,6 +49,8 @@ class HomeController {
                     film_time: data.movie.time,
                     episode_current: episode_current,
                     episode_total: episode_total,
+                    poster_url: data.movie.poster_url,
+                    thumb_url: data.movie.thumb_url,
                     m3u8: JSON.stringify(data.episodes),
                     tags: JSON.stringify(category) 
                 }, {
@@ -110,8 +112,8 @@ class HomeController {
 
         var data = {
             title: film.title,
-            poster_url: "https://img.ophim1.com/uploads/movies/" + film.poster_url,
-            thumb_url: "https://default.ophimcms.com/storage/images/" + slug + "/" + film.thumb_url,
+            poster_url: film.poster_url,
+            thumb_url: film.thumb_url,
             slug: slug,
             episode: episode,
             m3u8: m3u8,
