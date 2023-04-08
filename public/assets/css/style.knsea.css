@@ -50,15 +50,41 @@
     }
 }
 
+.btn-rounded {
+    border-radius: 25px;
+}
+
 .swiper-slide::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 50%;
+    height: 30%;
     background: linear-gradient(to bottom, rgb(0 0 0 / 0%), rgb(21 21 33)); /* Điều chỉnh độ tô đen tại đây */
     z-index: 1;
+}
+
+.swiper-slide {
+    position: relative;
+}
+  
+.slide-content {
+    position: absolute;
+    left: 50px;
+    bottom: 180px;
+    z-index: 1;
+    color: #fff;
+}
+  
+.btn-slide-banner {
+    background: #e50914;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 .menu-title.active {
@@ -229,7 +255,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000 url('https://hhtq.vip/wp-content/themes/halimmovies/assets/images/play-icon.png') no-repeat center center;
+    background: #000 url('https://hhtq.vip/wp-content/themes/moviemovies/assets/images/play-icon.png') no-repeat center center;
     background-size: 30px;
     opacity: 0;
     -webkit-transition: all .5s ease-in-out;
@@ -245,7 +271,7 @@
     opacity:.75;
 }
 
-.halim-post-title-box {
+.movie-post-title-box {
     position: absolute;
     line-height: 18px;
     padding: 80px 0 0;
@@ -253,12 +279,12 @@
     width: 100%;
     height: auto;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(6, 6, 6, 0.55) 30%, rgba(0, 0, 0, 0.92) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(6, 6, 6, 0.25) 30%, rgba(0, 0, 0, 0.80) 100%);
     border-bottom-right-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
 }
 
-.halim-post-title {
+.movie-post-title {
     position: absolute;
     background: rgba(0, 0, 0, 0);
     line-height: 18px;
@@ -268,7 +294,7 @@
     width: 100%;
 }
 
-.halim-post-title a, .halim-post-title h2, .halim-post-title p, .popular-post .original_title {
+.movie-post-title a, .movie-post-title h2, .movie-post-title p, .popular-post .original_title {
     font-size: 14px !important;
     margin: 0;
     line-height: 20px;
