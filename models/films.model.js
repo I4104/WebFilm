@@ -12,11 +12,11 @@ const film = sequelize.define('films', {
     },
     type: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     origin_name: {
         type: DataTypes.STRING,

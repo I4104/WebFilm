@@ -125,23 +125,25 @@ class HomeController {
 
 
     async get_info(req, res) {
-        filmModel.findAll({
-            where: { 
-                type: "",
-            },
-            order: [['year_date', 'DESC']],
-            limit: 10,
-        }).then((results) => {
-            results.forEach(async function(item) {
+        try {
+            const results = await filmModel.findAll({
+                where: { 
+                    type: "",
+                },
+                order: [['year_date', 'DESC']],
+                limit: 10,
+            });
+
+            await Promise.all(results.map(async function(item) {
                 try {
                     const response = await axios.get('https://ophim1.com/phim/' + item.slug);
                     const data = response.data;
 
                     var category = [];
 
-                    data.movie.category.forEach(async function (item) {
+                    await Promise.all(data.movie.category.map(async function (item) {
                         category.push(item.name)
-                    });
+                    }));
 
                     var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                     var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
@@ -158,14 +160,20 @@ class HomeController {
                     }, {
                         where: { slug: item.slug }
                     });
-                    console.log(item.slug);
+
                 } catch (error) {
                     console.error(error);
                 }
-            });
-        });
-        return res.send("Done!");
+            }));
+
+            return res.send("Done!");
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal Server Error");
+        }
     }
+
 
     async get_list(req, res) {
         try {
