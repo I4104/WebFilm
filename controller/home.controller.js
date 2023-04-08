@@ -14,40 +14,44 @@ class HomeController {
         const slug = (req.params.slug != null) ? req.params.slug : "";
         const episode = (req.params.episode != null) ? req.params.episode : 1;
 
-        try {
-            const response = await axios.get('https://ophim1.com/phim/' + req.params.slug);
-            const data = response.data;
-
-            var category = [];
-
-            data.movie.category.forEach(async (item) => {
-                category.push(item.name)
-            });
-
-            var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-            var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-
-            await filmModel.update({
-                type: data.movie.type,
-                status: data.movie.status,
-                description: data.movie.content,
-                film_time: data.movie.time,
-                episode_current: episode_current,
-                episode_total: episode_total,
-                m3u8: JSON.stringify(data.episodes),
-                tags: JSON.stringify(category) 
-            }, {
-                where: { slug: req.params.slug }
-            });
-        } catch (error) {
-            console.error(error);
-        }
-
-        const film = await filmModel.findOne({ where: { slug } });
-        if (!film) {
+        var film = await filmModel.findOne({ where: { slug } });
+        if (!film1) {
             return res.redirect("/");
         }
 
+        if (film.type == null || film.type == "" || film.type != "single") {
+            try {
+                const response = await axios.get('https://ophim1.com/phim/' + req.params.slug);
+                const data = response.data;
+
+                var category = [];
+
+                data.movie.category.forEach(async (item) => {
+                    category.push(item.name)
+                });
+
+                var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+
+                await filmModel.update({
+                    type: data.movie.type,
+                    status: data.movie.status,
+                    description: data.movie.content,
+                    film_time: data.movie.time,
+                    episode_current: episode_current,
+                    episode_total: episode_total,
+                    m3u8: JSON.stringify(data.episodes),
+                    tags: JSON.stringify(category) 
+                }, {
+                    where: { slug: req.params.slug }
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
+
+        film = await filmModel.findOne({ where: { slug } });
         var m3u8_json = JSON.parse(film.m3u8);
         var m3u8 = [];
         var item = m3u8_json[0];
@@ -98,7 +102,7 @@ class HomeController {
 
         var data = {
             title: film.title,
-            poster_url: film.poster_url,
+            poster_url: "https://default.ophimcms.com/storage/images/" + slug + "/" + film.thumb_url,
             slug: slug,
             episode: episode,
             m3u8: m3u8,
@@ -109,8 +113,47 @@ class HomeController {
     }
 
 
-    list(req, res) {
+    async get_info(req, res) {
+        filmModel.findAll({
+            where: { 
+                type: "",
+            },
+            order: [['year_date', 'DESC']],
+            limit: 10,
+        }).then((results) => {
+            results.forEach(async function(item) {
+                try {
+                    const response = await axios.get('https://ophim1.com/phim/' + item.slug);
+                    const data = response.data;
 
+                    var category = [];
+
+                    data.movie.category.forEach(async function (item) {
+                        category.push(item.name)
+                    });
+
+                    var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                    var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+
+                    await filmModel.update({
+                        type: data.movie.type,
+                        status: data.movie.status,
+                        description: data.movie.content,
+                        film_time: data.movie.time,
+                        episode_current: episode_current,
+                        episode_total: episode_total,
+                        m3u8: JSON.stringify(data.episodes),
+                        tags: JSON.stringify(category) 
+                    }, {
+                        where: { slug: item.slug }
+                    });
+                    console.log(item.slug);
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+        });
+        return res.send("Done!");
     }
 
     async get_list(req, res) {
