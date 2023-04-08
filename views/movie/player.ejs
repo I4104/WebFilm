@@ -33,7 +33,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fs-2x fw-bolder mt-4"><%= info.title %></div>
+                    <div class="fs-2x fw-bolder mt-4 d-flex align-items-center align-self-center">
+                        <span><%= info.title %></span>
+                        <% if (info.episode_list.legth > 2) { %>
+                        <span class="svg-icon svg-icon-muted svg-icon-2 align-self-center me-0 ms-0">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"/>
+                            </svg>
+                        </span> 
+                        <span class="fs-2 text-gray-800 align-self-center">Tập <%= info.episode %></span>
+                        <% } %>
+                    </div>
                     <div class="info d-flex align-items-center text-gray-800 fs-6 my-3">
                         <span class="vip-info"></span>
                         <div class="broken-line"></div>
@@ -88,9 +98,9 @@
                             <div class="intl-episodes-list scroll h-350px">
                                 <% info.episode_list.forEach(function(item) { %>
                                 <div class="v-li movie">
-                                    <button class="btn btn-sm bg-light w-lg-45px h-lg-50px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.name %>">
-                                        <span class="text-episodes <%= item.name %>"><%= item.name %></span>
-                                    </button>
+                                    <a class="btn btn-sm bg-light w-lg-45px h-lg-50px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.name %>">
+                                        <span class="text-episodes <% if (item.name == info.episode) { %> active <% } %>"><%= item.name %></span>
+                                    </a>
                                     <span class="card_vip_icon"></span>
                                 </div>
                                 <% }); %>

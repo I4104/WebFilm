@@ -15,7 +15,7 @@ class HomeController {
         const episode = (req.params.episode != null) ? req.params.episode : 1;
 
         var film = await filmModel.findOne({ where: { slug } });
-        if (!film1) {
+        if (!film) {
             return res.redirect("/");
         }
 
