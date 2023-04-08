@@ -302,15 +302,15 @@
 }
 
 .movie-post-episode {
-    left: 10px;
-    top: -211px;
+    left: 8px;
+    top: -213px;
     background: rgb(71, 132, 19);
     color: #fff;
     padding: 3px 5px 1px;
     z-index: 9;
     border-radius: 5px;
     background-size: 200% 100%;
-    background-image: linear-gradient(to right, #8E2DE2 0%, #01a8d5 51%, #1CB5E0 100%);
+    background-image: linear-gradient(to right, #1e1e2d 0%, #01a8d5 51%, #1CB5E0 100%);
     transition: .7s;
     text-transform: capitalize;
 }
