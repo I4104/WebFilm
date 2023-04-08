@@ -70,12 +70,12 @@
                             <i class="bi bi-star fs-2"></i>
                         </div>
                     </div>
-                    <div class="tag my-2 mb-3">
+                    <div class="tag my-4 ">
                         <% info.tags.forEach(function(item) { %>
                         <span class="badge bg-tags fs-7 p-2"><%= item %></span>
                         <% }); %>
                     </div>
-                    <div class="more my-2">
+                    <div class="more my-5">
                         <div class="accordion border-0" id="kt_info_more">
                             <div class="accordion-item border-0">
                                 <h2 class="accordion-header border-0" id="kt_more">
@@ -89,9 +89,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="separator my-10"></div>
+                    <div class="separator my-7"></div>
                     <div class="col-lg-12">
-                        <div class="fw-bolder fs-1 pt-0 pb-1">Đề xuất cho bạn</div>
+                        <div class="fw-bolder fs-1">Đề xuất cho bạn</div>
                         <div class="row slider list-movie-player">
                             <% film_dexuat_player.forEach(function(item) { %>
                             <% var episode = JSON.parse(item.m3u8); %>
@@ -102,6 +102,7 @@
                                     </figure>
                                     <div class="icon_overlay"></div>
                                     <div class="movie-post-title-box">
+                                        <div class="movie-post-episode"><%= item.episode_current %></div>
                                         <div class="movie-post-title">
                                             <h2 class="text-gray-800"><%= item.title %></h2>
                                         </div>

@@ -16,7 +16,7 @@ class HomeController {
                     }
                 },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
-                limit: 3,
+                limit: 2,
             });
             res.locals.film_banner = film_banner;
         } catch (error) {
