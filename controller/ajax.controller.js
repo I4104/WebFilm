@@ -56,40 +56,34 @@ class AjaxController {
         const results = await filmModel.findAll({
             where: {
                 thumb_url: {
-                    [Op.Like]: "%https://img.ophim1.com/uploads/movies%",
-                },
-                poster_url: {
-                    [Op.not]: "",
-                },
+                    [Op.like]: '%https://img.ophim1.com/uploads/movies%'
+                }
             },
             limit: 50,
         });
 
-        await Promise.all(results.map(async function(item) {
-            try {
-                const thumbUrl = item.thumb_url.split("/").pop();
-                const posterUrl = item.poster_url.split("/").pop();
-                if (fs.existsSync(path.join(uploadsPath, thumbUrl))) {
-                    await filmModel.update({
-                        thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
-                    }, {
-                        where: { id: item.id }
-                    });
-                }
-                if (fs.existsSync(path.join(uploadsPath, posterUrl))) {
-                    await filmModel.update({
-                        poster_url: '/uploads/' + item.poster_url.split("/").pop(),
-                    }, {
-                        where: { id: item.id }
-                    });
-                }
-            } catch (error) {
-                console.error(error);
+        const updates = results.reduce((accumulator, item) => {
+            const thumbUrl = item.thumb_url.split('/').pop();
+            const posterUrl = item.poster_url.split('/').pop();
+            if (fs.existsSync(path.join(uploadsPath, thumbUrl))) {
+                accumulator.push({
+                    thumb_url: `/uploads/${thumbUrl}`,
+                    id: item.id,
+                });
             }
-        }));
+            if (fs.existsSync(path.join(uploadsPath, posterUrl))) {
+                accumulator.push({
+                    poster_url: `/uploads/${posterUrl}`,
+                    id: item.id,
+                });
+            }
+            return accumulator;
+        }, []);
 
-        return res.send("Done!");
-
+        if (updates.length > 0) {
+            await filmModel.bulkUpdate(updates, { fields: ['thumb_url', 'poster_url'] });
+        }
+        return res.send('Done!');
     }
 
     async get_image(req, res) {
