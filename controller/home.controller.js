@@ -158,16 +158,37 @@ class HomeController {
         }
 
         try {
-            const film_dexuat_player = await filmModel.findAll({
+            const length = slug.length;
+            const part = Math.ceil(length / 3);
+            var gslug = slug.substr(0, part);
+
+            const film_cungten_player = await filmModel.findAll({
                 where: { 
                     m3u8: {
                         [Op.not]: "[]",
+                    },
+                    slug: {
+                        [Op.like]: "%"+ gslug +"%",
                     }
                 },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
-            res.locals.film_dexuat_player = film_dexuat_player;
+
+            if (film_cungten_player) {
+                res.locals.film_dexuat_player = film_cungten_player;
+            } else {
+                const film_dexuat_player = await filmModel.findAll({
+                    where: { 
+                        m3u8: {
+                            [Op.not]: "[]",
+                        }
+                    },
+                    order: [['year_date', 'DESC'], ['id', 'DESC']],
+                    limit: 24,
+                });
+                res.locals.film_dexuat_player = film_dexuat_player;
+            }
         } catch (error) {
             console.log(error);
         }
