@@ -9,8 +9,8 @@ class HomeController {
         const user = res.locals.user;
 
         try {
-            const film_banner = await filmModel.findAll({
-                where: { 
+            const latestFilm = await filmModel.findOne({
+                where: {
                     m3u8: {
                         [Op.not]: "[]",
                     },
@@ -18,10 +18,12 @@ class HomeController {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
                 },
-                order: [['year_date', 'DESC'], ['id', 'DESC']],
-                limit: 1,
+                order: [
+                    ['year_date', 'DESC'],
+                    ['id', 'DESC']
+                ],
             });
-            res.locals.film_banner = film_banner;
+            res.locals.film_banner = latestFilm;
         } catch (error) {
             console.log(error);
         }
