@@ -80,7 +80,7 @@ class AjaxController {
                                 url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
                                 responseType: 'stream',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStream(path.join(publicPath, thumbUrl)));
+                                response.data.pipe(fs.createWriteStream(path.join(uploadsPath, thumbUrl)));
                                 response.data.on('end', () => {
                                     console.log('Thumbnail downloaded successfully');
                                     resolve();
@@ -96,7 +96,7 @@ class AjaxController {
                                 url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
                                 responseType: 'stream',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStream(path.join(publicPath, posterUrl)));
+                                response.data.pipe(fs.createWriteStream(path.join(uploadsPath, posterUrl)));
                                 response.data.on('end', () => {
                                     console.log('Poster downloaded successfully');
                                     resolve();
