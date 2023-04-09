@@ -283,14 +283,29 @@ class AjaxController {
     async loc_phim(req, res) {
         const filmsToDelete = await filmModel.findAll({
             where: {
-                tags: {
-                    [Op.like]: '%Phim 18+%'
-                },
-                year_date: {
-                    [Op.It]: 2015
-                }
-            }
+                [Op.or]: [
+                    {
+                        tags: {
+                            [Op.like]: '%Phim 18+%',
+                        },
+                    },
+                    {
+                        year_date: {
+                            [Op.lt]: 2015,
+                        },
+                    },
+                ],
+            },
         });
+
+        await Promise.all(
+            filmsToDelete.map(async (film) => {
+                // Xóa file liên quan đến phim ở đây
+                await film.destroy();
+            })
+        );
+
+        return res.send('Done!');
 
         await Promise.all(filmsToDelete.map(async (film) => {
             const thumbUrl = path.join(__dirname, '../public/uploads', film.thumb_url.split("/").pop());
