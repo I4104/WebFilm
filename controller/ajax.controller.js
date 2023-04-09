@@ -66,6 +66,7 @@ class AjaxController {
                         [Op.not]: "",
                     },
                 },
+                order: [['year_date', 'DESC']],
                 limit: 50,
             });
 
