@@ -77,7 +77,7 @@ class HomeController {
                         [Op.eq]: "hoathinh",
                     },
                 },
-                order: [['id', 'DESC']],
+                order: [['year_date', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
             res.locals.anime = anime;
