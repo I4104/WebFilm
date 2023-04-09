@@ -3,13 +3,8 @@ const filmModel = require("../models/films.model");
 const axios = require('axios');
 const moment = require('moment');
 const { Op } = require('../config');
-const cloudinary = require('cloudinary').v2;
-
-cloudinary.config({
-    cloud_name: "dqaygauhe",
-    api_key: "137665163751685",
-    api_secret: "lGfzGfX0KHBC38tZdhzXRUSEVe0"
-});
+const sharp = require('sharp');
+const fs = require('fs');
 
 
 class AjaxController {
@@ -66,26 +61,31 @@ class AjaxController {
             });
 
             await Promise.all(results.map(async function(item) {
-                try {
-                    const res_thumb = await cloudinary.uploader.upload(item.thumb_url, {public_id: "thumb-" + item.slug});
-                    const res_poster = await cloudinary.uploader.upload(item.poster_url, {public_id: "poster-" + item.slug});
 
-                    console.log(res_thumb.secure_url);
-                    console.log(res_poster.secure_url);
+                const response_thumb = await axios.get("https://img.ophim1.com/uploads/movies/"+ item.thumb_url.split("/").pop(), {
+                    responseType: 'arraybuffer'
+                });
+                const response_poster = await axios.get("https://img.ophim1.com/uploads/movies/"+ item.poster_url.split("/").pop(), {
+                    responseType: 'arraybuffer'
+                });
 
-                    const url_thumb = cloudinary.url("thumb-" + item.slug);
-                    const url_poster = cloudinary.url("poster-" + item.slug);
+                const res_thumb = await sharp(response_thumb.data)
+                    .jpeg({ quality: 80 })
+                    .toBuffer();
 
-                    await filmModel.update({
-                        thumb_url: url_thumb,
-                        poster_url: url_poster,
-                    }, {
-                        where: { id: item.id }
-                    });
+                const res_poster = await sharp(response_poster.data)
+                    .jpeg({ quality: 80 })
+                    .toBuffer();
 
-                } catch (error) {
-                    console.error(error);
-                }
+                fs.writeFileSync('../uploads/' + item.thumb_url.split("/").pop(), res_thumb);
+                fs.writeFileSync('../uploads/' + item.poster_url.split("/").pop(), res_poster);
+
+                await filmModel.update({
+                    thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
+                    poster_url: '/uploads/' + item.poster_url.split("/").pop(),
+                }, {
+                    where: { id: item.id }
+                });
             }));
 
             return res.send("Done!");
