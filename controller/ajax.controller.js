@@ -297,7 +297,7 @@ class AjaxController {
                             },
                             {
                                 year_date: {
-                                    [Op.lt]: 2015,
+                                    [Op.lt]: 2018,
                                 },
                             },
                         ],
