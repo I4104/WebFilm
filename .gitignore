@@ -132,5 +132,6 @@ dist
 WebFilm.njsproj.user
 WebFilm.njsproj
 
+config.js
 obj/
 bin/
