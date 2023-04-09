@@ -79,7 +79,7 @@ class AjaxController {
                 axios({
                     url: "https://img.ophim1.com/uploads/movies/"+ item.thumb_url.split("/").pop(),
                     responseType: 'stream',
-                }).then(response => {
+                }).then(async (response) => {
                     response.data.pipe(fs.createWriteStream('../public/uploads/' + item.thumb_url.split("/").pop()));
                     response.data.on('end', () => {
                         console.log('Image downloaded successfully');
@@ -97,7 +97,7 @@ class AjaxController {
                 axios({
                     url: "https://img.ophim1.com/uploads/movies/"+ item.poster_url.split("/").pop(),
                     responseType: 'stream',
-                }).then(response => {
+                }).then(async (response) => {
                     response.data.pipe(fs.createWriteStream('../public/uploads/' + item.poster_url.split("/").pop()));
                     response.data.on('end', () => {
                         console.log('Image downloaded successfully');
