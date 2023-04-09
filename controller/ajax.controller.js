@@ -364,7 +364,7 @@ class AjaxController {
             data.items.forEach(async (item) => {
                 const film = await filmModel.findOne({ where: { title: item.name } });
                 if (!film) {
-                    let modified = moment(item.modified.time).format('Y-MM-DD H:mm:ss');
+                    let modified = moment(item.modified.time).format('Y-MM-DD HH:mm:ss');
                     await filmModel.create({
                         title: item.name,
                         origin_name: item.origin_name,
@@ -398,7 +398,7 @@ class AjaxController {
                 data.items.forEach(async (item) => {
                     const film = await filmModel.findOne({ where: { title: item.name } });
                     if (!film) {
-                        let modified = moment(item.modified.time).format('Y-MM-DD H:mm:ss');
+                        let modified = moment(item.modified.time).format('Y-MM-DD HH:mm:ss');
                         await filmModel.create({
                             title: item.name,
                             origin_name: item.origin_name,
