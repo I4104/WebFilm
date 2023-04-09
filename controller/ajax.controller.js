@@ -303,7 +303,7 @@ class AjaxController {
                                 },
                                 {
                                     year_date: {
-                                        [Op.lt]: 2018,
+                                        [Op.lt]: 2015,
                                     },
                                 },
                             ],
@@ -373,40 +373,7 @@ class AjaxController {
             data.items.forEach(async (item) => {
                 const film = await filmModel.findOne({ where: { title: item.name } });
                 if (!film) {
-                    let modified = moment(item.modified.time).format('Y-MM-DD HH:mm:ss');
-                    await filmModel.create({
-                        title: item.name,
-                        origin_name: item.origin_name,
-                        description: "",
-                        type: "",
-                        status: "",
-                        showtimes: "",
-                        slug: item.slug,
-                        thumb_url: item.thumb_url,
-                        poster_url: item.poster_url,
-                        tags: "[]",
-                        likes: "[]",
-                        year_date: item.year,
-                        modified: modified,
-                        film_time: "?",
-                        m3u8: "[]",
-                    });
-                }
-            });
-            res.json(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    async get_big_list(req, res) {
-        try {
-            for (var i = req.params.from; i > req.params.from - 10; i--) {
-                const response = await axios.get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' + i);
-                const data = response.data;
-                data.items.forEach(async (item) => {
-                    const film = await filmModel.findOne({ where: { title: item.name } });
-                    if (!film) {
+                    if (item.year > 2015) {
                         let modified = moment(item.modified.time).format('Y-MM-DD HH:mm:ss');
                         await filmModel.create({
                             title: item.name,
@@ -426,8 +393,9 @@ class AjaxController {
                             m3u8: "[]",
                         });
                     }
-                });
-            }
+                }
+            });
+            res.json(response.data);
         } catch (error) {
             console.error(error);
         }
