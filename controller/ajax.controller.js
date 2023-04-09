@@ -61,28 +61,27 @@ class AjaxController {
             },
             limit: 200,
         });
-
-        const updates = results.reduce((accumulator, item) => {
+        await Promise.all(results.map(async function(item) {
             const thumbUrl = item.thumb_url.split('/').pop();
             const posterUrl = item.poster_url.split('/').pop();
+
             if (fs.existsSync(path.join(uploadsPath, thumbUrl))) {
-                accumulator.push({
-                    thumb_url: `/uploads/${thumbUrl}`,
-                    id: item.id,
-                });
+                await filmModel.update({
+                    thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
+                }, {
+                    where: { id: item.id }
+                })
             }
             if (fs.existsSync(path.join(uploadsPath, posterUrl))) {
-                accumulator.push({
-                    poster_url: `/uploads/${posterUrl}`,
-                    id: item.id,
-                });
+                await filmModel.update({
+                    poster_url: '/uploads/' + item.poster_url.split("/").pop(),
+                }, {
+                    where: { id: item.id }
+                })
             }
             return accumulator;
-        }, []);
+        });
 
-        if (updates.length > 0) {
-            await filmModel.bulkUpdate(updates, { fields: ['thumb_url', 'poster_url'] });
-        }
         return res.send('Done!');
     }
 
