@@ -283,16 +283,24 @@ class AjaxController {
     async loc_phim(req, res) {
         const filmsToDelete = await filmModel.findAll({
             where: {
-                [Op.or]: [
+                [Op.and]: [
                     {
-                        tags: {
-                            [Op.like]: '%Phim 18+%',
-                        },
+                        type: {
+                            [Op.ne]: "hoathinh"
+                        }
                     },
                     {
-                        year_date: {
-                            [Op.lt]: 2015,
-                        },
+                        [Op.or]: [{
+                                tags: {
+                                    [Op.like]: '%Phim 18+%',
+                                },
+                            },
+                            {
+                                year_date: {
+                                    [Op.lt]: 2015,
+                                },
+                            },
+                        ],
                     },
                 ],
             },
