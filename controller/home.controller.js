@@ -20,6 +20,7 @@ class HomeController {
                 },
                 order: [
                     ['year_date', 'DESC'],
+                    ['modified', 'DESC'],
                     ['id', 'DESC']
                 ],
             });
@@ -56,7 +57,7 @@ class HomeController {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
                 },
-                order: [['id', 'DESC']],
+                order: [['modified', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
             res.locals.film_dexuat = film_dexuat;
@@ -77,7 +78,7 @@ class HomeController {
                         [Op.eq]: "hoathinh",
                     },
                 },
-                order: [['id', 'DESC']],
+                order: [['year_date', 'DESC'], ['modified', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
             res.locals.anime = anime;
@@ -113,12 +114,14 @@ class HomeController {
                 var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                 var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
+                let modified = moment(data.movie.modified.time).format('Y-MM-DD H:mm:ss');
 
                 await filmModel.update({
                     status: data.movie.status,
                     episode_current: episode_current,
                     episode_total: episode_total,
                     showtimes: showtimes,
+                    modified: modified,
                     m3u8: JSON.stringify(data.episodes),
                     tags: JSON.stringify(category) 
                 }, {
