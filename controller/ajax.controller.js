@@ -49,8 +49,11 @@ class AjaxController {
     }
 
     async get_image(req, res) {
-        if (!fs.existsSync('../public/uploads')) {
-            fs.mkdirSync('../public/uploads');
+        const publicPath = path.join(__dirname, '../public');
+        const uploadsPath = path.join(publicPath, 'uploads');
+
+        if (!fs.existsSync(uploadsPath)) {
+            fs.mkdirSync(uploadsPath);
         }
         try {
             const results = await filmModel.findAll({
@@ -73,7 +76,7 @@ class AjaxController {
                                 url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
                                 responseType: 'stream',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStream('../public/uploads/' + thumbUrl));
+                                response.data.pipe(fs.createWriteStream(path.join(publicPath, thumbUrl)));
                                 response.data.on('end', () => {
                                     console.log('Thumbnail downloaded successfully');
                                     resolve();
@@ -89,7 +92,7 @@ class AjaxController {
                                 url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
                                 responseType: 'stream',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStream('../public/uploads/' + posterUrl));
+                                response.data.pipe(fs.createWriteStreampath.join(publicPath, posterUrl));
                                 response.data.on('end', () => {
                                     console.log('Poster downloaded successfully');
                                     resolve();
