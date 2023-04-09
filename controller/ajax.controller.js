@@ -79,7 +79,6 @@ class AjaxController {
                     where: { id: item.id }
                 })
             }
-            return accumulator;
         }));
 
         return res.send('Done!');
