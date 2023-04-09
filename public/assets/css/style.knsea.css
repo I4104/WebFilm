@@ -206,7 +206,7 @@
     display: inline-block;
     border-radius: 6px;
     float: left;
-    width: 40px;
+    width: auto;
     height: 40px;
     background-color: rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
