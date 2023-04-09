@@ -13,7 +13,10 @@ class HomeController {
                 where: { 
                     m3u8: {
                         [Op.not]: "[]",
-                    }
+                    },
+                    thumb_url: {
+                        [Op.Like]: "%https://img.ophim1.com/uploads/movies%",
+                    },
                 },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
                 limit: 2,
