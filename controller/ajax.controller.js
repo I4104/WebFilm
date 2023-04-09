@@ -295,12 +295,12 @@ class AjaxController {
             const fs = require('fs');
 
             fs.unlink(path.join(uploadsPath, item.thumb_url.split("/").pop()), (err) => {
-                if (err) throw err;
+                if (err) throw path.join(uploadsPath, item.thumb_url.split("/").pop();
                 console.log('File has been deleted');
             });
 
             fs.unlink(path.join(uploadsPath, item.poster_url.split("/").pop()), (err) => {
-                if (err) throw err;
+                if (err) throw path.join(uploadsPath, item.thumb_url.split("/").pop();
                 console.log('File has been deleted');
             });
 
