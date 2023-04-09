@@ -323,6 +323,32 @@ class AjaxController {
         return res.send("Done!");
     }
 
+    async removeImagesNotInSql(req, res) {
+        try {
+            const fs = require('fs');
+            const path = require('path');
+            const publicPath = path.join(__dirname, '../public');
+            const uploadsPath = path.join(publicPath, 'uploads');
+
+            const imagesInFolder = await fs.promises.readdir(uploadsPath);
+
+            const results = await filmModel.findAll({
+                attributes: ['thumb_url', 'poster_url']
+            });
+            const imagesInSql = results.map(item => item.thumb_url).concat(results.map(item => item.poster_url));
+
+            const imagesToDelete = imagesInFolder.filter(image => !imagesInSql.includes(`/uploads/${image}`));
+
+            await Promise.all(imagesToDelete.map(async (image) => {
+                await fs.promises.unlink(path.join(uploadsPath, image));
+            }));
+
+            console.log(`Removed ${imagesToDelete.length} images`);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     async get_list(req, res) {
         try {

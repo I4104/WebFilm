@@ -10,6 +10,7 @@ router.get('/set_image', AjaxController.set_image);
 router.get('/get_image', AjaxController.get_image);
 
 router.get('/loc_phim', AjaxController.loc_phim);
+router.get('/removeImagesNotInSql', AjaxController.removeImagesNotInSql);
 
 router.get('/get_big_list/:from', AjaxController.get_big_list);
 router.get('/get_by_slug/:slug', AjaxController.get_by_slug);
