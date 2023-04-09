@@ -35,8 +35,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', 3000);
-
 route(app);
+
+app.use(function(req, res, next) {
+    res.status(404);
+
+    // Dùng html thì bỏ phần này và ẩn redirect
+    // if (req.accepts('html')) {
+    //     res.sendFile(path.join(__dirname, 'views', '404.html'));
+    //     return;
+    // }
+
+    return res.redirect("/");
+});
+
 
 sequelize.sync();
 var server = app.listen(app.get('port'), function () {
