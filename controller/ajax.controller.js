@@ -67,19 +67,15 @@ class AjaxController {
 
             await Promise.all(results.map(async function(item) {
                 try {
-                    const res_thumb = cloudinary.uploader.upload(item.thumb_url, {public_id: "thumb-" + item.slug});
-                    const res_poster = cloudinary.uploader.upload(item.poster_url, {public_id: "poster-" + item.slug});
+                    const res_thumb = await cloudinary.uploader.upload(item.thumb_url, {public_id: "thumb-" + item.slug});
+                    const res_poster = await cloudinary.uploader.upload(item.poster_url, {public_id: "poster-" + item.slug});
 
-                    res_thumb.then((data) => {
-                        console.log(data);
-                        console.log(data.secure_url);
-                    }).catch((err) => {
-                        console.log(err);
-                    });
+                    console.log(res_thumb.secure_url);
+                    console.log(res_poster.secure_url);
 
                     const url_thumb = cloudinary.url("thumb-" + item.slug);
                     const url_poster = cloudinary.url("poster-" + item.slug);
-                    
+
                     await filmModel.update({
                         thumb_url: url_thumb,
                         poster_url: url_poster,
