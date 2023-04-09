@@ -68,7 +68,7 @@ class AjaxController {
                         },
                     }
                 },
-                limit: 1000,
+                limit: 10,
             });
 
             await Promise.allSettled(results.map(async function(item) {
@@ -98,7 +98,7 @@ class AjaxController {
                                 url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
                                 responseType: 'stream',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStreampath.join(publicPath, posterUrl));
+                                response.data.pipe(fs.createWriteStream(path.join(publicPath, posterUrl)));
                                 response.data.on('end', () => {
                                     console.log('Poster downloaded successfully');
                                     resolve();
