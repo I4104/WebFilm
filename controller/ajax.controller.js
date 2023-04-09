@@ -5,7 +5,7 @@ const moment = require('moment');
 const { Op } = require('../config');
 const fs = require('fs');
 const path = require('path');
-
+const sharp = require('sharp');
 
 class AjaxController {
 
@@ -59,16 +59,15 @@ class AjaxController {
         try {
             const results = await filmModel.findAll({
                 where: {
-                    [Op.and]: {
-                        thumb_url: {
-                            [Op.notLike]: "%/uploads/%",
-                        },
-                        thumb_url: {
-                            [Op.not]: "",
-                        },
-                    }
+                    thumb_url: {
+                        [Op.Like]: "%https://img.ophim1.com/uploads/movies%",
+                    },
+                    poster_url: {
+                        [Op.not]: "",
+                    },
                 },
-                limit: 1000,
+                order: [['year_date', 'DESC']],
+                limit: 50,
             });
 
             await Promise.allSettled(results.map(async function(item) {
@@ -82,7 +81,7 @@ class AjaxController {
                                 url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
                                 responseType: 'stream',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStream(path.join(publicPath, thumbUrl)));
+                                response.data.pipe(fs.createWriteStream(path.join(uploadsPath, thumbUrl)));
                                 response.data.on('end', () => {
                                     console.log('Thumbnail downloaded successfully');
                                     resolve();
@@ -96,12 +95,19 @@ class AjaxController {
                         new Promise((resolve, reject) => {
                             axios({
                                 url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
-                                responseType: 'stream',
+                                responseType: 'arraybuffer',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStreampath.join(publicPath, posterUrl));
-                                response.data.on('end', () => {
-                                    console.log('Poster downloaded successfully');
-                                    resolve();
+                                const buffer = await sharp(response.data)
+                                    .jpeg({ quality: 80 })
+                                    .toBuffer();
+                                fs.writeFile(path.join(uploadsPath, posterUrl), buffer, (err) => {
+                                    if (err) {
+                                        console.error(err);
+                                        reject(err);
+                                    } else {
+                                        console.log('Poster downloaded and compressed successfully');
+                                        resolve();
+                                    }
                                 });
                             }).catch(error => {
                                 console.error(error);
@@ -112,13 +118,13 @@ class AjaxController {
 
                     await Promise.all([
                         filmModel.update({
-                            thumb_url: '/uploads/' + thumbUrl,
+                            thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
                         }, {
                             where: { id: item.id }
                         }),
 
                         filmModel.update({
-                            poster_url: '/uploads/' + posterUrl,
+                            poster_url: '/uploads/' + item.poster_url.split("/").pop(),
                         }, {
                             where: { id: item.id }
                         })
@@ -206,7 +212,7 @@ class AjaxController {
                     type: "",
                 },
                 order: [['year_date', 'DESC']],
-                limit: 10,
+                limit: 50,
             });
 
             await Promise.all(results.map(async function(item) {
@@ -228,6 +234,8 @@ class AjaxController {
                         status: data.movie.status,
                         description: data.movie.content,
                         film_time: data.movie.time,
+                        thumb_url: data.movie.thumb_url,
+                        poster_url: data.movie.poster_url,
                         episode_current: episode_current,
                         episode_total: episode_total,
                         m3u8: JSON.stringify(data.episodes),
