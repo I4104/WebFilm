@@ -31,7 +31,10 @@ class HomeController {
                 where: { 
                     m3u8: {
                         [Op.not]: "[]",
-                    }
+                    },
+                    thumb_url: {
+                        [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
+                    },
                 },
                 order: [['seen', 'DESC']],
                 limit: 24,
@@ -46,7 +49,10 @@ class HomeController {
                 where: { 
                     m3u8: {
                         [Op.not]: "[]",
-                    }
+                    },
+                    thumb_url: {
+                        [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
+                    },
                 },
                 order: [['id', 'DESC']],
                 limit: 24,
