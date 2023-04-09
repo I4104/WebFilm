@@ -51,7 +51,7 @@ class AjaxController {
     async get_image(req, res) {
         try {
             const results = await filmModel.findAll({
-                where: { 
+                where: {
                     thumb_url: {
                         [Op.notLike]: "%/uploads/%",
                     },
@@ -59,41 +59,69 @@ class AjaxController {
                 limit: 1000,
             });
 
-            await Promise.all(results.map(async function(item) {
-                axios({
-                    url: "https://img.ophim1.com/uploads/movies/"+ item.thumb_url.split("/").pop(),
-                    responseType: 'stream',
-                }).then(async (response) => {
-                    response.data.pipe(fs.createWriteStream('../public/uploads/' + item.thumb_url.split("/").pop()));
-                    response.data.on('end', () => {
-                        console.log('Image downloaded successfully');
-                    });
-                    
-                    await filmModel.update({
-                        thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
-                    }, {
-                        where: { id: item.id }
-                    });
-                }).catch(error => {
-                    console.error(error);
-                });
-                
-                axios({
-                    url: "https://img.ophim1.com/uploads/movies/"+ item.poster_url.split("/").pop(),
-                    responseType: 'stream',
-                }).then(async (response) => {
-                    response.data.pipe(fs.createWriteStream('../public/uploads/' + item.poster_url.split("/").pop()));
-                    response.data.on('end', () => {
-                        console.log('Image downloaded successfully');
-                    });
+            await Promise.allSettled(results.map(async function(item) {
+                try {
+                    const thumbUrl = item.thumb_url.split("/").pop();
+                    const posterUrl = item.poster_url.split("/").pop();
 
-                    await filmModel.update({
-                        poster_url: '/uploads/' + item.poster_url.split("/").pop(),
-                    }, {
-                        where: { id: item.id }
-                    });
-                }).catch(error => {
-                    console.error(error);
+                    await Promise.all([
+                        new Promise((resolve, reject) => {
+                            axios({
+                                url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
+                                responseType: 'stream',
+                            }).then(async (response) => {
+                                response.data.pipe(fs.createWriteStream('../public/uploads/' + thumbUrl));
+                                response.data.on('end', () => {
+                                    console.log('Thumbnail downloaded successfully');
+                                    resolve();
+                                });
+                            }).catch(error => {
+                                console.error(error);
+                                reject(error);
+                            });
+                        }),
+
+                        new Promise((resolve, reject) => {
+                            axios({
+                                url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
+                                responseType: 'stream',
+                            }).then(async (response) => {
+                                response.data.pipe(fs.createWriteStream('../public/uploads/' + posterUrl));
+                                response.data.on('end', () => {
+                                    console.log('Poster downloaded successfully');
+                                    resolve();
+                                });
+                            }).catch(error => {
+                                console.error(error);
+                                reject(error);
+                            });
+                        })
+                    ]);
+
+                    await Promise.all([
+                        filmModel.update({
+                            thumb_url: '/uploads/' + thumbUrl,
+                        }, {
+                            where: { id: item.id }
+                        }),
+
+                        filmModel.update({
+                            poster_url: '/uploads/' + posterUrl,
+                        }, {
+                            where: { id: item.id }
+                        })
+                    ]);
+                } catch (error) {
+                    console.log(error);
+                }
+            }));
+
+            await Promise.all(results.map(async function(item) {
+                await filmModel.update({
+                    thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
+                    poster_url: '/uploads/' + item.poster_url.split("/").pop(),
+                }, {
+                    where: { id: item.id }
                 });
             }));
 
@@ -102,6 +130,7 @@ class AjaxController {
         } catch (error) {
             return res.status(500).send(error);
         }
+
     }
 
 
