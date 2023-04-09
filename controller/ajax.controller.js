@@ -74,15 +74,14 @@ class AjaxController {
                         thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
                     }, {
                         where: { id: item.id }
-                    }),
-
+                    });
                 }
                 if (fs.existsSync(path.join(uploadsPath, posterUrl))) {
                     await filmModel.update({
                         poster_url: '/uploads/' + item.poster_url.split("/").pop(),
                     }, {
                         where: { id: item.id }
-                    })
+                    });
                 }
             } catch (error) {
                 console.error(error);
