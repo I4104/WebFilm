@@ -57,7 +57,7 @@ class HomeController {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
                 },
-                order: [['modified', 'DESC'], ['id', 'DESC']],
+                order: [['id', 'DESC']],
                 limit: 24,
             });
             res.locals.film_dexuat = film_dexuat;
