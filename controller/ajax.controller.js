@@ -280,11 +280,14 @@ class AjaxController {
         }
     }
 
-    async delete_all_18plus(req, res) {
+    async loc_phim(req, res) {
         const filmsToDelete = await filmModel.findAll({
             where: {
                 tags: {
                     [Op.like]: '%Phim 18+%'
+                },
+                year_date: {
+                    [Op.It]: 2008
                 }
             }
         });
