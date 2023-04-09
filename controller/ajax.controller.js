@@ -49,6 +49,9 @@ class AjaxController {
     }
 
     async get_image(req, res) {
+        if (!fs.existsSync('../public/uploads')) {
+            fs.mkdirSync('../public/uploads');
+        }
         try {
             const results = await filmModel.findAll({
                 where: {
