@@ -159,7 +159,7 @@ class HomeController {
 
         try {
             const length = slug.length;
-            const part = Math.ceil(length / 3);
+            const part = Math.ceil(length / 4);
             var gslug = slug.substr(0, part);
 
             const film_cungten_player = await filmModel.findAll({
