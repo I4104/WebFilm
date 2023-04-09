@@ -80,7 +80,7 @@ class AjaxController {
                 })
             }
             return accumulator;
-        });
+        }));
 
         return res.send('Done!');
     }
