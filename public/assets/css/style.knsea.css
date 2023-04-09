@@ -326,7 +326,7 @@
 }
 
 .movie-post-title a, .movie-post-title h2, .movie-post-title p{
-    font-size: 15px !important;
+    font-size: 15px;
     color: #fff;
     overflow: hidden;
     display: -webkit-box;
@@ -334,6 +334,12 @@
     -webkit-box-flex: 1;
     -webkit-box-orient: vertical;
     margin-bottom: 3px;
+}
+
+@media (max-width: 991.98px) {
+    .movie-post-title a, .movie-post-title h2, .movie-post-title p{
+        font-size: 12px;
+    }
 }
 
 .movie-item {
