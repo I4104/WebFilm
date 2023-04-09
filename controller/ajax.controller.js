@@ -5,7 +5,7 @@ const moment = require('moment');
 const { Op } = require('../config');
 const fs = require('fs');
 const path = require('path');
-
+const sharp = require('sharp');
 
 class AjaxController {
 
@@ -95,12 +95,19 @@ class AjaxController {
                         new Promise((resolve, reject) => {
                             axios({
                                 url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
-                                responseType: 'stream',
+                                responseType: 'arraybuffer',
                             }).then(async (response) => {
-                                response.data.pipe(fs.createWriteStream(path.join(uploadsPath, posterUrl)));
-                                response.data.on('end', () => {
-                                    console.log('Poster downloaded successfully');
-                                    resolve();
+                                const buffer = await sharp(response.data)
+                                    .jpeg({ quality: 80 })
+                                    .toBuffer();
+                                fs.writeFile(path.join(uploadsPath, posterUrl), buffer, (err) => {
+                                    if (err) {
+                                        console.error(err);
+                                        reject(err);
+                                    } else {
+                                        console.log('Poster downloaded and compressed successfully');
+                                        resolve();
+                                    }
                                 });
                             }).catch(error => {
                                 console.error(error);
