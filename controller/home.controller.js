@@ -62,6 +62,27 @@ class HomeController {
             console.log(error);
         }
 
+        try {
+            const anime = await filmModel.findAll({
+                where: { 
+                    m3u8: {
+                        [Op.not]: "[]",
+                    },
+                    thumb_url: {
+                        [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
+                    },
+                    type: {
+                        [Op.eq]: "hoathinh",
+                    },
+                },
+                order: [['id', 'DESC']],
+                limit: 24,
+            });
+            res.locals.anime = anime;
+        } catch (error) {
+            console.log(error);
+        }
+
         return res.render('index');
     }
 
@@ -88,7 +109,7 @@ class HomeController {
 
                 var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-                var showtime = (data.movie.showtime != null) ? data.movie.showtime : "";
+                var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
 
                 await filmModel.update({
                     type: data.movie.type,
@@ -97,7 +118,7 @@ class HomeController {
                     film_time: data.movie.time,
                     episode_current: episode_current,
                     episode_total: episode_total,
-                    showtime: showtime,
+                    showtimes: showtimes,
                     poster_url: data.movie.poster_url,
                     thumb_url: data.movie.thumb_url,
                     m3u8: JSON.stringify(data.episodes),
@@ -155,7 +176,7 @@ class HomeController {
 
     async category(req, res) {
         const user = res.locals.user;
-        const category = (req.params.category != null) ? req.params.category : "";
+        var category = (req.params.category != null) ? req.params.category : "";
 
         if (category == "series") {
             res.locals.category = "Phim Bộ";
