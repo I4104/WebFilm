@@ -20,6 +20,7 @@ class HomeController {
                 },
                 order: [
                     ['year_date', 'DESC'],
+                    ['modified', 'DESC'],
                     ['id', 'DESC']
                 ],
             });
@@ -56,7 +57,7 @@ class HomeController {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
                 },
-                order: [['id', 'DESC']],
+                order: [['modified', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
             res.locals.film_dexuat = film_dexuat;
@@ -77,7 +78,7 @@ class HomeController {
                         [Op.eq]: "hoathinh",
                     },
                 },
-                order: [['year_date', 'DESC'], ['id', 'DESC']],
+                order: [['year_date', 'DESC'], ['modified', 'DESC'], ['id', 'DESC']],
                 limit: 24,
             });
             res.locals.anime = anime;
