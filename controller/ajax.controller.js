@@ -291,20 +291,24 @@ class AjaxController {
                 }
             }
         });
+
         await Promise.all(results.map(async function(item) {
             const fs = require('fs');
 
             fs.unlink(path.join(uploadsPath, item.thumb_url.split("/").pop()), (err) => {
-                if (err) throw path.join(uploadsPath, item.thumb_url.split("/").pop();
                 console.log('File has been deleted');
             });
 
             fs.unlink(path.join(uploadsPath, item.poster_url.split("/").pop()), (err) => {
-                if (err) throw path.join(uploadsPath, item.thumb_url.split("/").pop();
                 console.log('File has been deleted');
             });
 
+            await filmModel.destroy({
+                where: { id: item.id }
+            });
         }));
+
+        res.send('Done!');
     }
 
     async get_list(req, res) {
