@@ -85,91 +85,96 @@ class AjaxController {
     }
 
     async get_image(req, res) {
-        const publicPath = path.join(__dirname, '../public');
-        const uploadsPath = path.join(publicPath, 'uploads');
+        try {
+            const publicPath = path.join(__dirname, '../public');
+            const uploadsPath = path.join(publicPath, 'uploads');
 
-        if (!fs.existsSync(uploadsPath)) {
-            fs.mkdirSync(uploadsPath);
-        }
-        const results = await filmModel.findAll({
-            where: {
-                thumb_url: {
-                    [Op.like]: '%https://img.ophim1.com/uploads/movies%'
-                }
-            },
-            order: [['year_date', 'DESC']],
-            limit: 50,
-        });
+            if (!fs.existsSync(uploadsPath)) {
+                fs.mkdirSync(uploadsPath);
+            }
+            const results = await filmModel.findAll({
+                where: {
+                    thumb_url: {
+                        [Op.like]: '%https://img.ophim1.com/uploads/movies%'
+                    }
+                },
+                order: [['year_date', 'DESC']],
+                limit: 50,
+            });
 
-        await Promise.allSettled(results.map(async function(item) {
-            const thumbUrl = item.thumb_url.split("/").pop();
-            const posterUrl = item.poster_url.split("/").pop();
+            await Promise.allSettled(results.map(async function(item) {
+                const thumbUrl = item.thumb_url.split("/").pop();
+                const posterUrl = item.poster_url.split("/").pop();
 
-            await Promise.all([
-                new Promise((resolve, reject) => {
-                    axios({
-                        url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
-                        responseType: 'stream',
-                    }).then(async (response) => {
-                        response.data.pipe(fs.createWriteStream(path.join(uploadsPath, thumbUrl)));
-                        response.data.on('end', () => {
-                            console.log('Thumbnail downloaded successfully');
-                            resolve();
-                        });
-                    }).catch(error => {
-                        console.error(error);
-                        reject(error);
-                    });
-                }),
-
-                new Promise((resolve, reject) => {
-                    axios({
-                        url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
-                        responseType: 'arraybuffer',
-                    }).then(async (response) => {
-                        const buffer = await sharp(response.data)
-                            .jpeg({ quality: 80 })
-                            .toBuffer();
-                        fs.writeFile(path.join(uploadsPath, posterUrl), buffer, (err) => {
-                            if (err) {
-                                console.error(err);
-                                reject(err);
-                            } else {
-                                console.log('Poster downloaded and compressed successfully');
+                await Promise.all([
+                    new Promise((resolve, reject) => {
+                        axios({
+                            url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
+                            responseType: 'stream',
+                        }).then(async (response) => {
+                            response.data.pipe(fs.createWriteStream(path.join(uploadsPath, thumbUrl)));
+                            response.data.on('end', () => {
+                                console.log('Thumbnail downloaded successfully');
                                 resolve();
-                            }
+                            });
+                        }).catch(error => {
+                            console.error(error);
+                            reject(error);
                         });
-                    }).catch(error => {
-                        console.error(error);
-                        reject(error);
-                    });
-                })
-            ]);
+                    }),
 
-            await Promise.all([
-                filmModel.update({
+                    new Promise((resolve, reject) => {
+                        axios({
+                            url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
+                            responseType: 'arraybuffer',
+                        }).then(async (response) => {
+                            const buffer = await sharp(response.data)
+                                .jpeg({ quality: 80 })
+                                .toBuffer();
+                            fs.writeFile(path.join(uploadsPath, posterUrl), buffer, (err) => {
+                                if (err) {
+                                    console.error(err);
+                                    reject(err);
+                                } else {
+                                    console.log('Poster downloaded and compressed successfully');
+                                    resolve();
+                                }
+                            });
+                        }).catch(error => {
+                            console.error(error);
+                            reject(error);
+                        });
+                    })
+                ]);
+
+                await Promise.all([
+                    filmModel.update({
+                        thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
+                    }, {
+                        where: { id: item.id }
+                    }),
+
+                    filmModel.update({
+                        poster_url: '/uploads/' + item.poster_url.split("/").pop(),
+                    }, {
+                        where: { id: item.id }
+                    })
+                ]);
+            }));
+
+            await Promise.all(results.map(async function(item) {
+                await filmModel.update({
                     thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
-                }, {
-                    where: { id: item.id }
-                }),
-
-                filmModel.update({
                     poster_url: '/uploads/' + item.poster_url.split("/").pop(),
                 }, {
                     where: { id: item.id }
-                })
-            ]);
-        }));
-
-        await Promise.all(results.map(async function(item) {
-            await filmModel.update({
-                thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
-                poster_url: '/uploads/' + item.poster_url.split("/").pop(),
-            }, {
-                where: { id: item.id }
-            });
-        }));
-
+                });
+            }));
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal Server Error");
+        }
+        
         return res.send("Done!");
     }
 
@@ -281,51 +286,55 @@ class AjaxController {
     }
 
     async loc_phim(req, res) {
-        const filmsToDelete = await filmModel.findAll({
-            where: {
-                [Op.and]: [
-                    {
-                        type: {
-                            [Op.ne]: "hoathinh"
-                        }
-                    },
-                    {
-                        [Op.or]: [{
-                                tags: {
-                                    [Op.like]: '%Phim 18+%',
+        try {
+            const filmsToDelete = await filmModel.findAll({
+                where: {
+                    [Op.and]: [
+                        {
+                            type: {
+                                [Op.ne]: "hoathinh"
+                            }
+                        },
+                        {
+                            [Op.or]: [{
+                                    tags: {
+                                        [Op.like]: '%Phim 18+%',
+                                    },
                                 },
-                            },
-                            {
-                                year_date: {
-                                    [Op.lt]: 2018,
+                                {
+                                    year_date: {
+                                        [Op.lt]: 2018,
+                                    },
                                 },
-                            },
-                        ],
-                    },
-                ],
-            },
-        });
+                            ],
+                        },
+                    ],
+                },
+            });
 
-        await Promise.all(
-            filmsToDelete.map(async (film) => {
-                await film.destroy();
-            })
-        );
+            await Promise.all(
+                filmsToDelete.map(async (film) => {
+                    await film.destroy();
+                })
+            );
 
-        return res.send('Done!');
+            return res.send('Done!');
 
-        await Promise.all(filmsToDelete.map(async (film) => {
-            const thumbUrl = path.join(__dirname, '../public/uploads', film.thumb_url.split("/").pop());
-            const posterUrl = path.join(__dirname, '../public/uploads', film.poster_url.split("/").pop());
-            try {
-                await fs.promises.unlink(thumbUrl);
-                await fs.promises.unlink(posterUrl);
-                await film.destroy();
-                console.log(`Deleted film with id ${film.id}`);
-            } catch (error) {
-                console.error(`Error deleting film with id ${film.id}: ${error}`);
-            }
-        }));
+            await Promise.all(filmsToDelete.map(async (film) => {
+                const thumbUrl = path.join(__dirname, '../public/uploads', film.thumb_url.split("/").pop());
+                const posterUrl = path.join(__dirname, '../public/uploads', film.poster_url.split("/").pop());
+                try {
+                    await fs.promises.unlink(thumbUrl);
+                    await fs.promises.unlink(posterUrl);
+                    await film.destroy();
+                    console.log(`Deleted film with id ${film.id}`);
+                } catch (error) {
+                    console.error(`Error deleting film with id ${film.id}: ${error}`);
+                }
+            }));
+        } catch (error) {
+            console.error(error);
+        }
 
         return res.send("Done!");
     }
