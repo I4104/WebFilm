@@ -110,13 +110,13 @@ class AjaxController {
 
                     await Promise.all([
                         filmModel.update({
-                            thumb_url: '/uploads/' + thumbUrl,
+                            thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
                         }, {
                             where: { id: item.id }
                         }),
 
                         filmModel.update({
-                            poster_url: '/uploads/' + posterUrl,
+                            poster_url: '/uploads/' + item.poster_url.split("/").pop(),
                         }, {
                             where: { id: item.id }
                         })
