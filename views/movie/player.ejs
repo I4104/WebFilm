@@ -100,7 +100,7 @@
                                         <div class="intl-episodes-list scroll h-200px">
                                             <% info.episode_list.forEach(function(item) { %>
                                             <div class="v-li movie">
-                                                <a class="btn btn-sm bg-light w-lg-45px h-lg-50px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
+                                                <a class="btn btn-sm bg-light w-100 h-lg-50px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
                                                     <span class="text-episodes <% if (item.episode == info.episode) { %> active <% } %>"><%= item.name %></span>
                                                 </a>
                                             </div>
@@ -145,7 +145,7 @@
                             <div class="intl-episodes-list scroll h-350px">
                                 <% info.episode_list.forEach(function(item) { %>
                                 <div class="v-li movie">
-                                    <a class="btn btn-sm bg-light w-lg-45px h-lg-45px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
+                                    <a class="btn btn-sm bg-light w-100 h-lg-45px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
                                         <span class="text-episodes <% if (item.episode == info.episode) { %> active <% } %>"><%= item.name %></span>
                                     </a>
                                 </div>
