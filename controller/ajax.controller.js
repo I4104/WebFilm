@@ -287,7 +287,7 @@ class AjaxController {
                     [Op.like]: '%Phim 18+%'
                 },
                 year_date: {
-                    [Op.It]: 2008
+                    [Op.It]: 2015
                 }
             }
         });
