@@ -49,6 +49,36 @@ class AjaxController {
         }  
     }
 
+    async set_image(req, res) {
+        const publicPath = path.join(__dirname, '../public');
+        const uploadsPath = path.join(publicPath, 'uploads');
+
+        const fileNames = fs.readdirSync(uploadsPath);
+
+        const filesData = fileNames.map(name => ({
+            name,
+            path: `${uploadsPath}/${name}`,
+            size: fs.statSync(`${uploadsPath}/${name}`).size,
+        }));
+
+        filesData.forEach(async fileData => {
+            if (fileData.name.endsWith('-thumb.jpg')) {
+                await filmModel.update({
+                    thumb_url: '/uploads/' + fileData.name,
+                }, {
+                    where: { slug: fileData.name.replace('-thumb.jpg', '') }
+                });
+            }
+            if (fileData.name.endsWith('-poster.jpg')) {
+                await filmModel.update({
+                    poster_url: '/uploads/' + fileData.name,
+                }, {
+                    where: { slug: fileData.name.replace('-poster.jpg', '') }
+                });
+            }
+        });
+    }
+
     async get_image(req, res) {
         const publicPath = path.join(__dirname, '../public');
         const uploadsPath = path.join(publicPath, 'uploads');
