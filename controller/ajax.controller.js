@@ -280,6 +280,33 @@ class AjaxController {
         }
     }
 
+    async loc_18(req, res) {
+        const publicPath = path.join(__dirname, '../public');
+        const uploadsPath = path.join(publicPath, 'uploads');
+
+        const results = await filmModel.findAll({
+            where: {
+                tag: {
+                    [Op.like]: '%Phim 18+%'
+                }
+            }
+        });
+        await Promise.all(results.map(async function(item) {
+            const fs = require('fs');
+
+            fs.unlink(path.join(uploadsPath, item.thumb_url.split("/").pop()), (err) => {
+                if (err) throw err;
+                console.log('File has been deleted');
+            });
+
+            fs.unlink(path.join(uploadsPath, item.poster_url.split("/").pop()), (err) => {
+                if (err) throw err;
+                console.log('File has been deleted');
+            });
+
+        }));
+    }
+
     async get_list(req, res) {
         try {
             const response = await axios.get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' + req.params.page);
