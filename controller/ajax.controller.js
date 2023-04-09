@@ -59,7 +59,7 @@ class AjaxController {
                     [Op.like]: '%https://img.ophim1.com/uploads/movies%'
                 }
             },
-            limit: 50,
+            limit: 200,
         });
 
         const updates = results.reduce((accumulator, item) => {
