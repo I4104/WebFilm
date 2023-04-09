@@ -207,81 +207,39 @@ class AjaxController {
                 limit: 50,
             });
 
-            for (const item of results) {
+            await Promise.all(results.map(async function(item) {
                 try {
                     const response = await axios.get('https://ophim1.com/phim/' + item.slug);
                     const data = response.data;
 
-                    const category = data.movie.category.map(item => item.name);
+                    var category = [];
 
-                    const episode_current = data.movie.episode_current || 0;
-                    const episode_total = data.movie.episode_total || 0;
+                    await Promise.all(data.movie.category.map(async function (item) {
+                        category.push(item.name)
+                    }));
+
+                    var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                    var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
 
                     await filmModel.update({
                         type: data.movie.type,
                         status: data.movie.status,
                         description: data.movie.content,
                         film_time: data.movie.time,
-                        episode_current,
-                        episode_total,
+                        thumb_url: data.movie.thumb_url,
+                        poster_url: data.movie.poster_url,
+                        episode_current: episode_current,
+                        episode_total: episode_total,
                         m3u8: JSON.stringify(data.episodes),
                         tags: JSON.stringify(category) 
                     }, {
                         where: { slug: item.slug }
                     });
 
-                    const thumbUrl = data.movie.thumb_url.split("/").pop();
-                    const posterUrl = data.movie.poster_url.split("/").pop();
-
-                    await Promise.allSettled([
-                        axios({
-                            url: "https://img.ophim1.com/uploads/movies/" + thumbUrl,
-                            responseType: 'stream',
-                        }).then(response => {
-                            return new Promise((resolve, reject) => {
-                                response.data.pipe(fs.createWriteStream(path.join(uploadsPath, thumbUrl)));
-                                response.data.on('end', () => {
-                                    console.log('Thumbnail downloaded successfully');
-                                    filmModel.update({
-                                        thumb_url: '/uploads/' + data.movie.thumb_url.split("/").pop(),
-                                    }, {
-                                        where: { id: item.id }
-                                    });
-                                    resolve();
-                                });
-                                response.data.on('error', (err) => {
-                                    console.error(err);
-                                    reject(err);
-                                })
-                            });
-                        }),
-
-                        axios({
-                            url: "https://img.ophim1.com/uploads/movies/" + posterUrl,
-                            responseType: 'stream',
-                        }).then(response => {
-                            return new Promise((resolve, reject) => {
-                                response.data.pipe(fs.createWriteStream(path.join(uploadsPath, posterUrl)));
-                                response.data.on('end', () => {
-                                    console.log('Poster downloaded successfully');
-                                    filmModel.update({
-                                        poster_url: '/uploads/' + data.movie.poster_url.split("/").pop(),
-                                    }, {
-                                        where: { id: item.id }
-                                    });
-                                    resolve();
-                                });
-                                response.data.on('error', (err) => {
-                                    console.error(err);
-                                    reject(err);
-                                })
-                            });
-                        })
-                    ]);
                 } catch (error) {
                     console.error(error);
                 }
-            }
+            }));
 
             return res.send("Done!");
 
