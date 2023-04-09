@@ -280,36 +280,31 @@ class AjaxController {
         }
     }
 
-    async loc_18(req, res) {
-        const publicPath = path.join(__dirname, '../public');
-        const uploadsPath = path.join(publicPath, 'uploads');
-
-        const results = await filmModel.findAll({
+    async delete_all_18plus(req, res) {
+        const filmsToDelete = await filmModel.findAll({
             where: {
-                year_date: {
-                    [Op.It]: 2008
+                tags: {
+                    [Op.like]: '%Phim 18+%'
                 }
             }
         });
 
-        await Promise.all(results.map(async function(item) {
-            const fs = require('fs');
-
-            fs.unlink(path.join(uploadsPath, item.thumb_url.split("/").pop()), (err) => {
-                console.log('File has been deleted');
-            });
-
-            fs.unlink(path.join(uploadsPath, item.poster_url.split("/").pop()), (err) => {
-                console.log('File has been deleted');
-            });
-
-            await filmModel.destroy({
-                where: { id: item.id }
-            });
+        await Promise.all(filmsToDelete.map(async (film) => {
+            const thumbUrl = path.join(__dirname, '../public/uploads', film.thumb_url.split("/").pop());
+            const posterUrl = path.join(__dirname, '../public/uploads', film.poster_url.split("/").pop());
+            try {
+                await fs.promises.unlink(thumbUrl);
+                await fs.promises.unlink(posterUrl);
+                await film.destroy();
+                console.log(`Deleted film with id ${film.id}`);
+            } catch (error) {
+                console.error(`Error deleting film with id ${film.id}: ${error}`);
+            }
         }));
 
-        res.send('Done!');
+        return res.send("Done!");
     }
+
 
     async get_list(req, res) {
         try {
