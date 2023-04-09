@@ -25,7 +25,7 @@ class AjaxController {
                     html += '<div class="col-lg-2 col-6 item p-3">\
                         <a class="position-relative rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
                             <figure class="rounded">\
-                                <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-225px h-sm-275px h-md-325px h-lg-350px" src="https://img.ophim1.com/uploads/movies/' + item.thumb_url.split("/").pop() + '">\
+                                <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-225px h-sm-275px h-md-325px h-lg-350px" src="' + item.thumb_url + '">\
                             </figure>\
                             <div class="icon_overlay"></div>\
                             <div class="movie-post-episode">' + item.episode_current + '</div>\

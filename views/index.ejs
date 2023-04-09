@@ -37,7 +37,7 @@
                                         </div>
                                         <a href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>" class="btn btn-icon btn-lg btn-light-danger btn-rounded me-5"><i class="fa fa-play fs-2"></i></a>
                                     </div>
-                                    <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-200px h-sm-375px h-md-525px h-lg-800px" src="https://img.ophim1.com/uploads/movies/<%= item.poster_url.split("/").pop(); %>">
+                                    <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-200px h-sm-375px h-md-525px h-lg-800px" src="<%= item.poster_url; %>">
                                 </div>
                                 <% }); %>
                             </div>
@@ -56,7 +56,7 @@
                                         <div class="col-lg-1 item mb-5 p-3">
                                             <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
-                                                    <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-150px h-sm-175px h-md-275px h-lg-300px" data-src="https://img.ophim1.com/uploads/movies/<%= item.thumb_url.split("/").pop() %>" src="/assets/icons/lazy-load-movie.gif">
+                                                    <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-150px h-sm-175px h-md-275px h-lg-300px" data-src="<%= item.thumb_url %>" src="/assets/icons/lazy-load-movie.gif">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
                                                 <div class="movie-post-episode"><%= item.episode_current %></div>
@@ -79,7 +79,7 @@
                                         <div class="col-lg-1 item mb-5 p-3">
                                             <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
-                                                    <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-150px h-sm-175px h-md-275px h-lg-300px" data-src="https://img.ophim1.com/uploads/movies/<%= item.thumb_url.split("/").pop(); %>" src="/assets/icons/lazy-load-movie.gif">
+                                                    <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-150px h-sm-175px h-md-275px h-lg-300px" data-src="<%= item.thumb_url; %>" src="/assets/icons/lazy-load-movie.gif">
                                                 </figure>
                                                 <div class="icon_overlay"></div>
                                                 <div class="movie-post-episode"><%= item.episode_current %></div>
