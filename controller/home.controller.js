@@ -19,7 +19,7 @@ class HomeController {
                     },
                 },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
-                limit: 2,
+                limit: 1,
             });
             res.locals.film_banner = film_banner;
         } catch (error) {

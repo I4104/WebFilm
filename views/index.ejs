@@ -10,12 +10,12 @@
                                 <div class="hero-new__background-image">
                                     <style>
                                         .hero-new__background-image {
-                                            background-image: url(https://tv.knsea.com/uploads/sat-thu-john-wick-phan-4-thumb.jpg);
+                                            background-image: url(<%= film_banner.thumb_url %>);
                                         }
                                         
                                         @media (min-width: 760px) {
                                             .hero-new__background-image {
-                                                background-image: url(https://tv.knsea.com/uploads/van-cu-yeu-anh-poster.jpg);
+                                                background-image: url(<%= film_banner.poster_url %>);
                                             }
                                         }
                                     </style>
@@ -23,13 +23,12 @@
                             </div>
                             <div class="hero-new__content content-gutter--large content-center--large z-index-2">
                                 <div class="hero-new__content-inner">
-                                    <h1 class="fs-1x fw-bolder">Sát Thủ John Wick: Phần 4</h1>
-                                    <p class="info-thumb text-gray-800">Sát Thủ John Wick: Chương 4 là câu chuyện của John Wick (Keanu Reeves) đã khám phá ra con đường để đánh bại High Table. Nhưng trước khi có thể kiếm được tự do, Wick phải đối đầu với kẻ thù mới với những liên minh hùng mạnh trên toàn cầu và những lực lượng biến những người bạn cũ thành kẻ thù.</p>
+                                    <h1 class="fs-1x fw-bolder"><%= film_banner.title %></h1>
+                                    <p class="info-thumb text-gray-800"><%= film_banner.description %></p>
                                     <a class="themed-icon-button themed-icon-button--link themed-icon-button--arcane hero-new__button" href="#kt_content_container" data-kt-scroll-toggle>
                                         <span class="themed-icon-button__content">
                                             <div class="themed-icon-button__icon">
                                                 <span class="icon" style="width:16px;height:16px;line-height:16px">
-                                                    
                                                     <svg viewBox="0 0 24 24" fill="none">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.003 14H3.5v-4h11.502l-4.165-4.538 2.705-2.947 7.353 8.012c.747.813.747 2.133 0 2.947l-7.353 8.011-2.705-2.947L15.003 14z" fill="#F0F0F0"></path>
                                                     </svg>
