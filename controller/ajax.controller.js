@@ -286,8 +286,8 @@ class AjaxController {
 
         const results = await filmModel.findAll({
             where: {
-                tags: {
-                    [Op.like]: '%Phim 18+%'
+                year_date: {
+                    [Op.It]: 2008
                 }
             }
         });
