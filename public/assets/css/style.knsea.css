@@ -201,10 +201,10 @@
 
 .intl-episodes-list .v-li.movie {
     padding: 0px;
-    margin-right: 17.796874px;
-    margin-bottom: 22px;
+    margin-right: 17px;
+    margin-bottom: 17px;
     display: inline-block;
-    border-radius: 2px;
+    border-radius: 6px;
     float: left;
     width: 40px;
     height: 40px;
@@ -252,7 +252,7 @@
 .text-episodes {
     display: flex;
     font-size: 14px;
-    /*margin-top: -10px;*/
+    margin-top: 2px;
     white-space: nowrap;
     text-align: center;
     align-items: center;

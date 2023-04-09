@@ -24,13 +24,42 @@
                             <div class="hero-new__content content-gutter--large content-center--large z-index-2">
                                 <div class="hero-new__content-inner">
                                     <h1 class="fs-1x fw-bolder"><%= film_banner.title %></h1>
+                                    <div class="info d-flex align-items-center text-gray-800 fs-6 my-3">
+                                        <span class="vip-info"></span>
+                                        <div class="broken-line"></div>
+                                        <span><%= film_banner.film_time %></span>
+                                        <div class="broken-line"></div>
+                                        <span><%= film_banner.year_date %></span>
+                                        <div class="broken-line"></div>
+                                        <div class="rating-label me-2 checked">
+                                            <i class="bi bi-star fs-2"></i>
+                                        </div>
+                                        <div class="rating-label me-2 checked">
+                                            <i class="bi bi-star fs-2"></i>
+                                        </div>
+                                        <div class="rating-label me-2 checked">
+                                            <i class="bi bi-star fs-2"></i>
+                                        </div>
+                                        <div class="rating-label me-2 checked">
+                                            <i class="bi bi-star fs-2"></i>
+                                        </div>
+                                        <div class="rating-label me-2 checked">
+                                            <i class="bi bi-star fs-2"></i>
+                                        </div>
+                                    </div>
+                                    <div class="tag my-4 ">
+                                        <% JSON.parse(film_banner.tags).forEach(function(item) { %>
+                                            <span class="badge bg-tags fs-7 p-2"><%= item %></span>
+                                        <% }); %>
+                                    </div>
+                                    <% var episode = JSON.parse(film_banner.m3u8); %>
                                     <p class="info-thumb text-gray-800"><%= film_banner.description %></p>
-                                    <a class="themed-icon-button themed-icon-button--link themed-icon-button--arcane hero-new__button" href="#kt_content_container" data-kt-scroll-toggle>
+                                    <a class="themed-icon-button themed-icon-button--link themed-icon-button--arcane hero-new__button" href="/phim/<%= film_banner.slug %>/<%= episode[0].server_data[0].slug %>" data-kt-scroll-toggle>
                                         <span class="themed-icon-button__content">
                                             <div class="themed-icon-button__icon">
-                                                <span class="icon" style="width:16px;height:16px;line-height:16px">
-                                                    <svg viewBox="0 0 24 24" fill="none">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.003 14H3.5v-4h11.502l-4.165-4.538 2.705-2.947 7.353 8.012c.747.813.747 2.133 0 2.947l-7.353 8.011-2.705-2.947L15.003 14z" fill="#F0F0F0"></path>
+                                                <span class="icon">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="#F0F0F0"/>
                                                     </svg>
                                                 </span>
                                             </div>

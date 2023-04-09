@@ -89,6 +89,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="episode my-5 d-lg-none d-block">
+                        <div class="accordion border-0" id="kt_info_episode">
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header border-0" id="kt_episode">
+                                    <button class="accordion-button fs-4 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#episode" aria-expanded="true" aria-controls="more">Danh Sách Tập Phim</button>
+                                </h2>
+                                <div id="episode" class="accordion-collapse border-0 collapse show" aria-labelledby="kt_episode" data-bs-parent="#kt_info_episode">
+                                    <div class="accordion-body text-gray-800 fs-6">
+                                        <div class="intl-episodes-list scroll h-200px">
+                                            <% info.episode_list.forEach(function(item) { %>
+                                            <div class="v-li movie">
+                                                <a class="btn btn-sm bg-light w-lg-45px h-lg-50px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
+                                                    <span class="text-episodes <% if (item.episode == info.episode) { %> active <% } %>"><%= item.name %></span>
+                                                </a>
+                                            </div>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="separator my-7"></div>
                     <div class="col-lg-12">
                         <div class="fw-bolder fs-1">Đề xuất cho bạn</div>
@@ -113,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 d-none d-lg-block">
                     <div class="card card-flush bg-body border-0">
                         <div class="card-body p-5 border-0">
                             <div class="fs-2 fw-bold"><%= info.title %></div>
@@ -123,10 +145,9 @@
                             <div class="intl-episodes-list scroll h-350px">
                                 <% info.episode_list.forEach(function(item) { %>
                                 <div class="v-li movie">
-                                    <a class="btn btn-sm bg-light w-lg-45px h-lg-50px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
+                                    <a class="btn btn-sm bg-light w-lg-45px h-lg-45px w-40px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
                                         <span class="text-episodes <% if (item.episode == info.episode) { %> active <% } %>"><%= item.name %></span>
                                     </a>
-                                    <span class="card_vip_icon"></span>
                                 </div>
                                 <% }); %>
                             </div>
