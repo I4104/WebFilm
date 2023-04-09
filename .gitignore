@@ -137,3 +137,4 @@ config.js
 obj/
 bin/
 uploads/
+config.js
