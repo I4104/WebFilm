@@ -112,15 +112,10 @@ class HomeController {
                 var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
 
                 await filmModel.update({
-                    type: data.movie.type,
                     status: data.movie.status,
-                    description: data.movie.content,
-                    film_time: data.movie.time,
                     episode_current: episode_current,
                     episode_total: episode_total,
                     showtimes: showtimes,
-                    poster_url: data.movie.poster_url,
-                    thumb_url: data.movie.thumb_url,
                     m3u8: JSON.stringify(data.episodes),
                     tags: JSON.stringify(category) 
                 }, {

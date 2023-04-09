@@ -308,7 +308,6 @@ class AjaxController {
 
         await Promise.all(
             filmsToDelete.map(async (film) => {
-                // Xóa file liên quan đến phim ở đây
                 await film.destroy();
             })
         );
