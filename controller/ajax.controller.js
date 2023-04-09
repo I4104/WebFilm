@@ -53,32 +53,13 @@ class AjaxController {
             const results = await filmModel.findAll({
                 where: { 
                     thumb_url: {
-                        [Op.not]: "",
-                    },
-                    poster_url: {
-                        [Op.like]: "%/uploads/%",
+                        [Op.notLike]: "%/uploads/%",
                     },
                 },
                 limit: 1000,
             });
 
             await Promise.all(results.map(async function(item) {
-
-                // const response_thumb = await axios.get("https://img.ophim1.com/uploads/movies/"+ item.thumb_url.split("/").pop(), {
-                //     responseType: 'arraybuffer'
-                // });
-                // const response_poster = await axios.get("https://img.ophim1.com/uploads/movies/"+ item.poster_url.split("/").pop(), {
-                //     responseType: 'arraybuffer'
-                // });
-
-                // const res_thumb = await sharp(response_thumb.data)
-                //     .jpeg({ quality: 80 })
-                //     .toBuffer();
-
-                // const res_poster = await sharp(response_poster.data)
-                //     .jpeg({ quality: 80 })
-                //     .toBuffer();
-
                 axios({
                     url: "https://img.ophim1.com/uploads/movies/"+ item.thumb_url.split("/").pop(),
                     responseType: 'stream',
