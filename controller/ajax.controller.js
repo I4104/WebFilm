@@ -97,9 +97,6 @@ class AjaxController {
                     thumb_url: {
                         [Op.Like]: "%https://img.ophim1.com/uploads/movies%",
                     },
-                    poster_url: {
-                        [Op.not]: "",
-                    },
                 },
                 order: [['year_date', 'DESC']],
                 limit: 50,
@@ -179,11 +176,9 @@ class AjaxController {
             }));
 
             return res.send("Done!");
-
         } catch (error) {
             return res.status(500).send(error);
         }
-
     }
 
 
