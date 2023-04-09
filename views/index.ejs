@@ -1,48 +1,45 @@
 <%- include("partials/header.ejs") %>
                     <div class="toolbar" id="kt_toolbar">
-                        <div class="swiper banner-main">
-                            <div class="swiper-wrapper">
-                                <% film_banner.forEach(function(item) { %>
-                                <% var episode = JSON.parse(item.m3u8); %>
-                                <div class="swiper-slide">
-                                    <div class="slide-content">
-                                        <span class="fs-xxl-1 fw-bolder text-light"><%= item.title %></span>
-                                        <div class="info d-flex align-items-center text-gray-800 fs-6 my-3">
-                                            <span class="vip-info"></span>
-                                            <div class="broken-line"></div>
-                                            <span><%= item.film_time %></span>
-                                            <div class="broken-line"></div>
-                                            <span><%= item.year_date %></span>
-                                            <div class="broken-line"></div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                            <div class="rating-label me-2 checked">
-                                                <i class="bi bi-star fs-2"></i>
-                                            </div>
-                                        </div>
-                                        <div class="tag my-2 mb-3">
-                                            <% JSON.parse(item.tags).forEach(function(item) { %>
-                                            <span class="badge bg-tags fs-7 p-2"><%= item %></span>
-                                            <% }); %>
-                                        </div>
-                                        <a href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>" class="btn btn-icon btn-lg btn-light-danger btn-rounded me-5"><i class="fa fa-play fs-2"></i></a>
-                                    </div>
-                                    <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-200px h-sm-375px h-md-525px h-lg-800px" src="<%= item.poster_url; %>">
+                        <div class="hero-new hero-after w-100">
+                            <style>
+                                :root {
+                                    --color-bg-gradient: rgba(186, 137, 100, 0.2);
+                                }
+                            </style>
+                            <div class="hero-new__background">
+                                <div class="hero-new__background-image">
+                                    <style>
+                                        .hero-new__background-image {
+                                            background-image: url(https://tv.knsea.com/uploads/sat-thu-john-wick-phan-4-thumb.jpg);
+                                        }
+                                        
+                                        @media (min-width: 760px) {
+                                            .hero-new__background-image {
+                                                background-image: url(https://tv.knsea.com/uploads/van-cu-yeu-anh-poster.jpg);
+                                            }
+                                        }
+                                    </style>
                                 </div>
-                                <% }); %>
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
+                            <div class="hero-new__content content-gutter--large content-center--large z-index-2">
+                                <div class="hero-new__content-inner">
+                                    <h1 class="fs-1x fw-bolder">Sát Thủ John Wick: Phần 4</h1>
+                                    <p class="info-thumb text-gray-800">Sát Thủ John Wick: Chương 4 là câu chuyện của John Wick (Keanu Reeves) đã khám phá ra con đường để đánh bại High Table. Nhưng trước khi có thể kiếm được tự do, Wick phải đối đầu với kẻ thù mới với những liên minh hùng mạnh trên toàn cầu và những lực lượng biến những người bạn cũ thành kẻ thù.</p>
+                                    <a class="themed-icon-button themed-icon-button--link themed-icon-button--arcane hero-new__button" href="#kt_content_container" data-kt-scroll-toggle>
+                                        <span class="themed-icon-button__content">
+                                            <div class="themed-icon-button__icon">
+                                                <span class="icon" style="width:16px;height:16px;line-height:16px">
+                                                    
+                                                    <svg viewBox="0 0 24 24" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.003 14H3.5v-4h11.502l-4.165-4.538 2.705-2.947 7.353 8.012c.747.813.747 2.133 0 2.947l-7.353 8.011-2.705-2.947L15.003 14z" fill="#F0F0F0"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            Xem Ngay
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-fluid content-item-home">
@@ -70,7 +67,6 @@
                                         <% }); %>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-12">
                                     <div class="fw-bolder fs-1 pt-0">Đề xuất cho bạn</div>
                                     <div class="row slider list-movie-home">

@@ -83,6 +83,7 @@ class HomeController {
             console.log(error);
         }
 
+        res.locals.router = 'home';
         return res.render('index');
     }
 
@@ -166,6 +167,7 @@ class HomeController {
             console.log(error);
         }
 
+        res.locals.router = 'view';
         return res.render('movie/player.ejs');
     }
 
@@ -196,6 +198,8 @@ class HomeController {
         } catch (error) {
             console.log(error);
         }
+
+        res.locals.router = 'category';
         return res.render("category.ejs");
     }
 
@@ -231,6 +235,7 @@ class HomeController {
         };
 
         res.locals.film = data;
+        res.locals.router = 'iframe';
         return res.render('movie/iframe.ejs');
     }
 
@@ -238,6 +243,7 @@ class HomeController {
         const user = res.locals.user;
         const search = (req.params.search != null) ? req.params.search : "";
         res.locals.search = search;
+        res.locals.router = 'search';
         return res.render('search.ejs');
     }
 

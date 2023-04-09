@@ -41,6 +41,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
     <script>
+    var swiper = new Swiper(".banner-slide", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        effect: 'fade',
+        centeredSlides: true,
+        autoplay: {
+            delay: 7000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
     $(function() {
         $('.lazyLoad').lazyload({
             effect : "fadeIn",
