@@ -98,7 +98,7 @@ class AjaxController {
                 }
             },
             order: [['year_date', 'DESC']],
-            limit: 50,
+            limit: 10,
         });
 
         await Promise.allSettled(results.map(async function(item) {
