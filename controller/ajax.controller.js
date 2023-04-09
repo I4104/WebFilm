@@ -59,9 +59,14 @@ class AjaxController {
         try {
             const results = await filmModel.findAll({
                 where: {
-                    thumb_url: {
-                        [Op.notLike]: "%/uploads/%",
-                    },
+                    [Op.and]: {
+                        thumb_url: {
+                            [Op.notLike]: "%/uploads/%",
+                        },
+                        thumb_url: {
+                            [Op.not]: "",
+                        },
+                    }
                 },
                 limit: 1000,
             });
