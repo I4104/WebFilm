@@ -231,7 +231,7 @@ class AjaxController {
         try {
             const results = await filmModel.findAll({
                 where: { 
-                    type: "",
+                    showtimes: "",
                 },
                 order: [['year_date', 'DESC']],
                 limit: 50,
@@ -242,26 +242,8 @@ class AjaxController {
                     const response = await axios.get('https://ophim1.com/phim/' + item.slug);
                     const data = response.data;
 
-                    var category = [];
-
-                    await Promise.all(data.movie.category.map(async function (item) {
-                        category.push(item.name)
-                    }));
-
-                    var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-                    var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-
                     await filmModel.update({
-                        type: data.movie.type,
-                        status: data.movie.status,
-                        description: data.movie.content,
-                        film_time: data.movie.time,
-                        thumb_url: data.movie.thumb_url,
-                        poster_url: data.movie.poster_url,
-                        episode_current: episode_current,
-                        episode_total: episode_total,
-                        m3u8: JSON.stringify(data.episodes),
-                        tags: JSON.stringify(category) 
+                        showtimes: data.movie.showtimes,
                     }, {
                         where: { slug: item.slug }
                     });
