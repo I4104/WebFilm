@@ -15,7 +15,7 @@ class HomeController {
                         [Op.not]: "[]",
                     },
                     thumb_url: {
-                        [Op.Like]: "%https://img.ophim1.com/uploads/movies%",
+                        [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
                 },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
