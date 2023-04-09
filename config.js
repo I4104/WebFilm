@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
 
-const sequelize = new Sequelize('knseacom_film', 'knseacom_film', 'I4104@sea', {
+const sequelize = new Sequelize('admin', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
     logging: false
