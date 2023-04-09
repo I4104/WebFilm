@@ -3,6 +3,14 @@ const filmModel = require("../models/films.model");
 const axios = require('axios');
 const moment = require('moment');
 const { Op } = require('../config');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: "dqaygauhe",
+    api_key: "137665163751685",
+    api_secret: "lGfzGfX0KHBC38tZdhzXRUSEVe0"
+});
+
 
 class AjaxController {
 
@@ -45,6 +53,53 @@ class AjaxController {
             return res.send(null);
         }  
     }
+
+    async get_image(req, res) {
+        try {
+            const results = await filmModel.findAll({
+                where: { 
+                    thumb_url: {
+                        [Op.not]: "",
+                    },
+                },
+                limit: 1000,
+            });
+
+            await Promise.all(results.map(async function(item) {
+                try {
+                    const res_thumb = cloudinary.uploader.upload(item.thumb_url, {public_id: "thumb-" + item.slug});
+                    const res_poster = cloudinary.uploader.upload(item.poster_url, {public_id: "poster-" + item.slug});
+
+                    res_thumb.then((data) => {
+                        console.log(data);
+                        console.log(data.secure_url);
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    const url_thumb = cloudinary.url("thumb-" + item.slug);
+                    const url_poster = cloudinary.url("poster-" + item.slug);
+                    
+                    await filmModel.update({
+                        thumb_url: url_thumb,
+                        poster_url: url_poster,
+                    }, {
+                        where: { id: item.id }
+                    });
+
+                } catch (error) {
+                    console.error(error);
+                }
+            }));
+
+            return res.send("Done!");
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal Server Error");
+        }
+    }
+
 
     async get_by_slug(req, res) {
         try {
