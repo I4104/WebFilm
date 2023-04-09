@@ -55,6 +55,9 @@ class AjaxController {
                     thumb_url: {
                         [Op.not]: "",
                     },
+                    poster_url: {
+                        [Op.like]: "%/uploads/%",
+                    },
                 },
                 limit: 1000,
             });
