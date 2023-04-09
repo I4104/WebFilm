@@ -53,30 +53,44 @@ class AjaxController {
         const publicPath = path.join(__dirname, '../public');
         const uploadsPath = path.join(publicPath, 'uploads');
 
-        const fileNames = fs.readdirSync(uploadsPath);
+        const results = await filmModel.findAll({
+            where: {
+                thumb_url: {
+                    [Op.Like]: "%https://img.ophim1.com/uploads/movies%",
+                },
+                poster_url: {
+                    [Op.not]: "",
+                },
+            },
+            limit: 50,
+        });
 
-        const filesData = fileNames.map(name => ({
-            name,
-            path: `${uploadsPath}/${name}`,
-            size: fs.statSync(`${uploadsPath}/${name}`).size,
+        await Promise.all(results.map(async function(item) {
+            try {
+                const thumbUrl = item.thumb_url.split("/").pop();
+                const posterUrl = item.poster_url.split("/").pop();
+                if (fs.existsSync(path.join(uploadsPath, thumbUrl))) {
+                    await filmModel.update({
+                        thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
+                    }, {
+                        where: { id: item.id }
+                    }),
+
+                }
+                if (fs.existsSync(path.join(uploadsPath, posterUrl))) {
+                    await filmModel.update({
+                        poster_url: '/uploads/' + item.poster_url.split("/").pop(),
+                    }, {
+                        where: { id: item.id }
+                    })
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }));
 
-        filesData.forEach(async fileData => {
-            if (fileData.name.endsWith('-thumb.jpg')) {
-                await filmModel.update({
-                    thumb_url: '/uploads/' + fileData.name,
-                }, {
-                    where: { slug: fileData.name.replace('-thumb.jpg', '') }
-                });
-            }
-            if (fileData.name.endsWith('-poster.jpg')) {
-                await filmModel.update({
-                    poster_url: '/uploads/' + fileData.name,
-                }, {
-                    where: { slug: fileData.name.replace('-poster.jpg', '') }
-                });
-            }
-        });
+        return res.send("Done!");
+
     }
 
     async get_image(req, res) {
