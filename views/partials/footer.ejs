@@ -27,7 +27,7 @@
             </svg>
         </span>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script src="/assets/js/scripts.bundle.js"></script>
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
@@ -39,8 +39,16 @@
     <script src="/assets/js/custom/apps/chat/chat.js"></script>
     <script src="/assets/js/home.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
     <script>
+    $(function() {
+        $('.lazyLoad').lazyload({
+            effect : "fadeIn",
+        });
+    });
+
     $(document).ready(function(){
+
         $('.list-movie-home').slick({
             dots: false,
             infinite: false,
