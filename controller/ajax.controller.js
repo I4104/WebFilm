@@ -430,7 +430,7 @@ class AjaxController {
                         where: { id: item.id }
                     });
 
-                    await logs.create({ content: "Update Series: " + item.name + " - Current episode: " + episode_current });
+                    await logs.create({ content: "Update Series: " + item.title + " - Current episode: " + episode_current });
                 }));
 
             }
