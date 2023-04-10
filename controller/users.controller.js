@@ -9,7 +9,12 @@ class AuthController {
     }
 
     login(req, res) {
-        return res.render("auth/login");
+        req.session.user = {
+            userId: 2,
+            login_at: Date.now()
+        }
+        return res.redirect("/");
+        //return res.render("auth/login");
     }
 
     register(req, res) {
