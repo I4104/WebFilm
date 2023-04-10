@@ -156,26 +156,21 @@
                             </div>
                             <div class="tab-content px-5" id="myTabContent">
                                 <div class="tab-pane fade active show" id="kt_episode_list" role="tabpanel">
-                                    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit.
+                                    <!--<div class="fs-5 fw-bold text-gray-800 py-2">Danh Sách Tập</div>-->
+                                    <div class="intl-episodes-list scroll h-325px">
+                                        <ul class="nav nav-pills nav-pills-custom" role="episodelist">
+                                            <% info.episode_list.forEach(function(item) { %>
+                                            <li class="nav-item mb-3 me-3" role="presentation">
+                                                <a class="nav-link btn btn-outline btn-flex btn-color-gray-800 btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
+                                                    <span class="fw-bold fs-6 lh-1"><%= item.name %></span>
+                                                    <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-success"></span><% } %>
+                                                </a>
+                                            </li>
+                                            <% }); %>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" id="kt_comment" role="tabpanel">
-                                    Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer pt-0 p-5 border-0">
-                            <div class="fs-5 fw-bold text-gray-800 py-2">Danh Sách Tập</div>
-                            <div class="intl-episodes-list scroll h-325px">
-                                <ul class="nav nav-pills nav-pills-custom" role="episodelist">
-                                    <% info.episode_list.forEach(function(item) { %>
-                                    <li class="nav-item mb-3 me-3" role="presentation">
-                                        <a class="nav-link btn btn-outline btn-flex btn-color-gray-800 btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
-                                            <span class="fw-bold fs-6 lh-1"><%= item.name %></span>
-                                            <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-success"></span><% } %>
-                                        </a>
-                                    </li>
-                                    <% }); %>
-                                </ul>
+                                <div class="tab-pane fade" id="kt_comment" role="tabpanel">Đang cập nhật...</div>
                             </div>
                         </div>
                     </div>
