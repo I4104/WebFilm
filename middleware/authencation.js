@@ -18,10 +18,6 @@ class AuthMiddleware {
     }
 
     async getAuth(req, res, next) {
-        req.session.user = {
-            userId: 2,
-            login_at: Date.now()
-        }
         if (!req.session.user) {
             return res.locals.user = null;
         } else {
