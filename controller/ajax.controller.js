@@ -425,7 +425,6 @@ class AjaxController {
                         showtimes: showtimes,
                         modified: modified,
                         m3u8: JSON.stringify(data.episodes),
-                        tags: JSON.stringify(category) 
                     }, {
                         where: { id: item.id }
                     });
