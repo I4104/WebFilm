@@ -12,6 +12,6 @@ router.get("/iframe/:slug/:episode", HomeController.iframe)
 router.get('/category/:category', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.category);
 router.get('/search/:search', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.search);
 
-router.get('/', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.index);
+router.get('/', [authMiddleware.getAuth], HomeController.index);
 
 module.exports = router;
