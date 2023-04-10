@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="card bg-body border-0">
-                        <div class="card-header p-0 border-0">
+                        <div class="card-body p-0 border-0">
                             <div class="tv-player">
                                 <iframe class="iframe-player rounded-top" src="/iframe/<%= info.slug %>/<%= info.episode %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             </div>
@@ -159,8 +159,7 @@
                             </div>
                             <div class="tab-content px-5" id="myTabContent">
                                 <div class="tab-pane fade active show" id="kt_episode_list" role="tabpanel">
-                                    <!--<div class="fs-5 fw-bold text-gray-800 py-2">Danh Sách Tập</div>-->
-                                    <div class="intl-episodes-list scroll">
+                                    <div class="intl-episodes-list scroll mb-5 500px">
                                         <ul class="nav nav-pills nav-pills-custom" role="episodelist">
                                             <% info.episode_list.forEach(function(item) { %>
                                             <li class="nav-item mb-3 me-3" role="presentation">
