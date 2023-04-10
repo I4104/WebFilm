@@ -2,7 +2,7 @@ const userModel = require("../models/users.model");
 const filmModel = require("../models/films.model");
 const logs = require("../models/logs.model");
 const axios = require('axios');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const { Op } = require('../config');
 const fs = require('fs');
 const path = require('path');
@@ -421,7 +421,7 @@ class AjaxController {
                     var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                     var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                     var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
-                    let modified = moment(data.movie.modified.time).format('Y-MM-DD HH:mm:ss');
+                    let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
 
                     if (item.modified != modified) {
                         await filmModel.update({
@@ -469,7 +469,7 @@ class AjaxController {
                     category.push(item.name)
                 }));
 
-                let modified = moment(data.movie.modified.time).format('Y-MM-DD HH:mm:ss');
+                let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
                 
                 var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
