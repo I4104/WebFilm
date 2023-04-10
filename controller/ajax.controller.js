@@ -393,6 +393,51 @@ class AjaxController {
         return res.send("Done!");
     }
 
+    async update_series(req, res) {
+        try {
+            const results = await filmModel.findAll({
+                where: {
+                    [Op.or]: [
+                        { type: "series" },
+                        { type: "hoathinh" }
+                    ],
+                    status: "ongoing",
+                    modified: {
+                        [Op.like]: '%2023-%'
+                    }
+                },
+                limit: 10
+            });
+            if (results.length > 0) {
+                await Promise.all(results.map(async function(item) {
+                    const response = await axios.get('https://ophim1.com/phim/' + item.slug);
+                    const data = response.data;
+
+                    var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                    var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+                    var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
+                    let modified = moment(data.movie.modified.time).format('Y-MM-DD H:mm:ss');
+
+                    await filmModel.update({
+                        status: data.movie.status,
+                        episode_current: episode_current,
+                        episode_total: episode_total,
+                        showtimes: showtimes,
+                        modified: modified,
+                        m3u8: JSON.stringify(data.episodes),
+                        tags: JSON.stringify(category) 
+                    }, {
+                        where: { id: item.id }
+                    });
+                }));
+
+            }
+            return res.send("Done!");
+        } catch (error) {
+            return res.send(error);            
+        }
+    }
+
 
     async get_by_slug(req, res) {
         try {

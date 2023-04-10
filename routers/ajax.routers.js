@@ -15,6 +15,7 @@ router.get('/removeImagesNotInSql', AjaxController.removeImagesNotInSql);
 
 router.get('/get_by_slug/:slug', AjaxController.get_by_slug);
 router.get('/get_info', AjaxController.get_info);
+router.get('/update_series', AjaxController.update_series);
 router.get('/get_list/:page', AjaxController.get_list);
 
 module.exports = router;
