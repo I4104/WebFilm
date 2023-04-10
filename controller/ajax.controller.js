@@ -31,11 +31,6 @@ class AjaxController {
             });
 
             const totalPages = Math.ceil(results.count / perPage);
-            const maxPagesToShow = 2; 
-            const startPage = Math.max(page - maxPagesToShow, 1);
-            const endPage = Math.min(startPage + maxPagesToShow * 2, totalPages);
-            const prevPage = startPage - 1;
-            const nextPage = endPage + 1;
 
             if (results.length > 0) {
                 for (const item of results) {
@@ -57,7 +52,7 @@ class AjaxController {
                 }
                 html += '<div class="d-flex justify-content-between align-items-center flex-wrap">';
 
-                if (currentPage === 1) {
+                if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
                               <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
                               <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
@@ -69,16 +64,16 @@ class AjaxController {
 
                 if (totalPages <= 7) {
                     for (let i = 1; i <= totalPages; i++) {
-                        if (i === currentPage) {
+                        if (i === page) {
                             html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                         } else {
                             html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
                         }
                     }
                 } else {
-                    if (currentPage <= 4) {
+                    if (page <= 4) {
                         for (let i = 1; i <= 5; i++) {
-                            if (i === currentPage) {
+                            if (i === page) {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                             } else {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
@@ -86,12 +81,12 @@ class AjaxController {
                         }
                         html += '<a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>\
                                 <a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">' + totalPages + '</a>';
-                    } else if (currentPage >= totalPages - 3) {
+                    } else if (page >= totalPages - 3) {
                         html += '<a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
                                 <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>';
 
                         for (let i = totalPages - 4; i <= totalPages; i++) {
-                            if (i === currentPage) {
+                            if (i === page) {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                             } else {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
@@ -101,8 +96,8 @@ class AjaxController {
                         html += '<a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
                                  <a href = "/search/' + i + '/' + req.params.search + '" class = "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1" > ... < /a>';
 
-                        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-                            if (i === currentPage) {
+                        for (let i = page - 2; i <= page + 2; i++) {
+                            if (i === page) {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                             } else {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
@@ -113,12 +108,12 @@ class AjaxController {
                     }
                 }
 
-                if (currentPage === totalPages) {
+                if (page === totalPages) {
                     html += '<a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
                             <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 } else {
-                    html += '<a href="/search/'+ (currentPage + 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
+                    html += '<a href="/search/'+ (page + 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
                             <a href = "/search/'+ (totalPages + 1) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 }
@@ -126,6 +121,7 @@ class AjaxController {
                 html += '<div class="col-lg-12 text-center">\
                         Không có dữ liệu\
                     </div>';
+                html += "Trang "+ page +" - Bắt đầu: "+ offset +" - Limit: "+ perPage +" ";
             }
             return res.send(html);
         } catch (error) {
