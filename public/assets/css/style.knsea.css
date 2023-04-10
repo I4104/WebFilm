@@ -329,7 +329,7 @@
     z-index: 9;
     border-radius: 5px;
     background-size: 200% 100%;
-    background-image: linear-gradient(to right, #1e1e2d 0%, #01a8d5 51%, #1CB5E0 100%);
+    background-image: linear-gradient(to right, #636399 0%, #01a8d5 51%, #1CB5E0 100%);
     transition: .7s;
     text-transform: capitalize;
 }
