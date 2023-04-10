@@ -187,23 +187,10 @@ class HomeController {
             res.locals.category = "Phim Lẻ";
         }
         if (category == "anime") {
-            category = "hoathinh";
             res.locals.category = "Hoạt Hình";
         }
 
-        try {
-            const info_category = await filmModel.findAll({
-                where: { 
-                    type: category,
-                },
-                order: [['year_date', 'DESC'], ['id', 'DESC']],
-                limit: 24,
-            });
-            res.locals.info_category = info_category;
-        } catch (error) {
-            console.log(error);
-        }
-
+        res.locals.cate = category;
         res.locals.router = 'category';
         return res.render("category.ejs");
     }

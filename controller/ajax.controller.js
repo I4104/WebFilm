@@ -59,8 +59,8 @@ class AjaxController {
 
                 if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
-                            <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
-                            <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a></li>';
+                            <li class="paginate_button page-item previous"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item previous"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
                                 <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
@@ -114,7 +114,7 @@ class AjaxController {
                 }
 
                 if (page === totalPages) {
-                    html += '<li class="paginate_button page-item next"><a href="#" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-right icon-xs"></i></a></li>\
+                    html += '<li class="paginate_button page-item next"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-right icon-xs"></i></a></li>\
                             <li class="paginate_button page-item next"><a href = "#" class = "btn btn-icon btn-sm page-link btn-light-primary my-1" disabled><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
                     </ul></div></div>';
                 } else {
@@ -134,6 +134,134 @@ class AjaxController {
             return res.send(error);
         }  
     }
+
+    async ajax_category(req, res) {
+        var page = parseInt(req.params.page) || 1; // Lấy số trang hiện tại
+        if (page < 1) {
+            page = 1
+        } 
+        const perPage = 36; // Số phần tử trên một trang
+        const offset = (page - 1) * perPage; // Vị trí bắt đầu của phần tử trên trang hiện tại
+
+        try {
+            var html = "";
+            const results = await filmModel.findAndCountAll({ 
+                where: { 
+                    type: {
+                        [Op.eq]: req.params.category
+                    },
+                },
+                order: [['id', 'DESC']],
+                offset: offset,
+                limit: perPage
+            });
+
+            const totalPages = Math.ceil(results.count / perPage);
+
+            if (results.count > 0) {
+                for (const item of results.rows) {
+                    var episode = JSON.parse(item.m3u8);
+                    html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">\
+                        <a class="position-relative rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
+                            <figure class="rounded">\
+                                <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-400px" src="' + item.thumb_url + '">\
+                            </figure>\
+                            <div class="icon_overlay"></div>\
+                            <div class="movie-post-episode">' + item.episode_current + '</div>\
+                            <div class="movie-post-title-box">\
+                                <div class="movie-post-title">\
+                                    <h2 class="text-gray-800">' + item.title + '</h2>\
+                                </div>\
+                            </div>\
+                        </a>\
+                    </div>';
+                }
+                html += '<div class="d-flex justify-content-between align-items-center flex-wrap">';
+
+                html += '\
+                    <div class="d-flex align-items-center py-3">\
+                        <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
+                    </div>\
+                </div>';
+                
+                if (page === 1) {
+                    html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
+                            <li class="paginate_button page-item previous"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item previous"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a></li>';
+                } else {
+                    html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
+                                <li class="paginate_button page-item previous"><a href="/category/1/' + req.params.category + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
+                                <li class="paginate_button page-item previous"><a href="/category/'+ (page - 1) +'/' + req.params.category + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
+                }
+
+                if (totalPages <= 7) {
+                    for (let i = 1; i <= totalPages; i++) {
+                        if (i === page) {
+                            html += `<li class="paginate_button page-item active"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
+                        } else {
+                            html += `<li class="paginate_button page-item"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
+                        }
+                    }
+                } else {
+                    if (page <= 4) {
+                        for (let i = 1; i <= 5; i++) {
+                            if (i === page) {
+                                html += `<li class="paginate_button page-item active"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
+                            } else {
+                                html += `<li class="paginate_button page-item"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
+                            }
+                        }
+                        html += '<li class="paginate_button page-item"><button class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">...</button></li>\
+                                <li class="paginate_button page-item"><a href="/category/' + totalPages + '/' + req.params.category + '" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">' + totalPages + '</a></li>';
+                    } else if (page >= totalPages - 3) {
+                        html += '<li class="paginate_button page-item"><a href="/category/1/' + req.params.category + '" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">1</a></li>\
+                                <li class="paginate_button page-item"><button class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">...</button></li>';
+
+                        for (let i = totalPages - 4; i <= totalPages; i++) {
+                            if (i === page) {
+                                html += `<li class="paginate_button page-item active"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
+                            } else {
+                                html += `<li class="paginate_button page-item"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
+                            }
+                        }
+                    } else {
+                        html += '<li class="paginate_button page-item"><a href="/category/1/' + req.params.category + '" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">1</a></li>\
+                                <li class="paginate_button page-item"><button class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">...</button></li>';
+
+                        for (let i = page - 2; i <= page + 2; i++) {
+                            if (i === page) {
+                                html += `<li class="paginate_button page-item active"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
+                            } else {
+                                html += `<li class="paginate_button page-item"><a href="/category/${i}/` + req.params.category + `" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
+                            }
+                        }
+                        html += '<li class="paginate_button page-item"><button class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">...</button></li>\
+                        <li class="paginate_button page-item"><a href="/category/' + totalPages + '/' + req.params.category + '" class="btn btn-icon btn-sm page-link border-0 btn-hover-primary me-2 my-1">' + totalPages + '</a></li>';
+                    }
+                }
+
+                if (page === totalPages) {
+                    html += '<li class="paginate_button page-item next"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-right icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item next"><a href = "#" class = "btn btn-icon btn-sm page-link btn-light-primary my-1" disabled><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
+                    </ul></div>';
+                } else {
+                    html += '<li class="paginate_button page-item next"><a href="/category/'+ (page + 1) +'/' + req.params.category + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-right icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item next"><a href = "/category/'+ (totalPages) +'/' + req.params.category + '" class = "btn btn-icon btn-sm page-link btn-light-primary my-1"><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
+                    </ul></div>';
+                }
+
+            } else {
+                html += '<div class="col-lg-12 text-center">\
+                        Không có dữ liệu\
+                    </div>';
+            }
+            return res.send(html);
+        } catch (error) {
+            console.log(error);
+            return res.send(error);
+        }  
+    }
+
 
     async set_image(req, res) {
         const publicPath = path.join(__dirname, '../public');
