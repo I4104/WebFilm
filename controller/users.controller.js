@@ -9,6 +9,10 @@ class AuthController {
     }
 
     login(req, res) {
+        req.session.user = {
+            userId: 2,
+            login_at: Date.now()
+        }
         return res.render("auth/login");
     }
 
