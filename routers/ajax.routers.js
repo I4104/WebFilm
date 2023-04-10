@@ -4,7 +4,7 @@ var router = express.Router();
 var AjaxController = require("../controller/ajax.controller");
 var authMiddleware = require("../middleware/authencation");
 
-router.get('/search/:search', [authMiddleware.isAuth, authMiddleware.getAuth], AjaxController.ajax_search);
+router.get('/search/:page/:search', [authMiddleware.isAuth, authMiddleware.getAuth], AjaxController.ajax_search);
 
 router.get('/set_image', AjaxController.set_image);
 router.get('/get_image', AjaxController.get_image);
