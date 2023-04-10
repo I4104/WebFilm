@@ -54,12 +54,12 @@ class AjaxController {
 
                 if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><</a>\
-                              <a href="" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled>></a>';
+                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
+                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><</a>\
-                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">></a>';
+                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
+                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
                 }
 
                 if (totalPages <= 7) {
@@ -109,12 +109,12 @@ class AjaxController {
                 }
 
                 if (page === totalPages) {
-                    html += '<a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><</a>\
-                            <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled >></a>\
+                    html += '<a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
+                            <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 } else {
-                    html += '<a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><</a>\
-                            <a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" >></a>\
+                    html += '<a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
+                            <a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 }
                 html += '\
