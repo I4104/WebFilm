@@ -64,16 +64,12 @@ class AuthController {
 
             const user = await userModel.create({ username, email, password: hashedPassword, rank: "default", active: 0 });
 
-            req.session.user = {
-                userId: user.id,
-                login_at: Date.now()
-            }
             return res.json({
                 error: 0,
                 type: "success", 
                 buttontext: "Ok", 
                 reload: true,
-                message: 'Đăng ký thành công'
+                message: 'Đăng ký thành công, vui lòng báo admin để active tài khoản!'
             });
         } catch (error) {
             return res.json({
@@ -98,6 +94,16 @@ class AuthController {
                     buttontext: "Ok", 
                     reload: false,
                     message: "Tài khoản không tồn tại"
+                });
+            }
+
+            if (user.active == 0) {
+                return res.json({
+                    error: 4,
+                    type: "error", 
+                    buttontext: "Ok", 
+                    reload: true,
+                    message: 'Vui lòng báo admin để active tài khoản!'
                 });
             }
 
