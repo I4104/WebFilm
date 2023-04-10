@@ -117,6 +117,12 @@ class AjaxController {
                             <a href = "/search/'+ (totalPages + 1) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 }
+                html += '\
+                    <div class="d-flex align-items-center py-3">\
+                        <span class="text-muted">Displaying '+ limit +' of '+ results.count +' records</span>\
+                    </div>\
+                </div>/';
+
             } else {
                 html += '<div class="col-lg-12 text-center">\
                         Không có dữ liệu\
