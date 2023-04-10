@@ -59,16 +59,16 @@
 
 .hero-new__background video,
 .hero-new__background-image {
-    position:absolute;
+    position: absolute;
     left:0;
     top:0;
     height:100%;
     width:100%;
-    -o-object-fit:cover;
-    object-fit:cover;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    -o-object-fit: cover;
+    object-fit: cover;
+    background-size: cover;
+    background-position:top center;
+    background-repeat: no-repeat;
 }
 
 .hero-new__content {
@@ -437,8 +437,8 @@
 
 @media screen and (min-width:960px) {
     .content-gutter--large {
-        padding-left:40px;
-        padding-right:40px;
+        padding-left:45px;
+        padding-right:45px;
     }
 }
 
