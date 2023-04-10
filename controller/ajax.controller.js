@@ -113,15 +113,15 @@ class AjaxController {
                             <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 } else {
-                    html += '<a href="/search/'+ (page + 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
-                            <a href = "/search/'+ (totalPages + 1) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
+                    html += '<a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
+                            <a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 }
                 html += '\
                     <div class="d-flex align-items-center py-3">\
                         <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
                     </div>\
-                </div>/';
+                </div>';
 
             } else {
                 html += '<div class="col-lg-12 text-center">\
