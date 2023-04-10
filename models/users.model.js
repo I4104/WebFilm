@@ -22,6 +22,11 @@ const User = sequelize.define('users', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    active: {
+        type: DataTypes.INTEGER,
+        default: 0,
+        allowNull: false
+    },
 }, {
     timestamps: false
 });

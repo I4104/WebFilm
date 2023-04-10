@@ -62,7 +62,7 @@ class AuthController {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
 
-            const user = await userModel.create({ username, email, password: hashedPassword, rank: "default" });
+            const user = await userModel.create({ username, email, password: hashedPassword, rank: "default", active: 0 });
 
             req.session.user = {
                 userId: user.id,
