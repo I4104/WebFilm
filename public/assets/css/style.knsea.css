@@ -197,9 +197,14 @@
     border: none;
 }
 
+.tab-episode-list {
+    height: 45px!important;
+    width: 74px!important;
+}
+
 .intl-episodes-list {
     padding: 0px 0px 0px 0px;
-    margin-right: -9px;
+    margin-right: -16px;
 }
 
 .intl-episodes-list .v-li.movie {

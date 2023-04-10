@@ -146,8 +146,8 @@
                             <ul class="nav nav-pills nav-pills-custom intl-episodes-list scroll h-300px" role="episodelist">
                                 <% info.episode_list.forEach(function(item) { %>
                                 <li class="nav-item mb-3 me-3 me-lg-6" role="presentation">
-                                    <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-danger flex-column overflow-hidden w-100px h-50px pt-5 pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
-                                        <span class="nav-text text-gray-800 fw-bold fs-6 lh-1"><%= item.name %></span>
+                                    <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-danger flex-column overflow-hidden tab-episode-list pt-5 pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
+                                        <span class="fw-bold fs-6 lh-1"><%= item.name %></span>
                                         <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-danger"></span><% } %>
                                     </a>
                                 </li>
