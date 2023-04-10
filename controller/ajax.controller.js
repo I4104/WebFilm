@@ -30,7 +30,7 @@ class AjaxController {
                 limit: perPage
             });
 
-            const totalPages = Math.ceil(movies.count / limit);
+            const totalPages = Math.ceil(results.count / limit);
             const maxPagesToShow = 2; 
             const startPage = Math.max(page - maxPagesToShow, 1);
             const endPage = Math.min(startPage + maxPagesToShow * 2, totalPages);
