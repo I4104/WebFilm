@@ -114,7 +114,7 @@ class HomeController {
                 var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                 var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
-                let modified = moment(data.movie.modified.time).format('Y-MM-DD H:mm:ss');
+                let modified = moment(data.movie.modified.time).format('Y-MM-DD HH:mm:ss');
 
                 await filmModel.update({
                     status: data.movie.status,
