@@ -14,7 +14,7 @@ class AjaxController {
         if (page < 1) {
             page = 1
         } 
-        const perPage = 10; // Số phần tử trên một trang
+        const perPage = 24; // Số phần tử trên một trang
         const offset = (page - 1) * perPage; // Vị trí bắt đầu của phần tử trên trang hiện tại
 
         try {
@@ -127,7 +127,7 @@ class AjaxController {
                         Không có dữ liệu\
                     </div>';
             }
-            return res.send(html);
+            return res.send(page + " - " + perPage + " - " + offset);
         } catch (error) {
             console.log(error);
             return res.send(null);
