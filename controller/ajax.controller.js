@@ -417,8 +417,9 @@ class AjaxController {
                     var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                     var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                     var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
-                    let modified = moment(data.movie.modified.time).format('Y-MM-DD H:mm:ss');
-                    if (item.episode_current != episode_current) {
+                    let modified = moment(data.movie.modified.time).format('Y-MM-DD HH:mm:ss');
+                    
+                    if (item.modified != modified) {
                         await filmModel.update({
                             status: data.movie.status,
                             episode_current: episode_current,
