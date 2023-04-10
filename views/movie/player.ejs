@@ -136,21 +136,35 @@
                     </div>
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
-                    <div class="card card-flush bg-body border-0">
+                    <div class="card card-flush bg-body border-0 mb-5">
                         <div class="card-body p-5 border-0">
                             <div class="fs-2 fw-bold"><%= info.title %></div>
+                            <div class="fs-4 text-gray-700"><%= info.origin_name %></div>
                         </div>
-                        <div class="card-footer p-5 border-0">
+                        <div class="card-footer pt-0 p-5 border-0">
                             <div class="fs-5 fw-bold text-gray-800 py-2">Các Tập Phim</div>
-                            <div class="intl-episodes-list scroll h-350px">
-                                <% info.episode_list.forEach(function(item) { %>
-                                <div class="v-li movie">
-                                    <a class="btn btn-sm bg-light w-100 h-lg-45px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
-                                        <span class="text-episodes <% if (item.episode == info.episode) { %> active <% } %>"><%= item.name %></span>
-                                    </a>
-                                </div>
-                                <% }); %>
+                            <div class="intl-episodes-list scroll h-325px">
+                                <ul class="nav nav-pills nav-pills-custom" role="episodelist">
+                                    <% info.episode_list.forEach(function(item) { %>
+                                    <li class="nav-item mb-3 me-3" role="presentation">
+                                        <a class="nav-link btn btn-outline btn-flex btn-color-gray-800 btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
+                                            <span class="fw-bold fs-6 lh-1"><%= item.name %></span>
+                                            <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-success"></span><% } %>
+                                        </a>
+                                    </li>
+                                    <% }); %>
+                                </ul>
                             </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-dismissible bg-light-danger d-flex flex-center flex-column px-lg-10">
+                        <button type="button" class="position-absolute top-0 end-0 m-2 btn btn-icon btn-icon-danger" data-bs-dismiss="alert">
+                            <i class="bi bi-x fs-1 text-danger"></i>
+                        </button>
+                        <div class="text-center text-dark">
+                            <h1 class="fs-3 fw-bold text-gray-800 mb-5">Khắc Cốt Ghi Tâm</h1>
+                            <div class="separator separator-dashed border-danger opacity-25 mb-5"></div>
+                            <div class="text-gray-800">Phim được lấy từ nhiều nguồn, chúng tôi không kiểm soát được tất cả quảng cáo trong luồng, bạn có thể tua để bỏ qua ví nó miễn phí ^^!</div>
                         </div>
                     </div>
                 </div>

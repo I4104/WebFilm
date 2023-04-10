@@ -46,6 +46,9 @@
     .form-search-main::-webkit-input-placeholder {
         color:#ffffff47 !important;
     }
+    .header-knsea .form-search-main:focus {
+        background-color: var(--kt-gray-300)!important;
+    }
     .header-fixed[data-kt-sticky-header=on] .header {
         background-color: var(--kt-header-desktop-default-bg-color);
     }
@@ -194,9 +197,19 @@
     border: none;
 }
 
+.tab-episode-list {
+    height: 45px!important;
+    width: 74px!important;
+    padding-top: 1.10rem!important;
+}
+
+.btn-check:active+.btn.btn-active-color-danger, .btn-check:checked+.btn.btn-active-color-danger, .btn.btn-active-color-danger.active, .btn.btn-active-color-danger.show, .btn.btn-active-color-danger:active:not(.btn-active), .btn.btn-active-color-danger:focus:not(.btn-active), .btn.btn-active-color-danger:hover:not(.btn-active), .show>.btn.btn-active-color-danger {
+    color: var(--kt-text-success)!important;
+}
+
 .intl-episodes-list {
     padding: 0px 0px 0px 0px;
-    margin-right: -9px;
+    margin-right: -16px;
 }
 
 .intl-episodes-list .v-li.movie {
@@ -330,13 +343,13 @@
 .item .movie-post-episode {
     left: 5px;
     top: 5px;
-    background: rgb(71, 132, 19);
+    background: rgba(0,0,0,.65);
     color: #fff;
-    padding: 3px 5px 1px;
+    padding: 2px 6px;
     z-index: 9;
     border-radius: 5px;
     background-size: 200% 100%;
-    background-image: linear-gradient(to right, #636399 0%, #01a8d5 51%, #1CB5E0 100%);
+    /*background-image: linear-gradient(to right, #636399 0%, #01a8d5 51%, #1CB5E0 100%);*/
     transition: .7s;
     text-transform: capitalize;
 }
