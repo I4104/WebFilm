@@ -271,7 +271,7 @@
 @media (min-width: 992px) {
     .item-movie-page {
         flex: 0 0 auto;
-        width: 12.5%;
+        width: 12.5% !important;
     }
 }
 
