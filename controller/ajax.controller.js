@@ -130,7 +130,7 @@ class AjaxController {
             return res.send(page + " - " + perPage + " - " + offset);
         } catch (error) {
             console.log(error);
-            return res.send(null);
+            return res.send(error);
         }  
     }
 
