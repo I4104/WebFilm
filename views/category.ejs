@@ -4,24 +4,9 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="fw-bolder fs-1 pt-0">Danh Mục: <%= category %></div>
-                                    <div class="row">
-                                        <% info_category.forEach(function(item) { %>
-                                        <% var episode = JSON.parse(item.m3u8); %>
-                                        <div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">
-                                            <a class="position-relative rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
-                                                <figure class="rounded">
-                                                    <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-400px" src="<%= item.thumb_url %>">
-                                                </figure>
-                                                <div class="icon_overlay"></div>
-                                                <div class="movie-post-episode"><%= item.episode_current %></div>
-                                                <div class="movie-post-title-box">
-                                                    <div class="movie-post-title">
-                                                        <h2 class="text-gray-800"><%= item.title %></h2>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <% }); %>
+                                    <div id="cate">
+                                        <span class="spinner-border text-success fs-5 me-3" role="status"></span>
+                                        <span class="fs-2 align-items-center ">Đang tìm kiếm...</span>
                                     </div>
                                 </div>
                             </div>
@@ -30,3 +15,12 @@
                 </div>
             </div>
 <%- include("partials/footer.ejs") %>
+<script>
+    $.ajax({
+        url: "/ajax/category/<%= page %>/<%= cate %>",
+        type: "GET",
+        success: (data) => {
+            $("#cate").html(data);
+        }
+    });
+</script>

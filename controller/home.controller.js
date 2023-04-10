@@ -179,6 +179,7 @@ class HomeController {
     async category(req, res) {
         const user = res.locals.user;
         var category = (req.params.category != null) ? req.params.category : "";
+        var page = (req.params.page != null) ? req.params.page : 1;
 
         if (category == "series") {
             res.locals.category = "Phim Bộ";
@@ -186,24 +187,12 @@ class HomeController {
         if (category == "single") {
             res.locals.category = "Phim Lẻ";
         }
-        if (category == "anime") {
-            category = "hoathinh";
+        if (category == "hoathinh") {
             res.locals.category = "Hoạt Hình";
         }
 
-        try {
-            const info_category = await filmModel.findAll({
-                where: { 
-                    type: category,
-                },
-                order: [['year_date', 'DESC'], ['id', 'DESC']],
-                limit: 24,
-            });
-            res.locals.info_category = info_category;
-        } catch (error) {
-            console.log(error);
-        }
-
+        res.locals.page = page;
+        res.locals.cate = category; 
         res.locals.router = 'category';
         return res.render("category.ejs");
     }

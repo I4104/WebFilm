@@ -9,7 +9,7 @@ router.get('/page/:page', [authMiddleware.isAuth, authMiddleware.getAuth], HomeC
 router.get('/phim/:slug/:episode', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.view);
 router.get("/iframe/:slug/:episode", HomeController.iframe)
 
-router.get('/category/:category', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.category);
+router.get('/category/:page/:category', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.category);
 router.get('/search/:page/:search', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.search);
 
 router.get('/', [authMiddleware.isAuth, authMiddleware.getAuth], HomeController.index);
