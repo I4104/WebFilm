@@ -32,8 +32,8 @@ class AjaxController {
 
             const totalPages = Math.ceil(results.count / perPage);
 
-            if (results.length > 0) {
-                for (const item of results) {
+            if (results.count > 0) {
+                for (const item of results.rows) {
                     var episode = JSON.parse(item.m3u8);
                     html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">\
                         <a class="position-relative rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
@@ -121,7 +121,6 @@ class AjaxController {
                 html += '<div class="col-lg-12 text-center">\
                         Không có dữ liệu\
                     </div>';
-                html += "Trang "+ page +" - Bắt đầu: "+ offset +" - Limit: "+ perPage +" - Result: " + JSON.stringify(results);
             }
             return res.send(html);
         } catch (error) {
