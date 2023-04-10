@@ -475,25 +475,30 @@ class AjaxController {
                         category.push(item.name)
                     }));
 
-                    var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-                    var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+                    if (category.includes("Phim 18+")) {
+                        await filmModel.destroy({ where: { slug: item.slug } });
+                    } else {
+                        if (category) {
+                            var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                            var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
 
-                    await filmModel.update({
-                        type: data.movie.type,
-                        status: data.movie.status,
-                        description: data.movie.content,
-                        film_time: data.movie.time,
-                        showtimes: data.movie.showtimes,
-                        thumb_url: data.movie.thumb_url,
-                        poster_url: data.movie.poster_url,
-                        episode_current: episode_current,
-                        episode_total: episode_total,
-                        m3u8: JSON.stringify(data.episodes),
-                        tags: JSON.stringify(category) 
-                    }, {
-                        where: { slug: item.slug }
-                    });
-
+                            await filmModel.update({
+                                type: data.movie.type,
+                                status: data.movie.status,
+                                description: data.movie.content,
+                                film_time: data.movie.time,
+                                showtimes: data.movie.showtimes,
+                                thumb_url: data.movie.thumb_url,
+                                poster_url: data.movie.poster_url,
+                                episode_current: episode_current,
+                                episode_total: episode_total,
+                                m3u8: JSON.stringify(data.episodes),
+                                tags: JSON.stringify(category) 
+                            }, {
+                                where: { slug: item.slug }
+                            });
+                        }
+                    }
                 } catch (error) {
                     console.error(error);
                 }
@@ -521,11 +526,6 @@ class AjaxController {
                             [Op.or]: [{
                                     tags: {
                                         [Op.like]: '%Phim 18+%',
-                                    },
-                                },
-                                {
-                                    year_date: {
-                                        [Op.lt]: 2015,
                                     },
                                 },
                             ],
