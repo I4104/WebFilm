@@ -64,7 +64,7 @@ class AjaxController {
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
                                 <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
-                                <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
+                                <li class="paginate_button page-item previous"><a href="/search/'+ (page - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 }
 
                 if (totalPages <= 7) {
@@ -118,7 +118,7 @@ class AjaxController {
                             <li class="paginate_button page-item next"><a href = "#" class = "btn btn-icon btn-sm page-link btn-light-primary my-1" disabled><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
                     </ul></div></div>';
                 } else {
-                    html += '<li class="paginate_button page-item next"><a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-right icon-xs"></i></a></li>\
+                    html += '<li class="paginate_button page-item next"><a href="/search/'+ (page + 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-right icon-xs"></i></a></li>\
                             <li class="paginate_button page-item next"><a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm page-link btn-light-primary my-1"><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
                     </ul></div></div>';
                 }
