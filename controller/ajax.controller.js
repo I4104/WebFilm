@@ -14,7 +14,7 @@ class AjaxController {
         if (page < 1) {
             page = 1
         } 
-        const perPage = 40; 
+        const perPage = 41; 
         const offset = (page - 1) * perPage; 
 
         try {
