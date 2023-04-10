@@ -121,7 +121,7 @@ class AjaxController {
                 html += '<div class="col-lg-12 text-center">\
                         Không có dữ liệu\
                     </div>';
-                html += "Trang "+ page +" - Bắt đầu: "+ offset +" - Limit: "+ perPage +" ";
+                html += "Trang "+ page +" - Bắt đầu: "+ offset +" - Limit: "+ perPage +" - Result: " + JSON.stringify(results);
             }
             return res.send(html);
         } catch (error) {
