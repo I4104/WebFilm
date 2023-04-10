@@ -5,7 +5,7 @@ var AjaxController = require("../controller/ajax.controller");
 var authMiddleware = require("../middleware/authencation");
 
 router.get('/search/:page/:search', [authMiddleware.isAuth, authMiddleware.getAuth], AjaxController.ajax_search);
-router.get('/category/:page/:search', [authMiddleware.isAuth, authMiddleware.getAuth], AjaxController.ajax_category);
+router.get('/category/:page/:category', [authMiddleware.isAuth, authMiddleware.getAuth], AjaxController.ajax_category);
 
 router.get('/set_image', AjaxController.set_image);
 router.get('/get_image', AjaxController.get_image);

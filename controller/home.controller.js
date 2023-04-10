@@ -187,10 +187,9 @@ class HomeController {
         if (category == "single") {
             res.locals.category = "Phim Lẻ";
         }
-        if (category == "anime") {
+        if (category == "hoathinh") {
             res.locals.category = "Hoạt Hình";
         }
-
 
         res.locals.page = page;
         res.locals.cate = category; 
