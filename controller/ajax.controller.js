@@ -50,72 +50,72 @@ class AjaxController {
                         </a>\
                     </div>';
                 }
-                html += '<div class="d-flex justify-content-between align-items-center flex-wrap">';
+                html += '<div class="d-flex justify-content-between align-items-center flex-wrap"><ul class="pagination">';
 
                 if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a>\
-                              <a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a>';
+                            <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a>\
-                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a>';
+                                <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
+                                <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 }
 
                 if (totalPages <= 7) {
                     for (let i = 1; i <= totalPages; i++) {
                         if (i === page) {
-                            html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a>`;
+                            html += `<li class="paginate_button page-item active"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
                         } else {
-                            html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a>`;
+                            html += `<li class="paginate_button page-item"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
                         }
                     }
                 } else {
                     if (page <= 4) {
                         for (let i = 1; i <= 5; i++) {
                             if (i === page) {
-                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a>`;
+                                html += `<li class="paginate_button page-item active"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
                             } else {
-                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a>`;
+                                html += `<li class="paginate_button page-item"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
                             }
                         }
-                        html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">...</a>\
-                                <a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">' + totalPages + '</a>';
+                        html += '<li class="paginate_button page-item"><a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">...</a>\
+                                <li class="paginate_button page-item"><a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">' + totalPages + '</a></li>';
                     } else if (page >= totalPages - 3) {
-                        html += '<a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">1</a>\
-                                <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">...</a>';
+                        html += '<li class="paginate_button page-item"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">1</a></li>\
+                                <li class="paginate_button page-item"><a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">...</a></li>';
 
                         for (let i = totalPages - 4; i <= totalPages; i++) {
                             if (i === page) {
-                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a>`;
+                                html += `<li class="paginate_button page-item active"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
                             } else {
-                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a>`;
+                                html += `<li class="paginate_button page-item"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
                             }
                         }
                     } else {
-                        html += '<a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">1</a>\
-                                 <a href = "#" class = "btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1" > ... < /a>';
+                        html += '<li class="paginate_button page-item"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">1</a></li>\
+                                <li class="paginate_button page-item"><a href = "#" class = "btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1" >...< /a></li>';
 
                         for (let i = page - 2; i <= page + 2; i++) {
                             if (i === page) {
-                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a>`;
+                                html += `<li class="paginate_button page-item active"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active me-2 my-1">${i}</a></li>`;
                             } else {
-                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a>`;
+                                html += `<li class="paginate_button page-item"><a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">${i}</a></li>`;
                             }
                         }
-                        html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">...</a>\
-                            <a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">' + totalPages + '</a>';
+                        html += '<li class="paginate_button page-item"><a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">...</a>\
+                        <li class="paginate_button page-item"><a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary me-2 my-1">' + totalPages + '</a></li>';
                     }
                 }
 
                 if (page === totalPages) {
-                    html += '<a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-right icon-xs"></i></a>\
-                            <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled><i class="fas fa-angle-double-right icon-xs"></i></a>\
-                    </div>';
+                    html += '<li class="paginate_button page-item next"><a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-right icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item next"><a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
+                    </ul></div>';
                 } else {
-                    html += '<a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-right icon-xs"></i></a>\
-                            <a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1"><i class="fas fa-angle-double-right icon-xs"></i></a>\
-                    </div>';
+                    html += '<li class="paginate_button page-item next"><a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-right icon-xs"></i></a></li>\
+                            <li class="paginate_button page-item next"><a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1"><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
+                    </ul></div>';
                 }
                 html += '\
                     <div class="d-flex align-items-center py-3">\
