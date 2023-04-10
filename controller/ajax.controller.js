@@ -119,7 +119,7 @@ class AjaxController {
                 }
                 html += '\
                     <div class="d-flex align-items-center py-3">\
-                        <span class="text-muted">Displaying '+ limit +' of '+ results.count +' records</span>\
+                        <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
                     </div>\
                 </div>/';
 
