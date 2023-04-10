@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model");
 const filmModel = require("../models/films.model");
+const logs = require("../models/logs.model");
 const axios = require('axios');
 const moment = require('moment');
 const { Op } = require('../config');
@@ -285,7 +286,7 @@ class AjaxController {
                     thumb_url: '/uploads/' + item.thumb_url.split("/").pop(),
                 }, {
                     where: { id: item.id }
-                })
+                });
             }
             if (fs.existsSync(path.join(uploadsPath, posterUrl))) {
                 await filmModel.update({
@@ -425,10 +426,11 @@ class AjaxController {
                         showtimes: showtimes,
                         modified: modified,
                         m3u8: JSON.stringify(data.episodes),
-                        tags: JSON.stringify(category) 
                     }, {
                         where: { id: item.id }
                     });
+
+                    await logs.create({ content: "Update Series: " + item.title + " - Current episode: " + episode_current });
                 }));
 
             }
@@ -485,6 +487,8 @@ class AjaxController {
                     m3u8: JSON.stringify(data.episodes),
                     tags: JSON.stringify(category) 
                 });
+
+                await logs.create({ content: "Get By Slug: " + req.params.slug + " - Name: " + data.movie.name });
             }
             return res.json({
                 status: 1,
@@ -544,6 +548,8 @@ class AjaxController {
                             });
                         }
                     }
+
+                    await logs.create({ content: "Get Info: " + item.slug + " - Name: " + data.movie.name });
                 } catch (error) {
                     console.error(error);
                 }
@@ -583,8 +589,9 @@ class AjaxController {
                 filmsToDelete.map(async (film) => {
                     await film.destroy();
                 })
-            );
 
+            );
+            await logs.create({ content: "Delete 18+ tags" });
             return res.send('Done!');
 
             await Promise.all(filmsToDelete.map(async (film) => {
@@ -592,7 +599,9 @@ class AjaxController {
                 const posterUrl = path.join(__dirname, '../public/uploads', film.poster_url.split("/").pop());
                 try {
                     await fs.promises.unlink(thumbUrl);
+                    await logs.create({ content: "Delete image: " + thumbUrl });
                     await fs.promises.unlink(posterUrl);
+                    await logs.create({ content: "Delete image: " + posterUrl });
                     await film.destroy();
                     console.log(`Deleted film with id ${film.id}`);
                 } catch (error) {
@@ -624,6 +633,7 @@ class AjaxController {
 
             await Promise.all(imagesToDelete.map(async (image) => {
                 await fs.promises.unlink(path.join(uploadsPath, image));
+                await logs.create({ content: "Delete image: " + image });
             }));
 
             console.log(`Removed ${imagesToDelete.length} images`);
@@ -663,6 +673,7 @@ class AjaxController {
                 }
             });
             res.json(response.data);
+            await logs.create({ content: "Get list page: " + req.params.page });
         } catch (error) {
             console.error(error);
         }
