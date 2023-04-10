@@ -10,12 +10,12 @@ const sharp = require('sharp');
 class AjaxController {
 
     async ajax_search(req, res) {
-        var page = parseInt(req.params.page) || 1; // Lấy số trang hiện tại
+        var page = parseInt(req.params.page) || 1; 
         if (page < 1) {
             page = 1
         } 
-        const perPage = 36; // Số phần tử trên một trang
-        const offset = (page - 1) * perPage; // Vị trí bắt đầu của phần tử trên trang hiện tại
+        const perPage = 40; 
+        const offset = (page - 1) * perPage; 
 
         try {
             var html = "";
@@ -137,12 +137,12 @@ class AjaxController {
     }
 
     async ajax_category(req, res) {
-        var page = parseInt(req.params.page) || 1; // Lấy số trang hiện tại
+        var page = parseInt(req.params.page) || 1;
         if (page < 1) {
             page = 1
         } 
-        const perPage = 36; // Số phần tử trên một trang
-        const offset = (page - 1) * perPage; // Vị trí bắt đầu của phần tử trên trang hiện tại
+        const perPage = 40; 
+        const offset = (page - 1) * perPage;
 
         try {
             var html = "";
@@ -314,7 +314,7 @@ class AjaxController {
                     }
                 },
                 order: [['year_date', 'DESC']],
-                limit: 50,
+                limit: 10,
             });
 
             await Promise.allSettled(results.map(async function(item) {
