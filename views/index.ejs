@@ -79,7 +79,7 @@
                                         <% film_hot.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
-                                            <a class="position-relative d-inline rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
+                                            <a class="position-relative d-block rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
                                                     <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-275px h-lg-300px" data-src="<%= item.thumb_url %>" src="/assets/icons/lazy-load-movie.gif">
                                                 </figure>
@@ -101,7 +101,7 @@
                                         <% film_dexuat.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
-                                            <a class="position-relative d-inline rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
+                                            <a class="position-relative d-block rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
                                                     <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-275px h-lg-300px" data-src="<%= item.thumb_url; %>" src="/assets/icons/lazy-load-movie.gif">
                                                 </figure>
@@ -123,7 +123,7 @@
                                         <% anime.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-1 item mb-5 p-3">
-                                            <a class="position-relative d-inline rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
+                                            <a class="position-relative d-block rounded" href="/phim/<%= item.slug %>/<%= episode[0].server_data[0].slug %>">
                                                 <figure class="rounded">
                                                     <img class="lazyLoad bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-275px h-lg-300px" data-src="<%= item.thumb_url; %>" src="/assets/icons/lazy-load-movie.gif">
                                                 </figure>
