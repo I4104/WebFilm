@@ -394,7 +394,7 @@ class AjaxController {
     }
 
     async update_series(req, res) {
-        //try {
+        try {
             const results = await filmModel.findAll({
                 where: {
                     [Op.or]: [
@@ -432,9 +432,9 @@ class AjaxController {
 
             }
             return res.send("Done!");
-        // } catch (error) {
-        //     return res.send(error);            
-        // }
+        } catch (error) {
+            return res.send(error);            
+        }
     }
 
 
