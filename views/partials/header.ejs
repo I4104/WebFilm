@@ -105,13 +105,13 @@
                             <% if(user) { %>
                             <div class="d-flex align-items-center ms-0 ms-lg-2" id="kt_header_user_menu_toggle">
                                 <div class="cursor-pointer symbol symbol-40px symbol-circle" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                                    <div class="symbol-label" style="background-image:url('https://img7.iqiyipic.com/passport/20201224/ce/2a/passport_34004179783_160872082846750_130_130.jpg')"></div>
+                                    <div class="symbol-label" style="background-image:url('/assets/icons/avatar.jpg')"></div>
                                 </div>
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
                                     <div class="menu-item px-3">
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <div class="symbol symbol-50px me-5">
-                                                <img alt="Logo" src="" />
+                                                <img alt="Logo" src="/assets/icons/avatar.jpg" />
                                             </div>
                                             <div class="d-flex flex-column">
                                                 <div class="fw-bold d-flex align-items-center fs-5"><%= user.username %>
@@ -128,26 +128,18 @@
                                     </div>
                                     <% } %>
                                     <div class="menu-item px-5">
-                                        <a href="../../demo11/dist/apps/projects/list.html" class="menu-link px-5">
-                                            <span class="menu-text">Sản Phẩm</span>
-                                            <span class="menu-badge">
-                                                    <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item px-5">
-                                        <a href="upgrade-a-plan" class="menu-link px-5">
-                                            <span class="menu-text">Nâng Cấp</span>
+                                        <a href="/like" class="menu-link px-5">
+                                            <span class="menu-text">Phim yêu thích</span>
                                             <span class="menu-badge">
                                                     <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
                                             </span>
                                         </a>
                                     </div>
                                     <div class="menu-item px-5 my-1">
-                                        <a href="accounts/settings" class="menu-link px-5">Cài Đặt Tài Khoản</a>
+                                        <a href="/users/profile" class="menu-link px-5">Cài Đặt Tài Khoản</a>
                                     </div>
                                     <div class="menu-item px-5">
-                                        <a href="users/logout" class="menu-link px-5">Đăng Xuất</a>
+                                        <a href="/users/logout" class="menu-link px-5">Đăng Xuất</a>
                                     </div>
                                 </div>
                             </div>   
@@ -164,92 +156,19 @@
 										<span class="menu-title">Trang Chủ</span>
                                     </span>
                                 </a>
-                                <a href="product" class="menu-item <?php if($router == 'product') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="forum" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
-										<span class="menu-title">Sản Phẩm</span>
+										<span class="menu-title">Phim Bộ</span>
                                     </span>
                                 </a>
-                                <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-									<span class="menu-link py-3">
-										<span class="menu-title">Hosting</span>
-										<span class="menu-arrow d-lg-none"></span>
-									</span>
-									<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" style="">
-										<div class="menu-item">
-											<a class="menu-link py-3" href="/hosting" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-kt-initialized="1">
-												<span class="menu-icon">
-													<span class="svg-icon svg-icon-3">
-														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"/>
-                                                            <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"/>
-                                                        </svg>
-													</span>
-												</span>
-												<span class="menu-title">Hosting Giá Rẻ</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link py-3" href="/hosting/free" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-kt-initialized="1">
-												<span class="menu-icon">
-													<span class="svg-icon svg-icon-3">
-														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"/>
-                                                            <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"/>
-                                                        </svg>
-													</span>
-												</span>
-												<span class="menu-title">Hosting Miễn Phí</span>
-											</a>
-										</div>
-									</div>
-								</div>
-                                <a href="forum" class="menu-item <?php if($router == 'forum') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="forum" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
-										<span class="menu-title">Diễn Đàn</span>
+                                        <span class="menu-title">Phim Lẻ</span>
                                     </span>
                                 </a>
-                                <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-									<span class="menu-link py-3">
-										<span class="menu-title">Sự Kiện</span>
-										<span class="menu-arrow d-lg-none"></span>
-									</span>
-									<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" style="">
-										<div class="menu-item">
-											<a class="menu-link py-3" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-kt-initialized="1">
-												<span class="menu-icon">
-													<span class="svg-icon svg-icon-3">
-														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path opacity="0.3" d="M4.05424 15.1982C8.34524 7.76818 13.5782 3.26318 20.9282 2.01418C21.0729 1.98837 21.2216 1.99789 21.3618 2.04193C21.502 2.08597 21.6294 2.16323 21.7333 2.26712C21.8372 2.37101 21.9144 2.49846 21.9585 2.63863C22.0025 2.7788 22.012 2.92754 21.9862 3.07218C20.7372 10.4222 16.2322 15.6552 8.80224 19.9462L4.05424 15.1982ZM3.81924 17.3372L2.63324 20.4482C2.58427 20.5765 2.5735 20.7163 2.6022 20.8507C2.63091 20.9851 2.69788 21.1082 2.79503 21.2054C2.89218 21.3025 3.01536 21.3695 3.14972 21.3982C3.28408 21.4269 3.42387 21.4161 3.55224 21.3672L6.66524 20.1802L3.81924 17.3372ZM16.5002 5.99818C16.2036 5.99818 15.9136 6.08615 15.6669 6.25097C15.4202 6.41579 15.228 6.65006 15.1144 6.92415C15.0009 7.19824 14.9712 7.49984 15.0291 7.79081C15.0869 8.08178 15.2298 8.34906 15.4396 8.55884C15.6494 8.76862 15.9166 8.91148 16.2076 8.96935C16.4986 9.02723 16.8002 8.99753 17.0743 8.884C17.3484 8.77046 17.5826 8.5782 17.7474 8.33153C17.9123 8.08486 18.0002 7.79485 18.0002 7.49818C18.0002 7.10035 17.8422 6.71882 17.5609 6.43752C17.2796 6.15621 16.8981 5.99818 16.5002 5.99818Z" fill="currentColor"></path>
-															<path d="M4.05423 15.1982L2.24723 13.3912C2.15505 13.299 2.08547 13.1867 2.04395 13.0632C2.00243 12.9396 1.9901 12.8081 2.00793 12.679C2.02575 12.5498 2.07325 12.4266 2.14669 12.3189C2.22013 12.2112 2.31752 12.1219 2.43123 12.0582L9.15323 8.28918C7.17353 10.3717 5.4607 12.6926 4.05423 15.1982ZM8.80023 19.9442L10.6072 21.7512C10.6994 21.8434 10.8117 21.9129 10.9352 21.9545C11.0588 21.996 11.1903 22.0083 11.3195 21.9905C11.4486 21.9727 11.5718 21.9252 11.6795 21.8517C11.7872 21.7783 11.8765 21.6809 11.9402 21.5672L15.7092 14.8442C13.6269 16.8245 11.3061 18.5377 8.80023 19.9442ZM7.04023 18.1832L12.5832 12.6402C12.7381 12.4759 12.8228 12.2577 12.8195 12.032C12.8161 11.8063 12.725 11.5907 12.5653 11.4311C12.4057 11.2714 12.1901 11.1803 11.9644 11.1769C11.7387 11.1736 11.5205 11.2583 11.3562 11.4132L5.81323 16.9562L7.04023 18.1832Z" fill="currentColor"></path>
-														</svg>
-													</span>
-												</span>
-												<span class="menu-title">Nhận Point</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link py-3" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right" data-kt-initialized="1">
-												<span class="menu-icon">
-													<span class="svg-icon svg-icon-3">
-														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path opacity="0.3" d="M4.05424 15.1982C8.34524 7.76818 13.5782 3.26318 20.9282 2.01418C21.0729 1.98837 21.2216 1.99789 21.3618 2.04193C21.502 2.08597 21.6294 2.16323 21.7333 2.26712C21.8372 2.37101 21.9144 2.49846 21.9585 2.63863C22.0025 2.7788 22.012 2.92754 21.9862 3.07218C20.7372 10.4222 16.2322 15.6552 8.80224 19.9462L4.05424 15.1982ZM3.81924 17.3372L2.63324 20.4482C2.58427 20.5765 2.5735 20.7163 2.6022 20.8507C2.63091 20.9851 2.69788 21.1082 2.79503 21.2054C2.89218 21.3025 3.01536 21.3695 3.14972 21.3982C3.28408 21.4269 3.42387 21.4161 3.55224 21.3672L6.66524 20.1802L3.81924 17.3372ZM16.5002 5.99818C16.2036 5.99818 15.9136 6.08615 15.6669 6.25097C15.4202 6.41579 15.228 6.65006 15.1144 6.92415C15.0009 7.19824 14.9712 7.49984 15.0291 7.79081C15.0869 8.08178 15.2298 8.34906 15.4396 8.55884C15.6494 8.76862 15.9166 8.91148 16.2076 8.96935C16.4986 9.02723 16.8002 8.99753 17.0743 8.884C17.3484 8.77046 17.5826 8.5782 17.7474 8.33153C17.9123 8.08486 18.0002 7.79485 18.0002 7.49818C18.0002 7.10035 17.8422 6.71882 17.5609 6.43752C17.2796 6.15621 16.8981 5.99818 16.5002 5.99818Z" fill="currentColor"></path>
-															<path d="M4.05423 15.1982L2.24723 13.3912C2.15505 13.299 2.08547 13.1867 2.04395 13.0632C2.00243 12.9396 1.9901 12.8081 2.00793 12.679C2.02575 12.5498 2.07325 12.4266 2.14669 12.3189C2.22013 12.2112 2.31752 12.1219 2.43123 12.0582L9.15323 8.28918C7.17353 10.3717 5.4607 12.6926 4.05423 15.1982ZM8.80023 19.9442L10.6072 21.7512C10.6994 21.8434 10.8117 21.9129 10.9352 21.9545C11.0588 21.996 11.1903 22.0083 11.3195 21.9905C11.4486 21.9727 11.5718 21.9252 11.6795 21.8517C11.7872 21.7783 11.8765 21.6809 11.9402 21.5672L15.7092 14.8442C13.6269 16.8245 11.3061 18.5377 8.80023 19.9442ZM7.04023 18.1832L12.5832 12.6402C12.7381 12.4759 12.8228 12.2577 12.8195 12.032C12.8161 11.8063 12.725 11.5907 12.5653 11.4311C12.4057 11.2714 12.1901 11.1803 11.9644 11.1769C11.7387 11.1736 11.5205 11.2583 11.3562 11.4132L5.81323 16.9562L7.04023 18.1832Z" fill="currentColor"></path>
-														</svg>
-													</span>
-												</span>
-												<span class="menu-title">Nhận Source Code</span>
-											</a>
-										</div>
-									</div>
-								</div>
-                                <a href="night-market" class="menu-item <?php if($router == 'night-market') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
+                                <a href="forum" class="menu-item menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
                                     <span class="menu-link py-3">
-										<span class="menu-title">Chợ Đêm</span>
-                                    </span>
-                                </a>
-                                <a href="news" class="menu-item <?php if($router == 'news') {echo 'here show';}?> menu-lg-down-accordion menu-here-bg me-0 me-lg-2">
-                                    <span class="menu-link py-3">
-										<span class="menu-title">Tin Tức</span>
+                                        <span class="menu-title">Anime</span>
                                     </span>
                                 </a>
                             </div>
