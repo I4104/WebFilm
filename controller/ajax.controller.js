@@ -125,6 +125,7 @@ class AjaxController {
 
             } else {
                 html += '<div class="col-lg-12 text-center">\
+                        <img src="/assets/icons/empty.png" alt=""></br>\
                         Không có dữ liệu\
                     </div>';
             }
@@ -251,6 +252,7 @@ class AjaxController {
 
             } else {
                 html += '<div class="col-lg-12 text-center">\
+                        <img src="/assets/icons/empty.png" alt=""></br>\
                         Không có dữ liệu\
                     </div>';
             }
