@@ -593,7 +593,7 @@ class AjaxController {
             const response = await axios.get('https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=' + req.params.page);
             const data = response.data;
             data.items.forEach(async (item) => {
-                const film = await filmModel.findOne({ where: { title: item.name } });
+                const film = await filmModel.findOne({ where: { slug: item.slug } });
                 if (!film) {
                     if (item.year > 2015) {
                         let modified = moment(item.modified.time).format('Y-MM-DD HH:mm:ss');
