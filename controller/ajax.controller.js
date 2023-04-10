@@ -50,14 +50,14 @@ class AjaxController {
                         </a>\
                     </div>';
                 }
-                html += '<div class="d-flex justify-content-between align-items-center flex-wrap"><ul class="pagination">';
+                html += '<div class="d-flex justify-content-between align-items-center flex-wrap">';
 
                 if (page === 1) {
-                    html += '<div class="d-flex flex-wrap py-2 mr-3">\
+                    html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
                             <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
                             <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 } else {
-                    html += '<div class="d-flex flex-wrap py-2 mr-3">\
+                    html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
                                 <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
                                 <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 }
