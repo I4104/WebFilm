@@ -407,6 +407,10 @@ class AjaxController {
                         [Op.like]: '%2023-%'
                     }
                 },
+                order: [
+                    ['year_date', 'DESC'],
+                    ['id', 'DESC']
+                ],
                 limit: 10
             });
             if (results.length > 0) {
@@ -418,7 +422,7 @@ class AjaxController {
                     var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                     var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
                     let modified = moment(data.movie.modified.time).format('Y-MM-DD HH:mm:ss');
-                    
+
                     if (item.modified != modified) {
                         await filmModel.update({
                             status: data.movie.status,
