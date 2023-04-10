@@ -17,7 +17,7 @@ class AjaxController {
         const perPage = 24; // Số phần tử trên một trang
         const offset = (page - 1) * perPage; // Vị trí bắt đầu của phần tử trên trang hiện tại
 
-        //try {
+        try {
             var html = "";
             const results = await filmModel.findAndCountAll({ 
                 where: { 
@@ -127,11 +127,11 @@ class AjaxController {
                         Không có dữ liệu\
                     </div>';
             }
-            return res.send(page + " - " + perPage + " - " + offset);
-        /*} catch (error) {
+            return res.send(html);
+        } catch (error) {
             console.log(error);
             return res.send(error);
-        }  */
+        }  
     }
 
     async set_image(req, res) {
