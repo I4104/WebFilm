@@ -16,7 +16,7 @@
 <%- include("partials/footer.ejs") %>
 <script>
     $.ajax({
-        url: "/ajax/search/<%= search %>",
+        url: "/ajax/search/<%= page %>/<%= search %>",
         type: "GET",
         success: (data) => {
             $("#list_search").html(data);

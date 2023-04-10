@@ -247,7 +247,9 @@ class HomeController {
     async search(req, res) {
         const user = res.locals.user;
         const search = (req.params.search != null) ? req.params.search : "";
+        const page = (req.params.page != null) ? req.params.page : 1;
         res.locals.search = search;
+        res.locals.page = page;
         res.locals.router = 'search';
         return res.render('search.ejs');
     }
