@@ -140,9 +140,9 @@
                         <div class="card-body p-5 border-0">
                             <div class="fs-2 fw-bold"><%= info.title %></div>
                         </div>
-                        <div class="card-footer p-5 border-0">
+                        <div class="card-footer pt-0 p-5 border-0">
                             <div class="fs-5 fw-bold text-gray-800 py-2">Các Tập Phim</div>
-                            <ul class="nav nav-pills nav-pills-custom intl-episodes-list scroll h-300px" role="episodelist">
+                            <ul class="nav nav-pills nav-pills-custom intl-episodes-list scroll h-325px" role="episodelist">
                                 <% info.episode_list.forEach(function(item) { %>
                                 <li class="nav-item mb-3 me-3" role="presentation">
                                     <a class="nav-link btn btn-outline btn-flex btn-color-gray-800 btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
