@@ -35,7 +35,7 @@ class AjaxController {
             if (results.count > 0) {
                 for (const item of results.rows) {
                     var episode = JSON.parse(item.m3u8);
-                    html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">\
+                    html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item-movie-page p-3">\
                         <a class="position-relative rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
                             <figure class="rounded">\
                                 <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-400px" src="' + item.thumb_url + '">\
@@ -162,7 +162,7 @@ class AjaxController {
             if (results.count > 0) {
                 for (const item of results.rows) {
                     var episode = JSON.parse(item.m3u8);
-                    html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">\
+                    html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item-movie-page p-3">\
                         <a class="position-relative rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
                             <figure class="rounded">\
                                 <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-400px" src="' + item.thumb_url + '">\
