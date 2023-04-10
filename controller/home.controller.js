@@ -179,6 +179,7 @@ class HomeController {
     async category(req, res) {
         const user = res.locals.user;
         var category = (req.params.category != null) ? req.params.category : "";
+        var page = (req.params.page != null) ? req.params.page : 1;
 
         if (category == "series") {
             res.locals.category = "Phim Bộ";
@@ -190,7 +191,9 @@ class HomeController {
             res.locals.category = "Hoạt Hình";
         }
 
-        res.locals.cate = category;
+
+        res.locals.page = page;
+        res.locals.cate = category; 
         res.locals.router = 'category';
         return res.render("category.ejs");
     }
