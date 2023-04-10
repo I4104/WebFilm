@@ -142,27 +142,16 @@
                         </div>
                         <div class="card-footer p-5 border-0">
                             <div class="fs-5 fw-bold text-gray-800 py-2">Các Tập Phim</div>
-
                             <ul class="nav nav-pills nav-pills-custom intl-episodes-list scroll h-300px" role="episodelist">
                                 <% info.episode_list.forEach(function(item) { %>
                                 <li class="nav-item mb-3 me-3" role="presentation">
-                                    <a class="nav-link btn btn-outline btn-flex btn-color-muted btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
+                                    <a class="nav-link btn btn-outline btn-flex btn-color-gray-800 btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
                                         <span class="fw-bold fs-6 lh-1"><%= item.name %></span>
                                         <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-danger"></span><% } %>
                                     </a>
                                 </li>
                                 <% }); %>
                             </ul>
-
-                            <div class="intl-episodes-list scroll h-350px">
-                                <% info.episode_list.forEach(function(item) { %>
-                                <div class="v-li movie">
-                                    <a class="btn btn-sm bg-light w-100 h-lg-45px h-40px border-0 fw-bold" href="/phim/<%= info.slug %>/<%= item.episode %>">
-                                        <span class="text-episodes <% if (item.episode == info.episode) { %> active <% } %>"><%= item.name %></span>
-                                    </a>
-                                </div>
-                                <% }); %>
-                            </div>
                         </div>
                     </div>
                 </div>
