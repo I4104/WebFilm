@@ -1,8 +1,11 @@
 <%- include("partials/header.ejs") %>
                     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-fluid">
                         <div class="content flex-row-fluid" id="kt_content">
-                            <div class="row" id="list_search">
+                            <div class="row">
                                 <div class="col-lg-12">
+                                    <div class="fw-bolder fs-1 pt-0">Danh Mục: <%= category %></div>
+                                </div>
+                                <div class="col-lg-12" id="list_search">
                                     <div class="d-flex text-center" style="margin-top: 250px; place-content: center;">
                                         <span class="spinner-border text-success fs-5 me-3" role="status"></span>
                                         <span class="fs-2 align-items-center ">Đang tìm kiếm...</span>
