@@ -14,7 +14,7 @@ class AjaxController {
         if (page < 1) {
             page = 1
         } 
-        const perPage = 24; // Số phần tử trên một trang
+        const perPage = 36; // Số phần tử trên một trang
         const offset = (page - 1) * perPage; // Vị trí bắt đầu của phần tử trên trang hiện tại
 
         try {
@@ -179,19 +179,18 @@ class AjaxController {
                 html += '<div class="d-flex justify-content-between align-items-center flex-wrap">';
 
                 html += '\
-                    <div class="d-flex align-items-center py-3">\
-                        <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
-                    </div>\
+                <div class="d-flex align-items-center py-3">\
+                    <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
                 </div>';
-                
+
                 if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
                             <li class="paginate_button page-item previous"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
                             <li class="paginate_button page-item previous"><a href="" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
-                                <li class="paginate_button page-item previous"><a href="/category/1/' + req.params.category + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
-                                <li class="paginate_button page-item previous"><a href="/category/'+ (page - 1) +'/' + req.params.category + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
+                                <li class="paginate_button page-item previous"><a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
+                                <li class="paginate_button page-item previous"><a href="/search/'+ (page - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-left icon-xs"></i></a></li>';
                 }
 
                 if (totalPages <= 7) {
