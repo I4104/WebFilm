@@ -1,6 +1,6 @@
 const userModel = require("../models/users.model");
 const filmModel = require("../models/films.model");
-const filmModel = require("../models/logs.model");
+const logs = require("../models/logs.model");
 const axios = require('axios');
 const moment = require('moment');
 const { Op } = require('../config');
