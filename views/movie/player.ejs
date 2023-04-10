@@ -137,12 +137,34 @@
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="card card-flush bg-body border-0 mb-5">
-                        <div class="card-body p-5 border-0">
+                        <div class="card-header p-5 border-0">
                             <div class="fs-2 fw-bold"><%= info.title %></div>
-                            <div class="fs-4 text-gray-700"><%= info.origin_name %></div>
+                            <div class="fs-3 text-gray-800"><%= info.origin_name %></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-5">
+                                <div class="d-grid">
+                                    <ul class="nav nav-tabs flex-nowrap text-nowrap" role="tablist">
+                                        <li class="nav-item w-50" role="presentation">
+                                            <a class="nav-link btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0 active" data-bs-toggle="tab" href="#kt_tab_pane_1" aria-selected="true" role="tab">Long Link 1</a>
+                                        </li>
+                                        <li class="nav-item w-50" role="presentation">
+                                            <a class="nav-link btn btn-active-light btn-color-gray-600 btn-active-color-primary rounded-bottom-0" data-bs-toggle="tab" href="#kt_tab_pane_2" aria-selected="false" role="tab" tabindex="-1">Long Link 2</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="kt_tab_pane_1" role="tabpanel">
+                                    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit.
+                                </div>
+                                <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel">
+                                    Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer pt-0 p-5 border-0">
-                            <div class="fs-5 fw-bold text-gray-800 py-2">Các Tập Phim</div>
+                            <div class="fs-5 fw-bold text-gray-800 py-2">Danh Sách Tập</div>
                             <div class="intl-episodes-list scroll h-325px">
                                 <ul class="nav nav-pills nav-pills-custom" role="episodelist">
                                     <% info.episode_list.forEach(function(item) { %>
