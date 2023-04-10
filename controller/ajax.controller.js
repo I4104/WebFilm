@@ -54,12 +54,12 @@ class AjaxController {
 
                 if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
-                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
+                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
+                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
-                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
+                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
+                              <a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
                 }
 
                 if (totalPages <= 7) {
@@ -79,11 +79,11 @@ class AjaxController {
                                 html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
                             }
                         }
-                        html += '<a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>\
+                        html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>\
                                 <a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">' + totalPages + '</a>';
                     } else if (page >= totalPages - 3) {
-                        html += '<a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
-                                <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>';
+                        html += '<a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
+                                <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>';
 
                         for (let i = totalPages - 4; i <= totalPages; i++) {
                             if (i === page) {
@@ -93,8 +93,8 @@ class AjaxController {
                             }
                         }
                     } else {
-                        html += '<a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
-                                 <a href = "/search/' + i + '/' + req.params.search + '" class = "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1" > ... < /a>';
+                        html += '<a href="/search/1/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
+                                 <a href = "#" class = "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1" > ... < /a>';
 
                         for (let i = page - 2; i <= page + 2; i++) {
                             if (i === page) {
