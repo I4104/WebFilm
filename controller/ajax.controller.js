@@ -52,6 +52,11 @@ class AjaxController {
                 }
                 html += '<div class="d-flex justify-content-between align-items-center flex-wrap">';
 
+                html += '\
+                <div class="d-flex align-items-center py-3">\
+                    <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
+                </div>';
+
                 if (page === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3"><ul class="pagination">\
                             <li class="paginate_button page-item previous"><a href="#" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-double-left icon-xs"></i></a></li>\
@@ -111,17 +116,12 @@ class AjaxController {
                 if (page === totalPages) {
                     html += '<li class="paginate_button page-item next"><a href="#" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1" disabled><i class="fas fa-angle-right icon-xs"></i></a></li>\
                             <li class="paginate_button page-item next"><a href = "#" class = "btn btn-icon btn-sm page-link btn-light-primary my-1" disabled><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
-                    </ul></div>';
+                    </ul></div></div>';
                 } else {
                     html += '<li class="paginate_button page-item next"><a href="/search/'+ (totalPages - 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm page-link btn-light-primary me-2 my-1"><i class="fas fa-angle-right icon-xs"></i></a></li>\
                             <li class="paginate_button page-item next"><a href = "/search/'+ (totalPages) +'/' + req.params.search + '" class = "btn btn-icon btn-sm page-link btn-light-primary my-1"><i class="fas fa-angle-double-right icon-xs"></i></a></li>\
-                    </ul></div>';
+                    </ul></div></div>';
                 }
-                html += '\
-                    <div class="d-flex align-items-center py-3">\
-                        <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
-                    </div>\
-                </div>';
 
             } else {
                 html += '<div class="col-lg-12 text-center">\
