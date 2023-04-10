@@ -203,6 +203,10 @@
     padding-top: 1.10rem!important;
 }
 
+.btn-check:active+.btn.btn-active-color-danger, .btn-check:checked+.btn.btn-active-color-danger, .btn.btn-active-color-danger.active, .btn.btn-active-color-danger.show, .btn.btn-active-color-danger:active:not(.btn-active), .btn.btn-active-color-danger:focus:not(.btn-active), .btn.btn-active-color-danger:hover:not(.btn-active), .show>.btn.btn-active-color-danger {
+    color: var(--kt-text-success)!important;
+}
+
 .intl-episodes-list {
     padding: 0px 0px 0px 0px;
     margin-right: -16px;

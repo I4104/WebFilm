@@ -147,7 +147,7 @@
                                 <li class="nav-item mb-3 me-3" role="presentation">
                                     <a class="nav-link btn btn-outline btn-flex btn-color-gray-800 btn-active-color-danger flex-column overflow-hidden tab-episode-list pb-2 <% if (item.episode == info.episode) { %>active<% } %>" href="/phim/<%= info.slug %>/<%= item.episode %>" role="tab">
                                         <span class="fw-bold fs-6 lh-1"><%= item.name %></span>
-                                        <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-danger"></span><% } %>
+                                        <% if (item.episode == info.episode) { %><span class="bullet-custom position-absolute bottom-0 w-100 h-4px bg-success"></span><% } %>
                                     </a>
                                 </li>
                                 <% }); %>
