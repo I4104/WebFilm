@@ -40,7 +40,7 @@ class AjaxController {
             if (results.length > 0) {
                 for (const item of results) {
                     var episode = JSON.parse(item.m3u8);
-                    await html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">\
+                    html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item p-3">\
                         <a class="position-relative rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
                             <figure class="rounded">\
                                 <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-400px" src="' + item.thumb_url + '">\
@@ -59,57 +59,57 @@ class AjaxController {
 
                 if (currentPage === 1) {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
-                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
+                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
+                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1" disabled><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
                 } else {
                     html += '<div class="d-flex flex-wrap py-2 mr-3">\
-                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
-                              <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
+                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-double-arrow-back icon-xs"></i></a>\
+                              <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-back icon-xs"></i></a>';
                 }
 
                 if (totalPages <= 7) {
                     for (let i = 1; i <= totalPages; i++) {
                         if (i === currentPage) {
-                            html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
+                            html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                         } else {
-                            html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
+                            html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
                         }
                     }
                 } else {
                     if (currentPage <= 4) {
                         for (let i = 1; i <= 5; i++) {
                             if (i === currentPage) {
-                                html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
+                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                             } else {
-                                html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
+                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
                             }
                         }
-                        html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>\
-                                <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">' + totalPages + '</a>';
+                        html += '<a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>\
+                                <a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">' + totalPages + '</a>';
                     } else if (currentPage >= totalPages - 3) {
-                        html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
-                                <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>';
+                        html += '<a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
+                                <a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>';
 
                         for (let i = totalPages - 4; i <= totalPages; i++) {
                             if (i === currentPage) {
-                                html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
+                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                             } else {
-                                html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
+                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
                             }
                         }
                     } else {
-                        html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
-                                 <a href = "#" class = "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1" > ... < /a>';
+                        html += '<a href="/search/' + i + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">1</a>\
+                                 <a href = "/search/' + i + '/' + req.params.search + '" class = "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1" > ... < /a>';
 
                         for (let i = currentPage - 2; i <= currentPage + 2; i++) {
                             if (i === currentPage) {
-                                html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
+                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">${i}</a>`;
                             } else {
-                                html += `<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
+                                html += `<a href="/search/${i}/` + req.params.search + `" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">${i}</a>`;
                             }
                         }
                         html += '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>\
-                            <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">' + totalPages + '</a>';
+                            <a href="/search/' + totalPages + '/' + req.params.search + '" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">' + totalPages + '</a>';
                     }
                 }
 
@@ -118,8 +118,8 @@ class AjaxController {
                             <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" disabled > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 } else {
-                    html += '<a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
-                            <a href = "#" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
+                    html += '<a href="/search/'+ (currentPage + 1) +'/' + req.params.search + '" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>\
+                            <a href = "/search/'+ (totalPages + 1) +'/' + req.params.search + '" class = "btn btn-icon btn-sm btn-light-primary my-1" > < i class = "ki ki-bold-double-arrow-next icon-xs"></i></a>\
                     </div>';
                 }
             } else {
