@@ -10,9 +10,9 @@
                             </div>
                         </div>
                         <div class="card-footer px-3 py-3 border-0">
-                            <div class="d-flex flex-stack ">
+                            <div class="d-flex flex-stack">
                                 <div class="align-content-start">
-                                    <button class="btn btn-sm bg-light"><i class="fas fa-video"></i>Trailer</button>
+                                    <button class="btn btn-sm bg-light"><i class="fas fa-eye"></i><span>0</span></button>
                                 </div>
                                 <div class="align-content-end">
                                     <a class="btn btn-sm bg-light text-gray-800 text-hover-success text-active-success active" href="">
@@ -70,7 +70,7 @@
                             <i class="bi bi-star fs-2"></i>
                         </div>
                     </div>
-                    <div class="tag my-4 ">
+                    <div class="tag my-4">
                         <% info.tags.forEach(function(item) { %>
                         <span class="badge bg-tags fs-7 p-2"><%= item %></span>
                         <% }); %>
@@ -85,6 +85,16 @@
                                     <div class="accordion-body text-gray-800 fs-6">
                                         <%- info.description %>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notify my-4">
+                        <div class="card mb-5">
+                            <div class="card-header border-bottom-0">
+                                <div class="card-title w-100">
+                                    <i class="fa fa-bell fs-2 text-danger me-5"></i>
+                                    <marquee class="w-100"><span class="text-danger fw-bold">Lưu ý: Việt nam đang bị đứt cáp quang. Sẻ có những nhà mạng xem phim sẽ cực kỳ lag, chậm thậm chí không xem được (đặc biệt vào buổi tối). Nên xem vào ban ngày nhé.</span></marquee>
                                 </div>
                             </div>
                         </div>
@@ -175,16 +185,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-dismissible bg-light-danger d-flex flex-center flex-column px-lg-10">
+                    <!--<div class="alert alert-dismissible bg-light-danger d-flex flex-center flex-column px-lg-10">
                         <button type="button" class="position-absolute top-0 end-0 m-2 btn btn-icon btn-icon-danger" data-bs-dismiss="alert">
                             <i class="bi bi-x fs-1 text-danger"></i>
                         </button>
                         <div class="text-center text-dark">
                             <h1 class="fs-3 fw-bold text-gray-800 mb-5">Khắc Cốt Ghi Tâm</h1>
                             <div class="separator separator-dashed border-danger opacity-25 mb-5"></div>
-                            <div class="text-gray-800">Phim được lấy từ nhiều nguồn, chúng tôi không kiểm soát được tất cả quảng cáo trong luồng, bạn có thể tua để bỏ qua ví nó miễn phí ^^!</div>
+                            <div class="text-gray-800">Phim được lấy từ nhiều nguồn, chúng tôi không kiểm soát được tất cả quảng cáo trong luồng, bạn có thể vui vẻ tua phim để bỏ qua quảng cáo vì nó miễn phí ^^!</div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
