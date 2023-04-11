@@ -76,7 +76,7 @@ const film = sequelize.define('films', {
     },
     seen: {
         type: DataTypes.INTEGER,
-        default: 0,
+        defaultValue: 0,
         allowNull: false
     },
 }, {
