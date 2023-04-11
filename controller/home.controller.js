@@ -105,7 +105,7 @@ class HomeController {
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                 var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
                 
-                let modified = moment.utc(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
+                let modified = String(data.movie.modified.time).replace("T", " ").replace(".000Z", "");
 
                 await filmModel.update({
                     status: data.movie.status,
