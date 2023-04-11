@@ -3,8 +3,26 @@ const bcrypt = require('bcrypt');
 
 class AuthController {
 
-    profile(req, res) {
+    async profile(req, res) {
         const user = res.locals.user;
+
+        try {
+            const bookmark = await filmModel.findAll({
+                where: { 
+                    m3u8: {
+                        [Op.not]: "[]",
+                    },
+                    likes: {
+                      [Op.contains]: [user.id]
+                    }
+                },
+                order: [['id', 'DESC']],
+            });
+            res.locals.bookmark = bookmark;
+        } catch (error) {
+            console.log(error);
+        }
+
         res.locals.router = "profile";
         res.locals.title = "Thông tin cá nhân";
         return res.render("auth/profile");
