@@ -11,7 +11,7 @@ const Logs = sequelize.define('logs', {
         allowNull: false
     },
     date: {
-        type: DataTypes.DATE,
+        type: DataTypes.TEXT,
         allowNull: false
     },
 }, {

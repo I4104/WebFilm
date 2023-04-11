@@ -68,7 +68,7 @@ class AjaxController {
 
                 html += '\
                 <div class="d-flex align-items-center py-3">\
-                    <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records | Time: '+ moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss') +'</span>\
+                    <span class="text-muted">Hiển thị '+ perPage +' của '+ results.count +' kết quả</span>\
                 </div>';
 
                 if (page === 1) {
@@ -195,7 +195,7 @@ class AjaxController {
 
                 html += '\
                 <div class="d-flex align-items-center py-3">\
-                    <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
+                    <span class="text-muted">Hiển thị '+ perPage +' của '+ results.count +' kết quả</span>\
                 </div>';
 
                 if (page === 1) {
@@ -445,7 +445,7 @@ class AjaxController {
                         var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                         var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
                         let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
-
+                        
                         if (item.modified != modified) {
                             await filmModel.update({
                                 status: data.movie.status,
@@ -525,7 +525,7 @@ class AjaxController {
                     m3u8: JSON.stringify(data.episodes),
                     tags: JSON.stringify(category) 
                 });
-
+                
                 await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Get By Slug: " + req.params.slug + " - Name: " + data.movie.name });
             }
             return res.json({
