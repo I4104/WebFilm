@@ -445,7 +445,7 @@ class AjaxController {
                         var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                         var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
                         let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
-                        
+
                         if (item.modified != modified) {
                             await filmModel.update({
                                 status: data.movie.status,
@@ -461,7 +461,8 @@ class AjaxController {
                             });
 
                             await logs.create({
-                                content: "Update Series: " + item.title + " - Current episode: " + episode_current
+                                content: "Update Series: " + item.title + " - Current episode: " + episode_current,
+                                date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss')
                             });
                         }
                     }));
@@ -525,7 +526,7 @@ class AjaxController {
                     m3u8: JSON.stringify(data.episodes),
                     tags: JSON.stringify(category) 
                 });
-                
+
                 await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Get By Slug: " + req.params.slug + " - Name: " + data.movie.name });
             }
             return res.json({
