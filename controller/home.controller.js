@@ -238,6 +238,7 @@ class HomeController {
             poster_url: film.poster_url,
             thumb_url: film.thumb_url,
             slug: slug,
+            type: film.type,
             episode: episode,
             m3u8: m3u8,
         };
