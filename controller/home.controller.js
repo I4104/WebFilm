@@ -185,7 +185,7 @@ class HomeController {
         }
 
         res.locals.router = 'view';
-        res.locals.title = 'Bạn đang xem: ' + film.title;
+        res.locals.title = 'Bạn đang xem: ' + film.title + " - tv.knsea.com";
         return res.render('movie/player.ejs');
     }
 
@@ -244,7 +244,7 @@ class HomeController {
 
         res.locals.film = data;
         res.locals.router = 'iframe';
-        res.locals.title = 'Bạn đang xem: ' + film.title;
+        res.locals.title = 'Bạn đang xem: ' + film.title + " - tv.knsea.com";
         return res.render('movie/iframe.ejs');
     }
 
@@ -255,7 +255,7 @@ class HomeController {
         res.locals.search = search;
         res.locals.page = page;
         res.locals.router = 'search';
-        res.locals.title = 'Bạn đang tìm kiếm: ' + search;
+        res.locals.title = 'Tìm kiếm: ' + search;
         return res.render('search.ejs');
     }
 
