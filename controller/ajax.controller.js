@@ -21,10 +21,18 @@ class AjaxController {
         try {
             var html = "";
             const results = await filmModel.findAndCountAll({ 
-                where: { 
-                    slug: {
-                        [Op.like]: '%'+ req.params.search +'%'
-                    },
+                where: {
+                    [Op.or]: {
+                        title: {
+                            [Op.like]: '%'+ req.params.search +'%'
+                        },
+                        tag: {
+                            [Op.like]: '%'+ req.params.search +'%'
+                        },
+                        slug: {
+                            [Op.like]: '%'+ req.params.search +'%'
+                        },
+                    }
                 },
                 order: [['id', 'DESC']],
                 offset: offset,
