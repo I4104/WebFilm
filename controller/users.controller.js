@@ -16,6 +16,7 @@ class AuthController {
                     },
                     likes: {
                         [Op.or]: [
+                            { [Op.like]: '['+ user.id +']%' },
                             { [Op.like]: '['+ user.id +',%' },
                             { [Op.like]: '%,'+ user.id +',%' },
                             { [Op.like]: '%,'+ user.id +']' }
