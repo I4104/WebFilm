@@ -104,10 +104,7 @@ class HomeController {
                 var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                 var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
                 var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
-
-                const date = new Date(dateString);
-                const formattedDate = date.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh', dateStyle: 'long', timeStyle: 'medium' });
-
+                
                 let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
 
                 await filmModel.update({

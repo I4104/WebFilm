@@ -568,7 +568,7 @@ class AjaxController {
                         if (category) {
                             var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
                             var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-
+                            
                             await filmModel.update({
                                 type: data.movie.type,
                                 status: data.movie.status,
@@ -689,7 +689,9 @@ class AjaxController {
                 const film = await filmModel.findOne({ where: { slug: item.slug } });
                 if (!film) {
                     if (item.year > 2015) {
-                        let modified = moment(item.modified.time).format('Y-MM-DD HH:mm:ss');
+
+                        let modified = moment(item.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
+
                         await filmModel.create({
                             title: item.name,
                             origin_name: item.origin_name,
@@ -711,7 +713,7 @@ class AjaxController {
                 }
             });
             res.json(response.data);
-            await logs.create({ content: "Get list page: " + req.params.page });
+            await logs.create({ content: "Get list, Items: " + data.items.length });
         } catch (error) {
             console.error(error);
         }
