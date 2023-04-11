@@ -666,14 +666,14 @@ class AjaxController {
                             type: { [Op.ne]: "hoathinh" }
                         },
                         {
-                            [Op.or]: {
+                            [Op.or]: [
                                 {
                                     status: { [Op.eq]: "trailer" }
                                 },
                                 {
                                     tags: { [Op.like]: '%Phim 18+%' },
                                 },
-                            }
+                            ]
                         }
                     ],
                 },
