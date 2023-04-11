@@ -28,7 +28,7 @@ class HomeController {
                     thumb_url: {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
-                    episode_current {
+                    episode_current: {
                         [Op.not]: "Tập 0"
                     },
                 },
@@ -49,7 +49,7 @@ class HomeController {
                     thumb_url: {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
-                    episode_current {
+                    episode_current: {
                         [Op.not]: "Tập 0"
                     },
                 },
@@ -73,7 +73,7 @@ class HomeController {
                     type: {
                         [Op.eq]: "hoathinh",
                     },
-                    episode_current {
+                    episode_current: {
                         [Op.not]: "Tập 0"
                     },
                 },
