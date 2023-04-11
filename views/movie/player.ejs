@@ -2,9 +2,19 @@
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl pb-5">
         <div class="content flex-row-fluid" id="kt_content">
             <div class="row g-5 g-xl-4">
+                <div class="col-12">
+                    <div class="card py-0 border-0">
+                        <div class="card-header border-bottom-0">
+                            <div class="card-title w-100">
+                                <i class="fa fa-bell fs-2 text-danger me-5"></i>
+                                <marquee class="w-100"><span class="text-danger fw-bold">Lưu ý: Việt nam đang bị đứt cáp quang. Sẻ có những nhà mạng xem phim sẽ cực kỳ lag, chậm thậm chí không xem được (đặc biệt vào buổi tối). Nên xem vào ban ngày nhé.</span></marquee>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-9">
                     <div class="card bg-body border-0">
-                        <div class="card-header p-0 border-0">
+                        <div class="card-body p-0 border-0">
                             <div class="tv-player">
                                 <iframe class="iframe-player rounded-top" src="/iframe/<%= info.slug %>/<%= info.episode %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             </div>
@@ -20,14 +30,8 @@
                                         <span>Yêu Thích</span>
                                     </a>
                                     <a class="btn btn-sm bg-light text-gray-800 text-hover-success ms-2" href="">
-                                        <span class="svg-icon svg-icon-muted svg-icon-1hx me-0">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.3" d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor"/>
-                                                <rect x="21.9497" y="3.46448" width="13" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" fill="currentColor"/>
-                                                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"/>
-                                            </svg>
-                                        </span>
-                                        <span>Chia Sẻ</span>
+                                        <i class="fas fa-bug" aria-hidden="true"></i>
+                                        <span>Báo Lỗi</span>
                                     </a>
                                 </div>
                             </div>
@@ -85,16 +89,6 @@
                                     <div class="accordion-body text-gray-800 fs-6">
                                         <%- info.description %>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="notify my-4">
-                        <div class="card mb-5">
-                            <div class="card-header border-bottom-0">
-                                <div class="card-title w-100">
-                                    <i class="fa fa-bell fs-2 text-danger me-5"></i>
-                                    <marquee class="w-100"><span class="text-danger fw-bold">Lưu ý: Việt nam đang bị đứt cáp quang. Sẻ có những nhà mạng xem phim sẽ cực kỳ lag, chậm thậm chí không xem được (đặc biệt vào buổi tối). Nên xem vào ban ngày nhé.</span></marquee>
                                 </div>
                             </div>
                         </div>
@@ -165,8 +159,7 @@
                             </div>
                             <div class="tab-content px-5" id="myTabContent">
                                 <div class="tab-pane fade active show" id="kt_episode_list" role="tabpanel">
-                                    <!--<div class="fs-5 fw-bold text-gray-800 py-2">Danh Sách Tập</div>-->
-                                    <div class="intl-episodes-list scroll h-500px">
+                                    <div class="intl-episodes-list scroll mb-5 500px">
                                         <ul class="nav nav-pills nav-pills-custom" role="episodelist">
                                             <% info.episode_list.forEach(function(item) { %>
                                             <li class="nav-item mb-3 me-3" role="presentation">

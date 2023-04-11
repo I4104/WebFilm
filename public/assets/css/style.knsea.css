@@ -208,6 +208,7 @@
 }
 
 .intl-episodes-list {
+    height: 675px!important;
     padding: 0px 0px 0px 0px;
     margin-right: -16px;
 }
