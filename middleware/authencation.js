@@ -19,7 +19,8 @@ class AuthMiddleware {
 
     async getAuth(req, res, next) {
         if (!req.session.user) {
-            return res.locals.user = null;
+            res.locals.user = null;
+            next();
         } else {
             const user = await userModel.findOne({
                 where: { id: req.session.user.userId },

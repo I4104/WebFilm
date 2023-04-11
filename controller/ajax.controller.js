@@ -278,6 +278,58 @@ class AjaxController {
     }
 
 
+    async bookmark(req, res) {
+        const user = res.locals.user;
+
+        if (user == null) {
+            return res.json({
+                error: 1,
+                type: "error", 
+                buttontext: "Ok", 
+                reload: true,
+                message: 'Bạn cần đăng nhập để tiếp tục!'
+            });
+        }
+
+        const slug = req.params.slug;
+        const film = await filmModel.findOne({ where: { slug } });
+        
+        if (!film) {
+            return res.json({
+                error: 2,
+                type: "error", 
+                buttontext: "Ok", 
+                reload: true,
+                message: 'Không tìm thấy phim!'
+            });
+        }
+
+        let likes = [];
+        if (film.likes) {
+            likes = JSON.parse(film.likes);
+        }
+
+        if (likes.includes(user.id)) {
+            likes = likes.filter(item => item !== user.id);
+        } else {
+            likes.push(user.id);
+        }
+
+        await filmModel.update({
+            likes: JSON.stringify(likes),
+        }, {
+            where: { id: film.id }
+        });
+
+        return res.json({
+            error: 0,
+            type: "success", 
+            buttontext: "Ok", 
+            reload: false,
+            message: 'Đã thêm phim vào mục yêu thích!'
+        });
+    }
+
     async set_image(req, res) {
         const publicPath = path.join(__dirname, '../public');
         const uploadsPath = path.join(publicPath, 'uploads');
