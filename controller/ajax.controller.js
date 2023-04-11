@@ -618,7 +618,7 @@ class AjaxController {
                         category.push(item.name)
                     }));
 
-                    if (category.includes("Phim 18+")) {
+                    if (category.includes("Phim 18+") || data.movie.status == "trailer") {
                         await filmModel.destroy({ where: { slug: item.slug } });
                     } else {
                         if (category) {
@@ -744,7 +744,7 @@ class AjaxController {
             data.items.forEach(async (item) => {
                 const film = await filmModel.findOne({ where: { slug: item.slug } });
                 if (!film) {
-                    if (item.year > 2015 && item.status != "trailer") {
+                    if (item.year > 2015) {
 
                         let modified = moment(item.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
 
