@@ -68,7 +68,7 @@ class AjaxController {
 
                 html += '\
                 <div class="d-flex align-items-center py-3">\
-                    <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records</span>\
+                    <span class="text-muted">Displaying '+ perPage +' of '+ results.count +' records | Time: '+ moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss') +'</span>\
                 </div>';
 
                 if (page === 1) {
