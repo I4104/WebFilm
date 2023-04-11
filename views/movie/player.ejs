@@ -210,12 +210,12 @@
                     confirmButton: "btn btn-primary"
                 }
             }).then((result) => {
-                if (data.error == 0) {
+                if (data.reload == true) {
                     window.location.reload();
                 }
             }); 
-            
-            
+
+
             if ($("#bookmark").hasClass("active")) {
                 $("#bookmark").removeClass("active");
             } else {

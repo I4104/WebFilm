@@ -309,10 +309,13 @@ class AjaxController {
             likes = JSON.parse(film.likes);
         }
 
+        let message = "";
         if (likes.includes(user.id)) {
             likes = likes.filter(item => item !== user.id);
+            message = "Đã xóa khỏi danh sách yêu thích";
         } else {
             likes.push(user.id);
+            message = "Đã thêm vào danh sách yêu thích";
         }
 
         await filmModel.update({
@@ -326,7 +329,7 @@ class AjaxController {
             type: "success", 
             buttontext: "Ok", 
             reload: false,
-            message: 'Đã thêm phim vào mục yêu thích!'
+            message: message
         });
     }
 
