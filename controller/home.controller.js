@@ -69,7 +69,7 @@ class HomeController {
                     },
                 },
                 order: [['year_date', 'DESC'], ['modified', 'DESC'], ['id', 'DESC']],
-                limit: 24,
+                limit: 48,
             });
             res.locals.anime = anime;
         } catch (error) {
