@@ -11,18 +11,8 @@ class HomeController {
         try {
             const latestFilm = await filmModel.findOne({
                 where: {
-                    m3u8: {
-                        [Op.not]: "[]",
-                    },
-                    thumb_url: {
-                        [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
-                    },
+                    id:  2642,
                 },
-                order: [
-                    ['year_date', 'DESC'],
-                    ['modified', 'DESC'],
-                    ['id', 'DESC']
-                ],
             });
             res.locals.film_banner = latestFilm;
         } catch (error) {

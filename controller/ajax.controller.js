@@ -396,53 +396,72 @@ class AjaxController {
 
     async update_series(req, res) {
         try {
-            const results = await filmModel.findAll({
-                where: {
-                    [Op.or]: [
-                        { type: "series" },
-                        { type: "hoathinh" }
+            let offset = 0;
+            let limit = 5;
+            let done = false;
+
+            while (!done) {
+                const results = await filmModel.findAll({
+                    where: {
+                        [Op.or]: [{
+                                type: "series"
+                            },
+                            {
+                                type: "hoathinh"
+                            }
+                        ],
+                        status: "ongoing",
+                        modified: {
+                            [Op.like]: '%2023-%'
+                        }
+                    },
+                    order: [
+                        ['year_date', 'DESC'],
+                        ['id', 'DESC']
                     ],
-                    status: "ongoing",
-                    modified: {
-                        [Op.like]: '%2023-%'
-                    }
-                },
-                order: [
-                    ['year_date', 'DESC'],
-                    ['id', 'DESC']
-                ],
-                limit: 10
-            });
-            if (results.length > 0) {
-                await Promise.all(results.map(async function(item) {
-                    const response = await axios.get('https://ophim1.com/phim/' + item.slug);
-                    const data = response.data;
+                    offset,
+                    limit
+                });
 
-                    var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-                    var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-                    var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
-                    let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
+                if (results.length > 0) {
+                    await Promise.all(results.map(async function(item) {
+                        const response = await axios.get('https://ophim1.com/phim/' + item.slug);
+                        const data = response.data;
 
-                    if (item.modified != modified) {
-                        await filmModel.update({
-                            status: data.movie.status,
-                            episode_current: episode_current,
-                            episode_total: episode_total,
-                            showtimes: showtimes,
-                            modified: modified,
-                            m3u8: JSON.stringify(data.episodes),
-                        }, {
-                            where: { id: item.id }
-                        });
+                        var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+                        var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+                        var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
+                        let modified = moment(data.movie.modified.time).tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss');
 
-                        await logs.create({ content: "Update Series: " + item.title + " - Current episode: " + episode_current });
-                    }
-                }));
+                        if (item.modified != modified) {
+                            await filmModel.update({
+                                status: data.movie.status,
+                                episode_current: episode_current,
+                                episode_total: episode_total,
+                                showtimes: showtimes,
+                                modified: modified,
+                                m3u8: JSON.stringify(data.episodes),
+                            }, {
+                                where: {
+                                    id: item.id
+                                }
+                            });
 
+                            await logs.create({
+                                content: "Update Series: " + item.title + " - Current episode: " + episode_current
+                            });
+                        }
+                    }));
+                } else {
+                    done = true;
+                }
+
+                offset += limit;
             }
+
             return res.send("Done!");
         } catch (error) {
-            return res.send(error);            
+            return res.send(error);
         }
     }
 
