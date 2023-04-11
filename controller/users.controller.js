@@ -8,7 +8,7 @@ class AuthController {
     async profile(req, res) {
         const user = res.locals.user;
 
-        //try {
+        try {
             const bookmark = await filmModel.findAll({
                 where: { 
                     m3u8: {
@@ -25,9 +25,9 @@ class AuthController {
                 order: [['id', 'DESC']],
             });
             res.locals.bookmark = bookmark;
-        // } catch (error) {
-        //     res.locals.bookmark = null;
-        // }
+        } catch (error) {
+            res.locals.bookmark = null;
+        }
 
         res.locals.router = "profile";
         res.locals.title = "Thông tin cá nhân";
