@@ -68,6 +68,7 @@
 								</div>
 								<div class="card-body p-9">
 									<div class="row">
+										<% if (bookmark.length > 0) { %>
 										<% bookmark.forEach(function(item) { %>
                                         <% var episode = JSON.parse(item.m3u8); %>
                                         <div class="col-lg-2 col-md-4 col-sm-4 col-6 item item-movie-page p-3">
@@ -85,6 +86,12 @@
 										    </a>
 										</div>
                                         <% }); %>
+										<% } else { %>
+										<div class="col-lg-12 text-center">
+					                        <img src="/assets/icons/empty.png" alt=""></br>
+					                        Không có dữ liệu
+                						</div>
+										<% } %>
 									</div>
 								</div>
 							</div>

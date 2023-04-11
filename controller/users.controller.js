@@ -6,22 +6,22 @@ class AuthController {
     async profile(req, res) {
         const user = res.locals.user;
 
-        try {
+        //try {
             const bookmark = await filmModel.findAll({
                 where: { 
                     m3u8: {
                         [Op.not]: "[]",
                     },
                     likes: {
-                      [Op.contains]: [user.id]
+                        [Op.contains]: [user.id]
                     }
                 },
                 order: [['id', 'DESC']],
             });
             res.locals.bookmark = bookmark;
-        } catch (error) {
-            console.log(error);
-        }
+        // } catch (error) {
+        //     res.locals.bookmark = null;
+        // }
 
         res.locals.router = "profile";
         res.locals.title = "Thông tin cá nhân";
