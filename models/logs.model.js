@@ -12,7 +12,6 @@ const Logs = sequelize.define('logs', {
     },
     date: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         allowNull: false
     },
 }, {
