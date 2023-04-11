@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 class AuthController {
 
-    profile(req, res) {
+    async profile(req, res) {
         const user = res.locals.user;
 
         try {
