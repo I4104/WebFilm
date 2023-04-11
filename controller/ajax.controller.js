@@ -526,7 +526,7 @@ class AjaxController {
                     tags: JSON.stringify(category) 
                 });
 
-                await logs.create({ content: "Get By Slug: " + req.params.slug + " - Name: " + data.movie.name });
+                await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Get By Slug: " + req.params.slug + " - Name: " + data.movie.name });
             }
             return res.json({
                 status: 1,
@@ -587,7 +587,7 @@ class AjaxController {
                         }
                     }
 
-                    await logs.create({ content: "Get Info: " + item.slug + " - Name: " + data.movie.name });
+                    await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Get Info: " + item.slug + " - Name: " + data.movie.name });
                 } catch (error) {
                     console.error(error);
                 }
@@ -629,7 +629,7 @@ class AjaxController {
                 })
 
             );
-            await logs.create({ content: "Delete 18+ tags" });
+            await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Delete 18+ tags" });
             return res.send('Done!');
 
             await Promise.all(filmsToDelete.map(async (film) => {
@@ -637,9 +637,9 @@ class AjaxController {
                 const posterUrl = path.join(__dirname, '../public/uploads', film.poster_url.split("/").pop());
                 try {
                     await fs.promises.unlink(thumbUrl);
-                    await logs.create({ content: "Delete image: " + thumbUrl });
+                    await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Delete image: " + thumbUrl });
                     await fs.promises.unlink(posterUrl);
-                    await logs.create({ content: "Delete image: " + posterUrl });
+                    await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Delete image: " + posterUrl });
                     await film.destroy();
                     console.log(`Deleted film with id ${film.id}`);
                 } catch (error) {
@@ -671,7 +671,7 @@ class AjaxController {
 
             await Promise.all(imagesToDelete.map(async (image) => {
                 await fs.promises.unlink(path.join(uploadsPath, image));
-                await logs.create({ content: "Delete image: " + image });
+                await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Delete image: " + image });
             }));
 
             console.log(`Removed ${imagesToDelete.length} images`);
@@ -713,7 +713,7 @@ class AjaxController {
                 }
             });
             res.json(response.data);
-            await logs.create({ content: "Get list, Items: " + data.items.length });
+            await logs.create({ date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss'), content: "Get list, Items: " + data.items.length });
         } catch (error) {
             console.error(error);
         }
