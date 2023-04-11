@@ -56,7 +56,9 @@
     
         playlist: [
             {
-                title: "<%= film.title %>",
+
+                title: "<%= film.title %> <% if (film.type != "single") { %> Tập <%= film.episode %><% } %>",
+
                 description: "Bạn đang xem",
                 image: "<%= film.poster_url %>",
                 sources: [
@@ -81,13 +83,16 @@
         events: {
             // sự kiện 'time' được kích hoạt mỗi khi thời gian phát thay đổi
             time: function(event) {
-                // lưu giá trị của currentTime vào cookie
-                document.cookie = "currentTime=" + event.currentTime.toFixed(2) + "; path=/";
+                // lưu giá trị của currentTime vào cookie với tên cookie là "currentTime_<title>" 
+                // với <title> là tên của tập phim hiện tại
+                document.cookie = "currentTime_" + playerInstance.getPlaylistItem()['title'] + "=" + event.currentTime.toFixed(2) + "; path=/";
             },
             // sự kiện 'ready' được kích hoạt khi jwplayer đã sẵn sàng để sử dụng
             ready: function(event) {
-                // đọc giá trị của currentTime từ cookie
-                const cookieValue = document.cookie.match('(^|;)\\s*' + 'currentTime' + '\\s*=\\s*([^;]+)');
+                // đọc giá trị của currentTime từ cookie với tên cookie là "currentTime_<title>"
+                // với <title> là tên của tập phim hiện tại
+                const cookieName = "currentTime_" + playerInstance.getPlaylistItem()['title'];
+                const cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
                 if (cookieValue) {
                     const currentTime = parseFloat(cookieValue.pop());
                     // chuyển đến thời gian currentTime nếu giá trị của currentTime hợp lệ
@@ -97,7 +102,7 @@
                 }
             }
         }
-        
+
     });
 
     playerInstance.on("ready", function () {
