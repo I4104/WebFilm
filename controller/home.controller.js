@@ -158,7 +158,7 @@ class HomeController {
             liked: liked,
             episode: episode,
             title: film.title,
-            modified: moment.tz(film.modified, 'Asia/Ho_Chi_Minh').locale('vi').format('HH:mm [Thứ] dddd'),
+            modified: moment.tz(film.modified, 'Asia/Ho_Chi_Minh').locale('vi').format('HH:mm dddd (DD/MM/Y)').replace("thứ", "Thứ"),
             description: film.description,
             tags: JSON.parse(film.tags),
             time: film.film_time,
