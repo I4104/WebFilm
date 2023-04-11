@@ -29,6 +29,12 @@
     </style>
     <div id="player"></div>
     <script>
+    jwplayer().on('time', function(event) {
+    // Lưu trữ thời gian đã xem vào cookie
+    var timeWatched = event.position;
+    document.cookie = "timeWatched=" + timeWatched;
+    });
+
     const playerInstance = jwplayer("player").setup({
         controls: true,
         sharing: false,
@@ -52,13 +58,6 @@
             url:"/assets/skin/netflix.css?v=5",
             name: "netflix"
         },
-        
-        /*logo: {
-            file: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-            link: "",
-            hide: false,
-            position: "top-right"
-        },*/
     
         captions: {
             color: "#FFF",
@@ -91,6 +90,33 @@
             }
         ],
     });
+
+    // Đăng ký sự kiện "time" của JWPlayer để theo dõi thời lượng video đã xem
+    playerInstance.on('time', function(event) {
+        // Lấy thời lượng video đã xem
+        const timeWatched = event.position;
+    
+        // Lưu thời lượng video đã xem vào cookie
+        document.cookie = "timeWatched=" + timeWatched;
+    });
+
+    // Phục hồi thời lượng video đã xem từ cookie khi trang được tải lại
+    window.onload = function() {
+    // Đọc giá trị cookie
+        const timeWatched = getCookie("timeWatched");
+
+    // Nếu có giá trị cookie, chuyển đến thời điểm đã xem trước đó
+        if (timeWatched) {
+            playerInstance.seek(timeWatched);
+        }
+    }
+
+    // Hàm đọc cookie
+    function getCookie(name) {
+        const value = "; " + document.cookie;
+        const parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
     
     playerInstance.on("ready", function () {
         // Move the timeslider in-line with other controls
