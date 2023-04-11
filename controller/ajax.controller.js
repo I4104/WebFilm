@@ -663,21 +663,18 @@ class AjaxController {
                 where: {
                     [Op.and]: [
                         {
-                            type: {
-                                [Op.ne]: "hoathinh"
-                            }
+                            type: { [Op.ne]: "hoathinh" }
                         },
-                        {
-                            status: "trailer",
-                        },
-                        {
-                            [Op.or]: [{
-                                    tags: {
-                                        [Op.like]: '%Phim 18+%',
-                                    },
+                        [Op.or]: {
+                            [
+                                {
+                                    status: { [Op.eq]: "trailer" }
+                                },
+                                {
+                                    tags: { [Op.like]: '%Phim 18+%' },
                                 },
                             ],
-                        },
+                        }
                     ],
                 },
             });
