@@ -179,7 +179,7 @@
         if (e.which == 13) {
             e.preventDefault();
             var inputVal = $(this).val();
-            window.location.href = "/search/1/" + createSlug(inputVal);
+            window.location.href = "/search/1/" + (inputVal);
         }
     });
     function createSlug(str) {
