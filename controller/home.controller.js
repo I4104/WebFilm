@@ -164,6 +164,7 @@ class HomeController {
             episode_list: m3u8,
             year: film.year_date
         }
+        filmModel.increment('seen', { by: 1, where: { id: film.id }});
 
         try {
             const film_dexuat_player = await filmModel.findAll({
