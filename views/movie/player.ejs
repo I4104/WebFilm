@@ -201,6 +201,21 @@
     $("#bookmark").on("click", (e) => {
         e.preventDefault();
         $.get("/ajax/bookmark/<%- info.slug %>", (data) => {
+            Swal.fire({
+                text: data.message,
+                icon: data.type,
+                buttonsStyling: true,
+                confirmButtonText: data.buttontext,
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            }).then((result) => {
+                if (data.error == 0) {
+                    window.location.reload();
+                }
+            }); 
+            
+            
             if ($("#bookmark").hasClass("active")) {
                 $("#bookmark").removeClass("active");
             } else {
