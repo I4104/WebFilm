@@ -665,13 +665,15 @@ class AjaxController {
                         {
                             type: { [Op.ne]: "hoathinh" }
                         },
-                        [Op.or]: {
-                            {
-                                status: { [Op.eq]: "trailer" }
-                            },
-                            {
-                                tags: { [Op.like]: '%Phim 18+%' },
-                            },
+                        {
+                            [Op.or]: {
+                                {
+                                    status: { [Op.eq]: "trailer" }
+                                },
+                                {
+                                    tags: { [Op.like]: '%Phim 18+%' },
+                                },
+                            }
                         }
                     ],
                 },
