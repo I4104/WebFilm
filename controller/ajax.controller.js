@@ -461,7 +461,7 @@ class AjaxController {
                             });
 
                             await logs.create({
-                                content: "Update Series: " + item.title + " - Current episode: " + episode_current,
+                                content: "Update Series: " + item.title + " - Current episode: " + episode_current + " - Modified: " + modified,
                                 date: moment().tz('Asia/Ho_Chi_Minh').format('Y-MM-DD HH:mm:ss')
                             });
                         }
