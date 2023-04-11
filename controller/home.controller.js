@@ -28,6 +28,9 @@ class HomeController {
                     thumb_url: {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
                     },
+                    episode_current {
+                        [Op.not]: "Tập 0"
+                    },
                 },
                 order: [['seen', 'DESC']],
                 limit: 24,
@@ -45,6 +48,9 @@ class HomeController {
                     },
                     thumb_url: {
                         [Op.notLike]: "%https://img.ophim1.com/uploads/movies%",
+                    },
+                    episode_current {
+                        [Op.not]: "Tập 0"
                     },
                 },
                 order: [['id', 'DESC']],
@@ -66,6 +72,9 @@ class HomeController {
                     },
                     type: {
                         [Op.eq]: "hoathinh",
+                    },
+                    episode_current {
+                        [Op.not]: "Tập 0"
                     },
                 },
                 order: [['year_date', 'DESC'], ['modified', 'DESC'], ['id', 'DESC']],
