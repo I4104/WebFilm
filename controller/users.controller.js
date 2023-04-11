@@ -15,7 +15,11 @@ class AuthController {
                         [Op.not]: "[]",
                     },
                     likes: {
-                        [Op.contains]: [user.id]
+                        [Op.or]: [
+                            { [Op.like]: '['+ user.id +',%' },
+                            { [Op.like]: '%,'+ user.id +',%' },
+                            { [Op.like]: '%,'+ user.id +']' }
+                        ]
                     }
                 },
                 order: [['id', 'DESC']],
