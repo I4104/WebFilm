@@ -145,8 +145,15 @@ class HomeController {
             m3u8.push(epl); 
         }
 
+        var liked = "";
+        var like = JSON.parse(film.likes);
+        if (like.includes(user.id)) {
+            liked = "active";
+        }
+
         res.locals.info = {
             slug: slug,
+            liked: liked,
             episode: episode,
             title: film.title,
             modified: film.modified,
