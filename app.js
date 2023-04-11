@@ -35,6 +35,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', 3000);
+const redirectHttp = (req, res, next) => {
+    if (req.protocol === 'http') {
+        res.redirect(301, `https://${req.headers.host}${req.originalUrl}`);
+    } else {
+        next();
+    }
+}
+
+app.use(redirectHttp);
 route(app);
 
 app.use(function(req, res, next) {
