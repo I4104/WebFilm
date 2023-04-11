@@ -140,6 +140,7 @@ class HomeController {
             slug: slug,
             episode: episode,
             title: film.title,
+            modified: film.modified,
             description: film.description,
             tags: JSON.parse(film.tags),
             time: film.film_time,
