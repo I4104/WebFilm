@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model");
 const filmModel = require("../models/films.model");
+const { Op } = require('../config');
 const bcrypt = require('bcrypt');
 
 class AuthController {
