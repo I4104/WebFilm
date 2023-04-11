@@ -2,6 +2,7 @@ const filmModel = require("../models/films.model");
 const axios = require('axios');
 const moment = require('moment-timezone');
 const { Op } = require('../config');
+require('moment/locale/vi');
 
 class HomeController {
 
@@ -86,6 +87,7 @@ class HomeController {
         }
 
         res.locals.router = 'home';
+        res.locals.title = 'Trang chủ - tv.knsea.com';
         return res.render('index');
     }
 
@@ -156,7 +158,7 @@ class HomeController {
             liked: liked,
             episode: episode,
             title: film.title,
-            modified: moment.tz(film.modified, 'Asia/Ho_Chi_Minh').format('HH:mm [Thứ] dddd'),
+            modified: moment.tz(film.modified, 'Asia/Ho_Chi_Minh').locale('vi').format('HH:mm [Thứ] dddd'),
             description: film.description,
             tags: JSON.parse(film.tags),
             time: film.film_time,
@@ -183,6 +185,7 @@ class HomeController {
         }
 
         res.locals.router = 'view';
+        res.locals.title = 'Bạn đang xem: ' + film.title;
         return res.render('movie/player.ejs');
     }
 
@@ -204,6 +207,7 @@ class HomeController {
         res.locals.page = page;
         res.locals.cate = category; 
         res.locals.router = 'category';
+        res.locals.title = 'Danh mục phim: ' + res.locals.category;
         return res.render("category.ejs");
     }
 
@@ -240,6 +244,7 @@ class HomeController {
 
         res.locals.film = data;
         res.locals.router = 'iframe';
+        res.locals.title = 'Bạn đang xem: ' + film.title;
         return res.render('movie/iframe.ejs');
     }
 
@@ -250,6 +255,7 @@ class HomeController {
         res.locals.search = search;
         res.locals.page = page;
         res.locals.router = 'search';
+        res.locals.title = 'Bạn đang tìm kiếm: ' + search;
         return res.render('search.ejs');
     }
 
