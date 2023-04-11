@@ -79,32 +79,23 @@
         ],
     });
 
-    // Đăng ký sự kiện "time" của JWPlayer để theo dõi thời lượng video đã xem
-    playerInstance.on('time', function(event) {
-        // Lấy thời lượng video đã xem
-        const timeWatched = event.position;
-    
-        // Lưu thời lượng video đã xem vào cookie
-        document.cookie = "timeWatched=" + timeWatched;
+    // Lấy giá trị thời lượng video đã xem từ localStorage
+    let viewedTime = localStorage.getItem('viewedTime');
+
+    // Nếu chưa có giá trị trong localStorage, thiết lập giá trị ban đầu là 0
+    if (!viewedTime) {
+        viewedTime = 0;
+    }
+
+    // Cập nhật giá trị thời lượng video đã xem khi video được phát
+        playerInstance.on('time', function(event) {
+        viewedTime = Math.floor(event.position);
     });
 
-    // Phục hồi thời lượng video đã xem từ cookie khi trang được tải lại
-    window.onload = function() {
-    // Đọc giá trị cookie
-        const timeWatched = getCookie("timeWatched");
-
-    // Nếu có giá trị cookie, chuyển đến thời điểm đã xem trước đó
-        if (timeWatched) {
-            playerInstance.seek(timeWatched);
-        }
-    }
-
-    // Hàm đọc cookie
-    function getCookie(name) {
-        const value = "; " + document.cookie;
-        const parts = value.split("; " + name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
-    }
+    // Lưu giá trị thời lượng video đã xem vào localStorage khi người dùng rời khỏi trang
+    window.addEventListener('beforeunload', function() {
+        localStorage.setItem('viewedTime', viewedTime);
+    });
     
     playerInstance.on("ready", function () {
         // Move the timeslider in-line with other controls
