@@ -162,6 +162,7 @@ class HomeController {
             time: film.film_time,
             origin_name: film.origin_name,
             episode_list: m3u8,
+            seen: film.seen,
             year: film.year_date
         }
         filmModel.increment('seen', { by: 1, where: { id: film.id }});
