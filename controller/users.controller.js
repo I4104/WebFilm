@@ -5,6 +5,7 @@ class AuthController {
 
     profile(req, res) {
         const user = res.locals.user;
+        res.locals.title = "Thông tin cá nhân";
         return res.render("auth/profile");
     }
 
