@@ -50,7 +50,7 @@ class AjaxController {
                 for (const item of results.rows) {
                     var episode = JSON.parse(item.m3u8);
                     html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item item-movie-page p-3">\
-                        <a class="position-relative d-inline-block rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
+                        <a class="position-relative d-inline-block rounded  w-100" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
                             <figure class="rounded">\
                                 <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-300px" src="' + item.thumb_url + '">\
                             </figure>\
@@ -177,7 +177,7 @@ class AjaxController {
                 for (const item of results.rows) {
                     var episode = JSON.parse(item.m3u8);
                     html += '<div class="col-lg-2 col-md-4 col-sm-4 col-6 item item-movie-page p-3">\
-                        <a class="position-relative d-inline-block rounded" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
+                        <a class="position-relative d-inline-block rounded  w-100" href="/phim/' + item.slug + '/' + episode[0].server_data[0].slug + '">\
                             <figure class="rounded">\
                                 <img class="bgi-no-repeat bgi-position-center bgi-size-cover w-100 h-250px h-sm-275px h-md-350px h-lg-300px" src="' + item.thumb_url + '">\
                             </figure>\
