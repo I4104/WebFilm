@@ -11,6 +11,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+const RedisStore = require('connect-redis')(session);
+const redisClient = require('redis').createClient();
+
 const { sequelize, keySecret, DataTypes } = require('./config');
 
 const route = require('./routers');
@@ -19,6 +22,7 @@ var app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
+    store: new RedisStore({ client: redisClient }),
     secret: keySecret,
     resave: false,
     saveUninitialized: false
