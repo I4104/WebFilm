@@ -179,7 +179,7 @@ class HomeController {
             } else {
                 check = title.slice(0, 2).join(" ");
             }
-            var slug = check.normalize('NFD')
+            var _check= check.normalize('NFD')
                     .replace(/[\u0300-\u036f]/g, '')
                     .replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/\s+/g, '-')
                     .replace(/-+/g, '-');
@@ -191,7 +191,7 @@ class HomeController {
                             [Op.like]: '%'+ check +'%'
                         },
                         slug: {
-                            [Op.like]: '%'+ slug +'%'
+                            [Op.like]: '%'+ _check +'%'
                         },
                     }
                 },
