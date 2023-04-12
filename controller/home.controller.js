@@ -172,7 +172,7 @@ class HomeController {
         var list_recommend = [];
             try {
                 var check = "";
-                var title = film.title.split(" ");
+                var title = film.title.split(" ").replace(":", "");
 
                 if (title.length > 4) {
                     check = title.slice(0, 3).join(" ");
