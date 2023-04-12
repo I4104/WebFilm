@@ -170,67 +170,75 @@ class HomeController {
         filmModel.increment('seen', { by: 1, where: { id: film.id }});
 
         var list_recommend = [];
-        try {
-            var check = "";
-            var title = film.title.split(" ");
-
-            if (title.length > 4) {
-                check = title.slice(0, 3).join(" ");
-            } else {
-                check = title.slice(0, 2).join(" ");
-            }
-            var _check= check.normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/\s+/g, '-')
-                    .replace(/-+/g, '-');
-
-            const results = await filmModel.findAll({ 
-                where: {
-                    [Op.and]: {
-                        [Op.or]: {
-                            title: {
-                                [Op.like]: '%'+ check +'%'
-                            },
-                            slug: {
-                                [Op.like]: '%'+ _check +'%'
-                            },
-                        },
-                        title: {
-                            [Op.eq]: film.title,
-                        }
-                    }
-
-                },
-                order: [['year_date', 'DESC'], ['id', 'DESC']],
-                limit: 24,
-            });
-            list_recommend = results;
-        } catch (error) {
-            console.log(error);
-        }
-
-        while (list_recommend.length < 24) {
             try {
-                const film_dexuat_player = await filmModel.findAll({
-                    where: { 
-                        m3u8: {
-                            [Op.not]: "[]",
-                        }
+                var check = "";
+                var title = film.title.split(" ");
+
+                if (title.length > 4) {
+                    check = title.slice(0, 3).join(" ");
+                } else {
+                    check = title.slice(0, 2).join(" ");
+                }
+                var _check= check.normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, '')
+                        .replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/\s+/g, '-')
+                        .replace(/-+/g, '-');
+
+                const results = await filmModel.findAll({ 
+                    where: {
+                        [Op.and]: [
+                            {
+                                [Op.or]: [
+                                    {
+                                        title: {
+                                            [Op.like]: '%'+ check +'%'
+                                        }
+                                    },
+                                    {
+                                        slug: {
+                                            [Op.like]: '%'+ _check +'%'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                title: {
+                                    [Op.not]: film.title,
+                                }
+                            }
+                        ]
                     },
                     order: [['year_date', 'DESC'], ['id', 'DESC']],
-                    limit: 24 - list_recommend.length,
+                    limit: 24,
                 });
-                if (film_dexuat_player.length === 0) {
-                    break;
-                }
-                list_recommend = list_recommend.concat(film_dexuat_player);
+                list_recommend = results;
             } catch (error) {
                 console.log(error);
-                break;
             }
-        }
-        
-        res.locals.film_dexuat_player = list_recommend;
+
+            while (list_recommend.length < 24) {
+                try {
+                    const film_dexuat_player = await filmModel.findAll({
+                        where: { 
+                            m3u8: {
+                                [Op.not]: "[]",
+                            }
+                        },
+                        order: [['year_date', 'DESC'], ['id', 'DESC']],
+                        limit: 24 - list_recommend.length,
+                    });
+                    if (film_dexuat_player.length === 0) {
+                        break;
+                    }
+                    list_recommend = list_recommend.concat(film_dexuat_player);
+                } catch (error) {
+                    console.log(error);
+                    break;
+                }
+            }
+
+            res.locals.film_dexuat_player = list_recommend;
+
         res.locals.router = 'view';
         res.locals.title = 'Bạn đang xem: ' + film.title + " - tv.knsea.com";
         return res.render('movie/player.ejs');
