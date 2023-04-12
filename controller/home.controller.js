@@ -186,14 +186,20 @@ class HomeController {
 
             const results = await filmModel.findAll({ 
                 where: {
-                    [Op.or]: {
+                    [Op.and]: {
+                        [Op.or]: {
+                            title: {
+                                [Op.like]: '%'+ check +'%'
+                            },
+                            slug: {
+                                [Op.like]: '%'+ _check +'%'
+                            },
+                        },
                         title: {
-                            [Op.like]: '%'+ check +'%'
-                        },
-                        slug: {
-                            [Op.like]: '%'+ _check +'%'
-                        },
+                            [Op.eq]: film.title,
+                        }
                     }
+
                 },
                 order: [['year_date', 'DESC'], ['id', 'DESC']],
                 limit: 24,
@@ -203,7 +209,7 @@ class HomeController {
             console.log(error);
         }
 
-        if (list_recommend.length < 24) {
+        while (list_recommend.length < 24) {
             try {
                 const film_dexuat_player = await filmModel.findAll({
                     where: { 
@@ -214,11 +220,15 @@ class HomeController {
                     order: [['year_date', 'DESC'], ['id', 'DESC']],
                     limit: 24 - list_recommend.length,
                 });
-                list_recommend.concat(film_dexuat_player);
+                if (film_dexuat_player.length === 0) {
+                    break;
+                }
+                list_recommend = list_recommend.concat(film_dexuat_player);
             } catch (error) {
                 console.log(error);
+                break;
             }
-        } 
+        }
         
         res.locals.film_dexuat_player = list_recommend;
         res.locals.router = 'view';
