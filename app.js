@@ -11,8 +11,29 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-const RedisStore = require('connect-redis')(session);
-const redisClient = require('redis').createClient();
+const MySQLStore = require('express-mysql-session')(session);
+
+const options = {
+    host: 'localhost',
+    port: 3306,
+    user: 'knseacom_film',
+    password: 'I4104@sea',
+    database: 'knseacom_film',
+    clearExpired: true,
+    checkExpirationInterval: 900000,
+    expiration: 86400000,
+    createDatabaseTable: true,
+    schema: {
+        tableName: 'sessions',
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data'
+        }
+    }
+};
+
+const sessionStore = new MySQLStore(options);
 
 const { sequelize, keySecret, DataTypes } = require('./config');
 
@@ -21,11 +42,13 @@ const route = require('./routers');
 var app = express();
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
     secret: keySecret,
     resave: false,
     saveUninitialized: false
+    store: sessionStore,
+    cookie: { maxAge: 86400000 }
 }));
 app.use(flash());
 
