@@ -101,41 +101,41 @@ class HomeController {
             return res.redirect("/");
         }
 
-        if (film.type == null || film.type == "" || film.type != "single") {
-            try {
-                const response = await axios.get('https://ophim1.com/phim/' + req.params.slug);
-                const data = response.data;
+        // if (film.type == null || film.type == "" || film.type != "single") {
+        //     try {
+        //         const response = await axios.get('https://ophim1.com/phim/' + req.params.slug);
+        //         const data = response.data;
 
-                var category = [];
+        //         var category = [];
 
-                data.movie.category.forEach(async (item) => {
-                    category.push(item.name)
-                });
+        //         data.movie.category.forEach(async (item) => {
+        //             category.push(item.name)
+        //         });
 
-                var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
-                var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
-                var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
+        //         var episode_current = (data.movie.episode_current != null) ? data.movie.episode_current : 0;
+        //         var episode_total = (data.movie.episode_total != null) ? data.movie.episode_total : 0;
+        //         var showtimes = (data.movie.showtimes != null) ? data.movie.showtimes : "";
                 
-                let modified = String(data.movie.modified.time).replace("T", " ").replace(".000Z", "");
+        //         let modified = String(data.movie.modified.time).replace("T", " ").replace(".000Z", "");
 
-                await filmModel.update({
-                    status: data.movie.status,
-                    episode_current: episode_current,
-                    episode_total: episode_total,
-                    showtimes: showtimes,
-                    modified: modified,
-                    m3u8: JSON.stringify(data.episodes),
-                    tags: JSON.stringify(category) 
-                }, {
-                    where: { slug: req.params.slug }
-                });
-            } catch (error) {
-                console.error(error);
-            }
-        }
+        //         await filmModel.update({
+        //             status: data.movie.status,
+        //             episode_current: episode_current,
+        //             episode_total: episode_total,
+        //             showtimes: showtimes,
+        //             modified: modified,
+        //             m3u8: JSON.stringify(data.episodes),
+        //             tags: JSON.stringify(category) 
+        //         }, {
+        //             where: { slug: req.params.slug }
+        //         });
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // }
         
 
-        film = await filmModel.findOne({ where: { slug } });
+        // film = await filmModel.findOne({ where: { slug } });
         var m3u8_json = JSON.parse(film.m3u8);
         var m3u8 = [];
         var item = m3u8_json[0];
